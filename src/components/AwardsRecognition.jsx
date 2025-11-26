@@ -1,5 +1,5 @@
 import './AwardsRecogonition.css';
-import medalIcon from '../assets/awards/medal-award.svg';
+import medalIcon from '../assets/Awards/medal-award.svg';
 import { ShieldCheck } from 'lucide-react';
 
 const awards = [
