@@ -1,0 +1,526 @@
+.platform-overview {
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0) 0%, rgba(15, 23, 42, 0.95) 100%), 
+              url('../assets/MainImages/platform_bg_2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 80px 0;
+  min-height: 100vh;
+  border-radius: 0 0 50px 50px;
+  position: relative;
+}
+
+.platform-overview-inner {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+}
+
+.platform-hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+  align-items: center;
+}
+
+.platform-tag {
+  display: inline-flex;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid #FFC800;
+  background: transparent;
+  color: #FFFFFF;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.platform-hero h2 {
+  margin: 0;
+  font-family: 'Sk-Modernist', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #FFFFFF;
+}
+
+.platform-hero p {
+  margin: 0;
+  color: #FFFFFF;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+.platform-hero-cta {
+  background: #FFC800 !important;
+  color: #000000 !important;
+  border-radius: 8px !important;
+  height: 48px !important;
+  padding: 0 32px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  border: none !important;
+  transition: all 0.2s ease !important;
+  margin-top: 8px;
+}
+
+.platform-hero-cta:hover {
+  background: #FFD633 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 200, 0, 0.4);
+}
+
+.platform-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.platform-feature-card {
+  background: #1e293b;
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 400px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card 1: Generate prototypes - Large (spans 2 columns, 2 rows) */
+.platform-feature-card:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 500px;
+}
+
+/* Card 2: Modify any component - Tall (spans 1 column, 2 rows) */
+.platform-feature-card:nth-child(2) {
+  grid-column: span 1;
+  grid-row: span 2;
+  min-height: 500px;
+}
+
+/* Card 3: Generate screens - Medium (spans 1 column, 1 row) */
+.platform-feature-card:nth-child(3) {
+  grid-column: span 1;
+  grid-row: span 1;
+  min-height: 350px;
+}
+
+/* Card 4: Automation & Orchestration - Wide (spans 2 columns, 1 row) */
+.platform-feature-card:nth-child(4) {
+  grid-column: span 2;
+  grid-row: span 1;
+  min-height: 380px;
+}
+
+/* Card 5: Wireframe scanner - Wide (spans 2 columns, 1 row) */
+.platform-feature-card:nth-child(5) {
+  grid-column: span 2;
+  grid-row: span 1;
+  min-height: 350px;
+}
+
+/* Card 6: Generate themes - Tall (spans 1 column, 2 rows) */
+.platform-feature-card:nth-child(6) {
+  grid-column: span 1;
+  grid-row: span 2;
+  min-height: 500px;
+}
+
+.platform-feature-card.purple {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, rgba(255, 200, 0, 0.15) 100%);
+}
+
+.platform-feature-card.dark {
+  background: #0f172a;
+  border: 1px solid #334155;
+}
+
+.platform-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(255, 200, 0, 0.15);
+}
+
+.feature-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 2;
+}
+
+.platform-feature-card h3 {
+  margin: 0;
+  font-family: 'Sk-Modernist', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.platform-feature-card p {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 500px;
+}
+
+.feature-image-container {
+  flex: 1;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.feature-image-container img {
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  border-radius: 16px;
+  object-position: 15% center;
+  transition: transform 0.3s ease;
+}
+
+/* Scale only the image on hover, not the container */
+.platform-feature-card:hover .feature-image-container img {
+  transform: scale(1.05);
+}
+
+/* Specific styling for Automation & Orchestration card (4th card) */
+/* Remove background and make image fill completely */
+.platform-feature-card:nth-child(4) .feature-image-container {
+  aspect-ratio: 2 / 1;
+  width: 90%;
+  height: 20%;
+  max-width: 550px;
+  margin: 0 auto;
+  background: transparent;
+  overflow: hidden;
+}
+
+.platform-feature-card:nth-child(4) .feature-image-container img {
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
+}
+
+/* Scale the Automation & Orchestration image on hover */
+.platform-feature-card:nth-child(4):hover .feature-image-container img {
+  transform: scale(1.15);
+}
+
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .platform-overview-inner {
+    padding: 0 60px;
+  }
+
+  .platform-features-grid {
+    gap: 20px;
+  }
+
+  .platform-feature-card {
+    padding: 32px;
+  }
+
+  .platform-feature-card h3 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 992px) {
+  .platform-overview {
+    padding: 60px 0;
+  }
+
+  .platform-overview-inner {
+    padding: 0 40px;
+    gap: 40px;
+  }
+
+  .platform-hero h2 {
+    font-size: 40px;
+  }
+
+  .platform-hero p {
+    font-size: 15px;
+  }
+
+  .platform-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Simplified grid for tablets */
+  .platform-feature-card:nth-child(1),
+  .platform-feature-card:nth-child(2),
+  .platform-feature-card:nth-child(5),
+  .platform-feature-card:nth-child(6) {
+    grid-column: span 1;
+    grid-row: span 1;
+    min-height: 380px;
+  }
+
+  .platform-feature-card:nth-child(3) {
+    grid-column: span 1;
+    grid-row: span 1;
+    min-height: 320px;
+  }
+
+  /* Hide Card 4 (Automation & Orchestration) on tablet */
+  .platform-feature-card:nth-child(4),
+  .platform-feature-card.scanner-card {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .platform-overview {
+    padding: 50px 0;
+  }
+
+  .platform-overview-inner {
+    padding: 0 30px;
+    gap: 32px;
+  }
+
+  .platform-hero h2 {
+    font-size: 32px;
+  }
+
+  .platform-hero p {
+    font-size: 14px;
+  }
+
+  .platform-features-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Single column for mobile - uniform card sizes */
+  .platform-feature-card,
+  .platform-feature-card:nth-child(1),
+  .platform-feature-card:nth-child(2),
+  .platform-feature-card:nth-child(3),
+  .platform-feature-card:nth-child(4),
+  .platform-feature-card:nth-child(5),
+  .platform-feature-card:nth-child(6) {
+    grid-column: span 1;
+    grid-row: span 1;
+    padding: 28px;
+    min-height: 400px;
+    max-height: none;
+  }
+
+  .platform-feature-card h3 {
+    font-size: 24px;
+  }
+
+  .platform-feature-card p {
+    font-size: 14px;
+  }
+
+  .feature-image-placeholder {
+    min-height: 180px;
+  }
+
+  /* Hide Card 4 (Automation & Orchestration) on mobile */
+  .platform-feature-card:nth-child(4),
+  .platform-feature-card.scanner-card {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .platform-overview {
+    padding: 40px 0;
+  }
+
+  .platform-overview-inner {
+    padding: 0 20px;
+    gap: 24px;
+  }
+
+  .platform-hero {
+    gap: 16px;
+  }
+
+  .platform-hero h2 {
+    font-size: 28px;
+  }
+
+  .platform-hero p {
+    font-size: 13px;
+  }
+
+  .platform-hero-cta {
+    width: 100% !important;
+    height: 44px !important;
+  }
+
+  .platform-feature-card,
+  .platform-feature-card:nth-child(1),
+  .platform-feature-card:nth-child(2),
+  .platform-feature-card:nth-child(3),
+  .platform-feature-card:nth-child(4),
+  .platform-feature-card:nth-child(5),
+  .platform-feature-card:nth-child(6) {
+    padding: 20px;
+    min-height: 280px;
+  }
+
+  .platform-feature-card h3 {
+    font-size: 20px;
+  }
+
+  .platform-feature-card p {
+    font-size: 13px;
+  }
+
+  .feature-image-placeholder {
+    min-height: 120px;
+  }
+
+  .feature-image-placeholder span {
+    font-size: 12px;
+  }
+}
+
+/* Scanner Card Specific Styles */
+.platform-feature-card.scanner-card {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 32px;
+  padding: 40px;
+  align-items: center;
+  min-height: 380px;
+}
+
+.scanner-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+
+.scanner-left .feature-content {
+  gap: 10px;
+}
+
+.scanner-left .feature-content h3 {
+  font-size: 26px;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.scanner-left .feature-content p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0;
+}
+
+.scanner-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 300px;
+}
+
+.scanner-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.scanner-feature-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.scanner-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 200, 0, 0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #FFC800;
+}
+
+.scanner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.scanner-text h4 {
+  margin: 0;
+  font-family: 'Sk-Modernist', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 1.3;
+}
+
+.scanner-text p {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+
+.scanner-card .feature-image-placeholder {
+  min-height: 300px;
+  height: 120%;
+  width: 100%;
+  background: rgba(255, 200, 0, 0.02);
+  border: 2px dashed rgba(255, 200, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanner-card .feature-image-placeholder span {
+  font-size: 11px;
+  color: rgba(255, 200, 0, 0.4);
+  text-align: center;
+}

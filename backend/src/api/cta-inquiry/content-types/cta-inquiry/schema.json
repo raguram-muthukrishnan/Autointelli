@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cta_inquiries",
+  "info": {
+    "singularName": "cta-inquiry",
+    "pluralName": "cta-inquiries",
+    "displayName": "CTA Inquiry",
+    "description": "Contact and inquiry form submissions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "company": {
+      "type": "string"
+    },
+    "service_requested": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text",
+      "required": true
+    },
+    "source_page": {
+      "type": "string"
+    },
+    "calendly_requested": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

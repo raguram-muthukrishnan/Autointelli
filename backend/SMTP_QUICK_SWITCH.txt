@@ -1,0 +1,47 @@
+╔══════════════════════════════════════════════════════════════════╗
+║          QUICK GUIDE: Switch to Client's Mail Server            ║
+╚══════════════════════════════════════════════════════════════════╝
+
+📋 INFORMATION NEEDED FROM CLIENT:
+   ✓ SMTP Host (e.g., mail.clientdomain.com)
+   ✓ SMTP Port (usually 587 or 465)
+   ✓ Email Address (e.g., noreply@clientdomain.com)
+   ✓ Password
+   ✓ Security Type (TLS/SSL)
+
+📝 FILE TO EDIT:
+   autointelli_web/backend/.env
+
+🔧 LINES TO UPDATE:
+   SMTP_HOST=mail.clientdomain.com
+   SMTP_PORT=587
+   SMTP_USER=noreply@clientdomain.com
+   SMTP_PASS=client_password_here
+   SMTP_FROM=noreply@clientdomain.com
+   ADMIN_EMAIL=admin@clientdomain.com
+
+🔄 RESTART SERVER:
+   cd autointelli_web/backend
+   npm run develop
+
+✅ TEST:
+   1. Subscribe to newsletter
+   2. Create a blog post
+   3. Submit contact form
+   4. Check email delivery
+
+📚 FULL GUIDE:
+   See: autointelli_web/docs/SWITCH_TO_CLIENT_SMTP.md
+
+⚠️  COMMON PORTS:
+   587 = TLS/STARTTLS (recommended)
+   465 = SSL
+   25  = Non-secure (not recommended)
+
+🔒 SECURITY:
+   - Never commit .env to git
+   - Use strong passwords
+   - Always use TLS/SSL
+   - Keep credentials secure
+
+═══════════════════════════════════════════════════════════════════

@@ -1,0 +1,88 @@
+.card-swap-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: scale(1.5) translate(-22%, -3%);
+  transform-origin: center center;
+  perspective: 1200px; /* Increased perspective for a better 3D effect */
+  overflow: visible;
+  width: 100%;
+  height: 100%;
+}
+
+.card-swap-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Updated card styling for a more professional look */
+  background: #2d3748; /* Dark blue-grey background */
+  color: #edf2f7; /* Light text color */
+  padding: 0;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Image container */
+.card-image-container {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: #1a202c;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Content container */
+.card-content {
+  padding: 30px;
+}
+
+/* Styling for content inside the cards */
+.card-swap-card h3 {
+  font-family: 'Sk-Modernist', sans-serif;
+  font-size: 26px;
+  color: #F8E064; /* Highlight color */
+  margin: 0 0 18px 0;
+}
+
+.card-swap-card p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Base CSS from reactbits with minor adjustments */
+@media (max-width: 992px) {
+  .card-swap-container {
+    transform: scale(0.8) translate(-60%, -60%);
+  }
+}
+
+@media (max-width: 768px) {
+  .card-swap-container {
+    position: relative;
+    transform: scale(0.9) translate(-55%, -55%);
+    margin-top: 40px;
+    height: 450px; /* Give it a fixed height on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .card-swap-container {
+    transform: scale(0.7) translate(-70%, -70%);
+  }
+}

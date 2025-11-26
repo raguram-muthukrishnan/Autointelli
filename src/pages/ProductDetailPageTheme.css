@@ -1,0 +1,263 @@
+/* ============================================
+   PRODUCT DETAIL PAGE - OPTIMIZED THEME SYSTEM
+   ============================================
+   
+   This file uses CSS custom properties (variables) to theme
+   the entire product detail page dynamically.
+   
+   HOW IT WORKS:
+   1. JavaScript sets CSS variables on .product-detail-page
+   2. All child elements use these variables
+   3. New components automatically inherit the theme
+   4. No need to add overrides for new components!
+   
+   ============================================ */
+
+/* ============================================
+   CORE THEME VARIABLES
+   Applied to the root product-detail-page container
+   ============================================ */
+
+.product-detail-page {
+  /* These variables are set dynamically by JavaScript */
+  /* --product-primary */
+  /* --product-secondary */
+  /* --product-light */
+  /* --product-text */
+  /* --product-dot */
+  /* --product-gradient */
+  /* --product-shadow */
+  /* --product-hover */
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.product-detail-page .pdp-hero {
+  background: var(--product-gradient);
+}
+
+.product-detail-page .pdp-cta-primary {
+  background: var(--product-gradient);
+  box-shadow: 0 4px 15px var(--product-shadow);
+}
+
+.product-detail-page .pdp-cta-primary:hover {
+  background: var(--product-secondary);
+  box-shadow: 0 6px 20px var(--product-shadow);
+  transform: translateY(-2px);
+}
+
+.product-detail-page .pdp-cta-secondary {
+  border: 2px solid var(--product-primary);
+  color: var(--product-primary);
+  background: transparent;
+}
+
+.product-detail-page .pdp-cta-secondary:hover {
+  background: var(--product-hover);
+  border-color: var(--product-secondary);
+}
+
+/* ============================================
+   INTRO SECTION - Problem/Solution Cards
+   ============================================ */
+
+.product-detail-page .problem-card,
+.product-detail-page .solution-card {
+  border-left: 6px solid var(--product-primary);
+}
+
+.product-detail-page .problem-card .card-image-section,
+.product-detail-page .solution-card .card-image-section {
+  background: var(--product-light);
+}
+
+.product-detail-page .problem-icon,
+.product-detail-page .solution-icon {
+  background: var(--product-light);
+  color: var(--product-primary);
+  box-shadow: 0 4px 20px var(--product-shadow);
+}
+
+.product-detail-page .card-title {
+  color: var(--product-primary);
+}
+
+/* ============================================
+   BENTO GRID - Key Features
+   ============================================ */
+
+.product-detail-page .bento-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.product-detail-page .bento-card:hover {
+  border-color: var(--product-primary);
+  box-shadow: 0 12px 35px var(--product-shadow);
+}
+
+.product-detail-page .bento-glow {
+  background: var(--product-gradient);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.product-detail-page .bento-card:hover .bento-glow {
+  opacity: 0.15;
+}
+
+/* ============================================
+   BENEFITS SECTION
+   ============================================ */
+
+.product-detail-page .pdp-benefits-tag {
+  color: var(--product-primary);
+  background: var(--product-hover);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.product-detail-page .benefit-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.product-detail-page .benefit-card:hover {
+  border-color: var(--product-primary);
+  box-shadow: 0 12px 35px var(--product-shadow);
+  transform: translateY(-8px);
+}
+
+.product-detail-page .benefit-card:hover .benefit-card-icon {
+  background: var(--product-light);
+}
+
+.product-detail-page .benefit-card-icon svg path {
+  stroke: var(--product-primary);
+}
+
+.product-detail-page .benefit-card-title {
+  color: var(--product-primary);
+}
+
+/* ============================================
+   ROI SECTION
+   ============================================ */
+
+.product-detail-page .roi-value {
+  color: var(--product-primary);
+  font-weight: 700;
+}
+
+.product-detail-page .pdp-roi {
+  background: var(--product-hover);
+}
+
+/* ============================================
+   FINAL CTA SECTION
+   ============================================ */
+
+.product-detail-page .pdp-cta-left {
+  background: var(--product-gradient);
+}
+
+.product-detail-page .pdp-cta-btn-primary {
+  background: var(--product-gradient);
+  box-shadow: 0 4px 15px var(--product-shadow);
+  border: none;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-detail-page .pdp-cta-btn-primary:hover {
+  box-shadow: 0 8px 25px var(--product-shadow);
+  transform: translateY(-2px);
+}
+
+.product-detail-page .pdp-cta-btn-secondary {
+  border: 2px solid var(--product-primary);
+  color: var(--product-primary);
+  background: transparent;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-detail-page .pdp-cta-btn-secondary:hover {
+  background: var(--product-hover);
+}
+
+/* ============================================
+   SECTION TITLES & TEXT
+   ============================================ */
+
+.product-detail-page .pdp-section-title {
+  color: var(--product-text);
+}
+
+/* ============================================
+   LINKS & INTERACTIVE ELEMENTS
+   ============================================ */
+
+.product-detail-page a {
+  color: var(--product-primary);
+}
+
+.product-detail-page a:hover {
+  color: var(--product-secondary);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   Any component can use these classes to get themed colors
+   ============================================ */
+
+.product-detail-page .theme-bg-primary {
+  background: var(--product-primary);
+}
+
+.product-detail-page .theme-bg-gradient {
+  background: var(--product-gradient);
+}
+
+.product-detail-page .theme-bg-light {
+  background: var(--product-light);
+}
+
+.product-detail-page .theme-text-primary {
+  color: var(--product-primary);
+}
+
+.product-detail-page .theme-border-primary {
+  border-color: var(--product-primary);
+}
+
+.product-detail-page .theme-shadow {
+  box-shadow: 0 4px 15px var(--product-shadow);
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .product-detail-page .pdp-cta-primary,
+  .product-detail-page .pdp-cta-secondary,
+  .product-detail-page .pdp-cta-btn-primary,
+  .product-detail-page .pdp-cta-btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}

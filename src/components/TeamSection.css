@@ -1,0 +1,133 @@
+/* Main container for the Team Section */
+.team-section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  gap: 40px;
+  width: 100%;
+  /* REMOVED min-height to let content define the height */
+  /* Adjusted padding to control the space */
+  padding: 80px 20px 0; 
+  box-sizing: border-box;
+  background: #fff; /* Added white background as per reference */
+}
+
+/* Heading and Subtitle Container */
+.team-section-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 787px;
+  max-width: 100%;
+}
+
+.team-section-title {
+  color: #404040;
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: 'Sk-Modernist', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 46px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.team-section-subtitle {
+  color: #818181;
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "DM Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+  margin: 0;
+}
+
+/* Wrapper for the boxes to align them at the bottom */
+.team-section-boxes-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Aligns boxes to the bottom */
+    gap: 20px;
+    width: 100%;
+}
+
+/* Container for the three content boxes */
+.team-section-boxes {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* This is key for the bar-like structure */
+  gap: 20px;
+}
+
+/* Base styles for each box */
+.team-box {
+  display: flex;
+  flex-direction: column;
+  /* Aligns text to the top of the box */
+  justify-content: flex-start; 
+  align-items: center;
+  text-align: center;
+  /* Increased top padding to push content down from the edge */
+  padding: 30px 20px; 
+  box-sizing: border-box;
+  /* Rounded corners only at the top */
+  border-radius: 20px 20px 0 0; 
+  background: linear-gradient(180deg, #F0CE1D 22.25%, #F8E064 98.31%);
+  flex-shrink: 0;
+  /* IDEA: Added a subtle shadow to lift the boxes off the page */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Individual heights for each box */
+.box-1 {
+  width: 216px;
+  height: 244px;
+}
+
+.box-2 {
+  width: 216px;
+  height: 288px;
+}
+
+.box-3 {
+  width: 216px;
+  height: 318px;
+}
+
+/* Text styles inside the boxes */
+.box-title {
+  color: #404040;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "DM Sans", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 27px;
+  margin: 0 0 15px 0; /* Increased margin for more space */
+}
+
+.box-subtitle {
+  color: #4D4D4D;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0 0 10px 0; /* Increased margin */
+}
+
+.box-description {
+  color: #4D4D4D;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  /* This will respect line breaks in your data file */
+  white-space: pre-line; 
+}
+

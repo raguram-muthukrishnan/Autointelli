@@ -1,0 +1,367 @@
+.resource-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+}
+
+.breadcrumb {
+  margin-bottom: 20px;
+}
+
+.breadcrumb a {
+  color: #4a5568;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: #2d3748;
+}
+
+.resource-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 992px) {
+  .resource-detail-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Hero Section */
+.resource-hero {
+  margin-bottom: 40px;
+}
+
+.resource-hero img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.hero-badges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.live-badge-detail {
+  background: #e53e3e;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.past-badge {
+  background: #718096;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.in-person-badge {
+  background: #48bb78;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.online-badge {
+  background: #3182ce;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.detail-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.detail-tag {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  color: #4a5568;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.resource-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a202c;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.resource-subtitle {
+  font-size: 1.25rem;
+  color: #4a5568;
+  margin-bottom: 20px;
+}
+
+/* Metadata Row */
+.metadata-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.metadata-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.metadata-item svg {
+  color: #3182ce;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.meta-label {
+  font-size: 0.8rem;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.meta-value {
+  font-size: 0.95rem;
+  color: #2d3748;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Content Sections */
+.content-section {
+  margin-bottom: 40px;
+}
+
+.content-section h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 10px;
+}
+
+.rich-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a5568;
+}
+
+.rich-text p {
+  margin-bottom: 1.5em;
+}
+
+/* Speakers */
+.speakers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.speaker-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.speaker-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.speaker-name {
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 5px;
+}
+
+.speaker-title {
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+/* Sidebar / Registration */
+.resource-sidebar {
+  position: sticky;
+  top: 100px; /* Adjust based on header height */
+  height: fit-content;
+}
+
+.registration-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.registration-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #1a202c;
+  font-weight: 700;
+}
+
+.capacity-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #f7fafc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.capacity-info svg {
+  color: #3182ce;
+}
+
+.btn-register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: #3182ce;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-register:hover {
+  background: #2b6cb0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+}
+
+.btn-register:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-register svg {
+  width: 18px;
+  height: 18px;
+}
+
+.sidebar-info {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.info-item {
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.info-item strong {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.waitlist-text {
+  text-align: center;
+  margin-top: 10px;
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+.seats-left {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #e53e3e;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Mobile Sticky CTA */
+@media (max-width: 991px) {
+  .resource-sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    z-index: 100;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+    padding: 15px;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .registration-card {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .registration-card h3, .waitlist-text, .seats-left {
+    display: none; /* Simplify for mobile bar */
+  }
+  
+  .btn-register {
+    margin: 0;
+  }
+}

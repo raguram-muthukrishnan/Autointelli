@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resource_downloads",
+  "info": {
+    "singularName": "resource-download",
+    "pluralName": "resource-downloads",
+    "displayName": "Resource Download",
+    "description": "Track resource downloads with email capture"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": ""
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "resourceName": {
+      "type": "string",
+      "required": true
+    },
+    "resourceType": {
+      "type": "enumeration",
+      "enum": [
+        "whitepaper",
+        "ebook",
+        "guide",
+        "case-study",
+        "datasheet",
+        "template",
+        "video",
+        "webinar",
+        "other"
+      ],
+      "default": "other"
+    },
+    "resourceUrl": {
+      "type": "text",
+      "required": true
+    },
+    "downloadedAt": {
+      "type": "datetime",
+      "required": true
+    },
+    "ipAddress": {
+      "type": "string"
+    },
+    "userAgent": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+'use strict';
+
+/**
+ * partner-request controller - SIMPLE VERSION (NO EMAIL)
+ * Use this if the main controller is causing issues
+ */
+
+const { createCoreController } = require('@strapi/strapi').factories;
+
+module.exports = createCoreController('api::partner-request.partner-request');

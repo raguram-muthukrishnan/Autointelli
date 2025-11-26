@@ -1,0 +1,240 @@
+.social-proof {
+  background: #f3f3f3;
+  padding: 2.75rem 0;
+  margin-top: 0;
+}
+
+.social-proof-inner {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  align-items: center;
+  text-align: center;
+}
+
+.social-proof-loop {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.social-proof-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  max-width: 560px;
+}
+
+.social-proof-tag {
+  display: inline-flex;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  background: rgb(255, 221, 0);
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.social-proof-header p {
+  margin: 0;
+  color: #7c4a02;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.logoloop {
+  position: relative;
+  overflow-x: hidden;
+
+  --logoloop-gap: 60px;
+  --logoloop-logoHeight: 60px;
+  --logoloop-fadeColorAuto: #fff6dd;
+}
+
+.logoloop--scale-hover {
+  padding-top: calc(var(--logoloop-logoHeight) * 0.1);
+  padding-bottom: calc(var(--logoloop-logoHeight) * 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .logoloop {
+    --logoloop-fadeColorAuto: #0b0b0b;
+  }
+}
+
+.logoloop__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  user-select: none;
+}
+
+.logoloop__list {
+  display: flex;
+  align-items: center;
+}
+
+.logoloop__item {
+  flex: 0 0 auto;
+  margin-right: var(--logoloop-gap);
+  font-size: var(--logoloop-logoHeight);
+  line-height: 1;
+}
+
+.logoloop__item:last-child {
+  margin-right: var(--logoloop-gap);
+}
+
+.logoloop__node {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logoloop__item img {
+  height: var(--logoloop-logoHeight);
+  width: auto;
+  max-width: 200px; /* Ensure consistent sizing */
+  max-height: var(--logoloop-logoHeight); /* Force consistent height */
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  image-rendering: -webkit-optimize-contrast;
+  -webkit-user-drag: none;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: grayscale(80%) brightness(1.1);
+  opacity: 0.9;
+}
+
+.logoloop--scale-hover .logoloop__item {
+  overflow: visible;
+}
+
+.logoloop--scale-hover .logoloop__item:hover img,
+.logoloop--scale-hover .logoloop__item:hover .logoloop__node {
+  transform: scale(1.18);
+  transform-origin: center center;
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.logoloop--scale-hover .logoloop__node {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logoloop__link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.logoloop__link:hover {
+  opacity: 0.9;
+}
+
+.logoloop__link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.logoloop--fade::before,
+.logoloop--fade::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(24px, 8%, 120px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.logoloop--fade::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.logoloop--fade::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoloop__track {
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  .logoloop__item img,
+  .logoloop__node {
+    transition: none !important;
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .social-proof {
+    padding: 2rem 0;
+    margin-top: 0;
+  }
+
+  .social-proof-inner {
+    gap: 1.5rem;
+  }
+
+  .social-proof-header {
+    padding: 0 20px;
+  }
+
+  .social-proof-header p {
+    font-size: 0.95rem;
+  }
+
+  .logoloop {
+    --logoloop-gap: 24px;
+    --logoloop-logoHeight: 24px;
+  }
+
+  .logoloop__item img {
+    max-width: 120px;
+    max-height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-proof {
+    padding: 1.5rem 0;
+  }
+
+  .social-proof-tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.85rem;
+  }
+
+  .social-proof-header p {
+    font-size: 0.9rem;
+  }
+
+  .logoloop {
+    --logoloop-gap: 20px;
+    --logoloop-logoHeight: 20px;
+  }
+
+  .logoloop__item img {
+    max-width: 100px;
+    max-height: 20px;
+  }
+}

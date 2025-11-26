@@ -1,0 +1,25 @@
+/* Events Page - Inherits from WebinarsPage.css with custom overrides */
+@import './WebinarsPage.css';
+
+/* Custom hero gradient for events */
+.webinars-page-container .webinars-hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.webinars-page-container .stat-number {
+  color: #48bb78;
+}
+
+.webinars-page-container .filter-btn.active {
+  background: #48bb78;
+  border-color: #48bb78;
+}
+
+.webinars-page-container .filter-btn.active:hover {
+  background: #38a169;
+}
+
+.webinars-page-container .tag-pill.active {
+  background: #48bb78;
+  border-color: #48bb78;
+}

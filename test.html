@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Chatbot Tester (Final)</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        h2 { color: #333; }
+        
+        /* Connection Status Bar */
+        .status-bar { padding: 10px; background: #eee; border-radius: 5px; margin-bottom: 15px; font-weight: bold;}
+        .connected { color: green; }
+        .disconnected { color: red; }
+
+        /* Chat Area */
+        #chat-container { 
+            border: 1px solid #ddd; 
+            height: 400px; 
+            overflow-y: scroll; 
+            padding: 15px; 
+            background: #f9f9f9; 
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Messages */
+        .msg { max-width: 70%; padding: 8px 12px; border-radius: 15px; font-size: 14px; line-height: 1.4; }
+        .msg-client { align-self: flex-end; background: #007bff; color: white; border-bottom-right-radius: 2px; }
+        .msg-server { align-self: flex-start; background: #e9ecef; color: #333; border-bottom-left-radius: 2px; }
+        .msg-error { align-self: center; background: #ffebee; color: #c62828; font-size: 12px; }
+        .msg-info { align-self: center; color: #888; font-size: 12px; font-style: italic; }
+
+        /* Input Area */
+        .controls { margin-top: 15px; display: flex; gap: 10px; }
+        input { flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+    <h2>🤖 AI Chatbot Integration Test</h2>
+    
+    <div class="status-bar">
+        Target: <code style="background:#ddd; padding:2px 5px;">ws://localhost:8000/proxy</code><br>
+        Status: <span id="status-text" class="disconnected">Disconnected</span>
+    </div>
+
+    <div id="chat-container">
+        <div class="msg msg-info">System: Waiting for connection...</div>
+    </div>
+
+    <div class="controls">
+        <input type="text" id="msgInput" placeholder="Type a message..." onkeypress="handleEnter(event)">
+        <button id="sendBtn" onclick="sendMessage()" disabled>Send</button>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. CONFIGURATION
+        // ==========================================
+        // Connect to YOUR Python Proxy (not the AI IP directly)
+        const PROXY_URL = "ws://localhost:8000/proxy"; 
+        
+        let socket;
+        const chatBox = document.getElementById('chat-container');
+        const statusText = document.getElementById('status-text');
+        const sendBtn = document.getElementById('sendBtn');
+        const inputField = document.getElementById('msgInput');
+
+        // ==========================================
+        // 2. ID GENERATORS (Mimic real user data)
+        // ==========================================
+        
+        // Generate or Retrieve User ID
+        let userId = localStorage.getItem("chat_user_id");
+        if (!userId) {
+            userId = Math.floor(Math.random() * 1000000000); // Random number
+            localStorage.setItem("chat_user_id", userId);
+        }
+
+        // Generate or Retrieve Conversation ID (Mongo ObjectId style)
+        // let conversationId = localStorage.getItem("chat_conv_id");
+        // if (!conversationId) {
+        //     const timestamp = (new Date().getTime() / 1000 | 0).toString(16);
+        //     conversationId = timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function() {
+        //         return (Math.random() * 16 | 0).toString(16);
+        //     }).toLowerCase();
+        //     localStorage.setItem("chat_conv_id", conversationId);
+        // }
+
+        // ==========================================
+        // 3. WEBSOCKET LOGIC
+        // ==========================================
+        function connect() {
+            try {
+                socket = new WebSocket(PROXY_URL);
+
+                socket.onopen = () => {
+                    statusText.innerText = "Connected via Proxy ✅";
+                    statusText.className = "connected";
+                    sendBtn.disabled = false;
+                    addLog("System: Connected to AI Server.", "msg-info");
+                };
+
+                socket.onmessage = (event) => {
+                    console.log("Raw Received:", event.data);
+                    
+                    // Try to parse JSON, or show text if it's just text
+                    try {
+                        const data = JSON.parse(event.data);
+                        // If the server sends back the same structure, show the 'message' part
+                        const displayText = data.message || JSON.stringify(data);
+                        addLog(displayText, "msg-server");
+                    } catch (e) {
+                        // It's just plain text
+                        addLog(event.data, "msg-server");
+                    }
+                };
+
+                socket.onclose = (e) => {
+                    statusText.innerText = "Disconnected ❌";
+                    statusText.className = "disconnected";
+                    sendBtn.disabled = true;
+                    addLog("System: Connection closed. Retrying in 3s...", "msg-error");
+                    setTimeout(connect, 3000); // Auto-reconnect
+                };
+
+                socket.onerror = (err) => {
+                    console.error("Socket Error:", err);
+                    socket.close();
+                };
+
+            } catch (err) {
+                addLog("Error creating socket: " + err.message, "msg-error");
+            }
+        }
+
+        // ==========================================
+        // 4. SEND MESSAGE (The Golden Key Format)
+        // ==========================================
+        function sendMessage() {
+            const text = inputField.value.trim();
+            if (!text) return;
+
+            // Based on the JSON you provided:
+            // {"user_id":2090..., "direction":"client", "message":"Hi", ...}
+            const payload = {
+                user_id: 2090364640,
+                direction: "client",
+                message: text,
+                conversationId: "69202da1e2417730d97f3fc4",
+                createdAt: new Date().toISOString()
+            };
+
+            const jsonString = JSON.stringify(payload);
+
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                socket.send(jsonString);
+                addLog(text, "msg-client"); // Show my message
+                inputField.value = "";      // Clear input
+            } else {
+                addLog("Error: Socket not open", "msg-error");
+            }
+        }
+
+        // ==========================================
+        // 5. UI HELPERS
+        // ==========================================
+        function addLog(text, className) {
+            const div = document.createElement('div');
+            div.className = `msg ${className}`;
+            div.textContent = text;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        // Start connection immediately
+        connect();
+
+    </script>
+</body>
+</html>

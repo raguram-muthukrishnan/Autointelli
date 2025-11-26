@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "jobs",
+  "info": {
+    "singularName": "job",
+    "pluralName": "jobs",
+    "displayName": "Job Posting",
+    "description": "Job openings and career opportunities"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "department": {
+      "type": "enumeration",
+      "enum": [
+        "Engineering",
+        "Product",
+        "Sales",
+        "Marketing",
+        "Customer Success",
+        "People & Operations",
+        "Finance",
+        "Design"
+      ],
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "employment_type": {
+      "type": "enumeration",
+      "enum": ["Full-time", "Part-time", "Contract", "Internship"],
+      "default": "Full-time"
+    },
+    "experience_level": {
+      "type": "enumeration",
+      "enum": ["Entry Level", "Mid Level", "Senior Level", "Lead/Principal", "Executive"],
+      "required": true
+    },
+    "short_description": {
+      "type": "text",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "requirements": {
+      "type": "richtext"
+    },
+    "responsibilities": {
+      "type": "richtext"
+    },
+    "salary_range": {
+      "type": "string"
+    },
+    "is_remote": {
+      "type": "boolean",
+      "default": false
+    },
+    "application_deadline": {
+      "type": "date"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

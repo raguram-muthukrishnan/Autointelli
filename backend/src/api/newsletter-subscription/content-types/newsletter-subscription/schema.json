@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "newsletter_subscriptions",
+  "info": {
+    "singularName": "newsletter-subscription",
+    "pluralName": "newsletter-subscriptions",
+    "displayName": "Newsletter Subscription",
+    "description": "Stores newsletter subscription preferences"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "categories": {
+      "type": "json",
+      "default": []
+    },
+    "subscribed": {
+      "type": "boolean",
+      "default": true
+    },
+    "unsubscribe_token": {
+      "type": "string",
+      "private": true
+    }
+  }
+}

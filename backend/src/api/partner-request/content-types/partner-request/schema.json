@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "partner_requests",
+  "info": {
+    "singularName": "partner-request",
+    "pluralName": "partner-requests",
+    "displayName": "Partner Request",
+    "description": "Partnership and collaboration requests"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "company_name": {
+      "type": "string",
+      "required": true
+    },
+    "contact_name": {
+      "type": "string",
+      "required": true
+    },
+    "business_email": {
+      "type": "email",
+      "required": true
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "partner_type": {
+      "type": "enumeration",
+      "enum": [
+        "Technology Partner",
+        "Reseller Partner",
+        "Integration Partner",
+        "Consulting Partner",
+        "Other"
+      ],
+      "required": true
+    },
+    "about_business": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

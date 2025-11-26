@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "visitors",
+  "info": {
+    "singularName": "visitor",
+    "pluralName": "visitors",
+    "displayName": "Visitor",
+    "description": "Track website visitors"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": ""
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "attributes": {
+    "visitorId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "sessionId": {
+      "type": "string"
+    },
+    "ipAddress": {
+      "type": "string"
+    },
+    "userAgent": {
+      "type": "text"
+    },
+    "referrer": {
+      "type": "string"
+    },
+    "landingPage": {
+      "type": "string"
+    },
+    "browser": {
+      "type": "string"
+    },
+    "device": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "visitCount": {
+      "type": "integer",
+      "default": 1
+    },
+    "lastVisit": {
+      "type": "datetime"
+    },
+    "firstVisit": {
+      "type": "datetime"
+    },
+    "pageViews": {
+      "type": "json"
+    }
+  }
+}

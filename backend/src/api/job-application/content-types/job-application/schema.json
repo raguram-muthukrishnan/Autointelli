@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_applications",
+  "info": {
+    "singularName": "job-application",
+    "pluralName": "job-applications",
+    "displayName": "Job Application",
+    "description": "Applications submitted by job seekers"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "job_title": {
+      "type": "string",
+      "required": true
+    },
+    "job_id": {
+      "type": "string"
+    },
+    "full_name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "linkedin_url": {
+      "type": "string"
+    },
+    "portfolio_url": {
+      "type": "string"
+    },
+    "years_of_experience": {
+      "type": "integer"
+    },
+    "current_company": {
+      "type": "string"
+    },
+    "cover_letter": {
+      "type": "text"
+    },
+    "resume": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["files"]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["New", "Reviewing", "Shortlisted", "Interview Scheduled", "Rejected", "Hired"],
+      "default": "New"
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}
