@@ -85,40 +85,52 @@ const ChatBot = () => {
     
     // AutoIntelli-specific responses
     if (input.includes('nms') || input.includes('network monitoring')) {
-      return "Our NMS (Network Monitoring System) provides comprehensive network infrastructure monitoring with real-time alerts and analytics. Would you like to know more about specific features?";
+      return "Our NMS (Network Monitoring System) provides comprehensive network infrastructure monitoring with real-time alerts and analytics. It includes device discovery, performance monitoring, and automated alerting. Would you like to know more about specific features?";
     }
     
     if (input.includes('opsduty') || input.includes('ops duty')) {
-      return "OpsDutyAI is our intelligent incident management platform that automates response workflows and reduces MTTR. It integrates seamlessly with your existing tools.";
+      return "OpsDutyAI is our intelligent incident management platform that automates response workflows and reduces MTTR. It features AI-powered incident correlation, automated escalation, and seamless integration with your existing tools like ServiceNow and Jira.";
     }
     
     if (input.includes('intelliflow') || input.includes('intelli flow')) {
-      return "IntelliFlow is our automation orchestration platform that streamlines IT operations with drag-and-drop workflow automation. Perfect for reducing manual tasks!";
+      return "IntelliFlow is our automation orchestration platform that streamlines IT operations with drag-and-drop workflow automation. Perfect for reducing manual tasks and improving operational efficiency! It supports complex workflows and integrates with 200+ tools.";
+    }
+    
+    if (input.includes('alice') || input.includes('securita') || input.includes('helpdesk')) {
+      return "We offer several specialized solutions: Alice AI for intelligent assistance, Securita for security operations, and IntelliDesk for IT service management. Each is designed to enhance your IT operations efficiency.";
     }
     
     if (input.includes('price') || input.includes('cost') || input.includes('pricing')) {
-      return "I'd be happy to discuss our pricing options! Our solutions are competitively priced based on your specific needs. Please contact our sales team at sales@autointelli.com for a custom quote.";
+      return "Our solutions are competitively priced based on your specific needs and scale. We offer flexible licensing options including per-device, per-user, and enterprise packages. Contact our sales team at sales@autointelli.com for a custom quote and potential discounts.";
     }
     
-    if (input.includes('demo') || input.includes('trial')) {
-      return "Great! We offer personalized demos of all our products. You can schedule a demo through our contact page, or I can help you get started. What product interests you most?";
+    if (input.includes('demo') || input.includes('trial') || input.includes('free')) {
+      return "Absolutely! We offer personalized live demos and 30-day free trials for all our products. You can schedule a demo through our contact page or request a trial account. Would you like me to help you get started with a specific product?";
     }
     
-    if (input.includes('contact') || input.includes('support')) {
-      return "You can reach our team at sales@autointelli.com for sales inquiries or support@autointelli.com for technical support. We're here to help 24/7!";
+    if (input.includes('contact') || input.includes('support') || input.includes('help')) {
+      return "You can reach our team at:\n• Sales: sales@autointelli.com\n• Support: support@autointelli.com\n• General: info@autointelli.com\n\nOur support team is available 24/7 to help with any questions or technical issues!";
     }
     
-    if (input.includes('integration') || input.includes('api')) {
-      return "All our products offer robust API integrations and support popular tools like ServiceNow, Jira, Slack, and more. Our platform is designed for seamless integration with your existing infrastructure.";
+    if (input.includes('integration') || input.includes('api') || input.includes('connect')) {
+      return "All our products offer robust API integrations and support 200+ popular tools including ServiceNow, Jira, Slack, Microsoft Teams, Splunk, and more. Our platform is designed for seamless integration with your existing infrastructure through REST APIs and webhooks.";
+    }
+    
+    if (input.includes('feature') || input.includes('capability') || input.includes('what can')) {
+      return "AutoIntelli's platform includes:\n• Real-time monitoring & alerting\n• AI-powered incident management\n• Workflow automation & orchestration\n• Advanced analytics & reporting\n• Multi-tenant architecture\n• 99.9% uptime SLA\n\nWhich area would you like to explore further?";
+    }
+    
+    if (input.includes('thank') || input.includes('thanks')) {
+      return "You're very welcome! I'm here to help you understand how AutoIntelli can transform your IT operations. Feel free to ask me anything about our products, pricing, or schedule a demo!";
     }
     
     // General responses
     const generalResponses = [
-      "I'm Alice AI, your AutoIntelli assistant! I can help you learn about our IT operations management solutions including NMS, OpsDutyAI, and IntelliFlow.",
-      "AutoIntelli specializes in intelligent IT operations management. Our platform helps organizations automate monitoring, incident response, and workflow orchestration.",
-      "I'm here to help you understand how AutoIntelli's solutions can improve your IT operations efficiency. What specific area interests you most?",
-      "Our products integrate AI and automation to streamline IT operations. Would you like to know more about our monitoring, automation, or incident management capabilities?",
-      "Thank you for your interest in AutoIntelli! I can provide information about our products, pricing, demos, and integrations. How can I assist you today?"
+      "I'm Alice AI, your AutoIntelli assistant! I can help you learn about our IT operations management solutions including NMS, OpsDutyAI, and IntelliFlow. What would you like to know?",
+      "AutoIntelli specializes in intelligent IT operations management. Our AI-powered platform helps organizations automate monitoring, incident response, and workflow orchestration. How can I assist you today?",
+      "I'm here to help you understand how AutoIntelli's solutions can improve your IT operations efficiency. We offer comprehensive monitoring, automation, and incident management tools. What specific area interests you most?",
+      "Our products integrate AI and automation to streamline IT operations. We serve Fortune 500 companies and growing businesses alike. Would you like to know more about our monitoring, automation, or incident management capabilities?",
+      "Thank you for your interest in AutoIntelli! I can provide information about our products, pricing, demos, integrations, and more. How can I help you explore our solutions today?"
     ];
     
     return generalResponses[Math.floor(Math.random() * generalResponses.length)];
@@ -171,7 +183,9 @@ const ChatBot = () => {
       setTimeout(async () => {
         let botResponse = generateIntelligentResponse(userInput);
         
-        // Optionally, try to get response from Strapi API
+        // Optionally, try to get response from Strapi API (commented out for now)
+        // Your Strapi backend doesn't have a chat endpoint yet, so we skip this
+        /*
         try {
           const response = await fetch(`${STRAPI_URL}/api/chat`, {
             method: 'POST',
@@ -191,6 +205,7 @@ const ChatBot = () => {
         } catch (apiError) {
           console.log('Strapi API not available, using intelligent mock response');
         }
+        */
         
         addBotMessage(botResponse);
         setIsLoading(false);
