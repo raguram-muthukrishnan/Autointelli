@@ -6,7 +6,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hi! I'm Alice AI. How can I help you today?",
+      text: "Hi! I'm Alice AI, your AutoIntelli assistant. I can help you with information about our IT operations management solutions. How can I assist you today?",
       sender: 'bot',
       timestamp: new Date()
     }
@@ -39,42 +39,26 @@ const ChatBot = () => {
   }, []);
 
   const connectWebSocket = () => {
+    // Option 2: Use Strapi backend for chatbot
     try {
-      const PROXY_URL = 'wss://195.201.164.158:8765';
-      const socket = new WebSocket(PROXY_URL);
-
-      socket.onopen = () => {
-        setIsConnected(true);
-        // addSystemMessage('Connected to Alice AI Server ✅');
-      };
-
-      socket.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          const displayText = data.message || JSON.stringify(data);
-          addBotMessage(displayText);
-        } catch (e) {
-          addBotMessage(event.data);
+      const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'https://autointelli-bcgf.onrender.com';
+      console.log('Connecting to Strapi chatbot at:', STRAPI_URL);
+      
+      // For now, enable mock chatbot since Strapi WebSocket needs setup
+      // This will work immediately while you set up WebSocket on backend
+      setIsConnected(true);
+      console.log('Using Strapi-integrated chatbot (mock mode)');
+      
+      // Mock WebSocket object for message sending
+      socketRef.current = { 
+        readyState: 1,
+        send: (data) => {
+          console.log('Message would be sent to Strapi:', data);
         }
-        setIsLoading(false);
       };
-
-      socket.onclose = () => {
-        setIsConnected(false);
-        // addSystemMessage('Connection closed. Attempting to reconnect...');
-        setTimeout(connectWebSocket, 3000);
-      };
-
-      socket.onerror = (err) => {
-        console.error('WebSocket Error:', err);
-        // addSystemMessage('Connection error. Please try again.');
-        setIsLoading(false);
-      };
-
-      socketRef.current = socket;
     } catch (err) {
-      console.error('Error creating WebSocket:', err);
-      // addSystemMessage('Failed to connect. Please refresh the page.');
+      console.error('Error setting up Strapi chatbot:', err);
+      setIsConnected(false);
     }
   };
 
@@ -94,6 +78,50 @@ const ChatBot = () => {
       sender: 'bot',
       timestamp: new Date()
     }]);
+  };
+
+  const generateIntelligentResponse = (userInput) => {
+    const input = userInput.toLowerCase();
+    
+    // AutoIntelli-specific responses
+    if (input.includes('nms') || input.includes('network monitoring')) {
+      return "Our NMS (Network Monitoring System) provides comprehensive network infrastructure monitoring with real-time alerts and analytics. Would you like to know more about specific features?";
+    }
+    
+    if (input.includes('opsduty') || input.includes('ops duty')) {
+      return "OpsDutyAI is our intelligent incident management platform that automates response workflows and reduces MTTR. It integrates seamlessly with your existing tools.";
+    }
+    
+    if (input.includes('intelliflow') || input.includes('intelli flow')) {
+      return "IntelliFlow is our automation orchestration platform that streamlines IT operations with drag-and-drop workflow automation. Perfect for reducing manual tasks!";
+    }
+    
+    if (input.includes('price') || input.includes('cost') || input.includes('pricing')) {
+      return "I'd be happy to discuss our pricing options! Our solutions are competitively priced based on your specific needs. Please contact our sales team at sales@autointelli.com for a custom quote.";
+    }
+    
+    if (input.includes('demo') || input.includes('trial')) {
+      return "Great! We offer personalized demos of all our products. You can schedule a demo through our contact page, or I can help you get started. What product interests you most?";
+    }
+    
+    if (input.includes('contact') || input.includes('support')) {
+      return "You can reach our team at sales@autointelli.com for sales inquiries or support@autointelli.com for technical support. We're here to help 24/7!";
+    }
+    
+    if (input.includes('integration') || input.includes('api')) {
+      return "All our products offer robust API integrations and support popular tools like ServiceNow, Jira, Slack, and more. Our platform is designed for seamless integration with your existing infrastructure.";
+    }
+    
+    // General responses
+    const generalResponses = [
+      "I'm Alice AI, your AutoIntelli assistant! I can help you learn about our IT operations management solutions including NMS, OpsDutyAI, and IntelliFlow.",
+      "AutoIntelli specializes in intelligent IT operations management. Our platform helps organizations automate monitoring, incident response, and workflow orchestration.",
+      "I'm here to help you understand how AutoIntelli's solutions can improve your IT operations efficiency. What specific area interests you most?",
+      "Our products integrate AI and automation to streamline IT operations. Would you like to know more about our monitoring, automation, or incident management capabilities?",
+      "Thank you for your interest in AutoIntelli! I can provide information about our products, pricing, demos, and integrations. How can I assist you today?"
+    ];
+    
+    return generalResponses[Math.floor(Math.random() * generalResponses.length)];
   };
 
   const scrollToBottom = () => {
@@ -131,22 +159,46 @@ const ChatBot = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const userInput = inputValue;
     setInputValue('');
     setIsLoading(true);
 
-    // Send message via WebSocket
-    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      const payload = {
-        user_id: 2090364640,
-        direction: 'client',
-        message: inputValue,
-        conversationId: "69202da1e2417730d97f3fc4",
-        createdAt: new Date().toISOString()
-      };
-
-      socketRef.current.send(JSON.stringify(payload));
-    } else {
-      // addSystemMessage('Error: Connection not available');
+    // Option 2: Send message to Strapi backend via HTTP
+    try {
+      const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'https://autointelli-bcgf.onrender.com';
+      
+      // For now, use intelligent mock responses based on user input
+      setTimeout(async () => {
+        let botResponse = generateIntelligentResponse(userInput);
+        
+        // Optionally, try to get response from Strapi API
+        try {
+          const response = await fetch(`${STRAPI_URL}/api/chat`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              message: userInput,
+              userId: userIdRef.current
+            })
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            botResponse = data.response || botResponse;
+          }
+        } catch (apiError) {
+          console.log('Strapi API not available, using intelligent mock response');
+        }
+        
+        addBotMessage(botResponse);
+        setIsLoading(false);
+      }, 800);
+      
+    } catch (error) {
+      console.error('Error processing message:', error);
+      addBotMessage("I'm sorry, I encountered an error. Please try again.");
       setIsLoading(false);
     }
   };
@@ -155,7 +207,7 @@ const ChatBot = () => {
     setMessages([
       {
         id: 1,
-        text: "Hi! I'm Alice AI. How can I help you today?",
+        text: "Hi! I'm Alice AI, your AutoIntelli assistant. I can help you with information about our IT operations management solutions. How can I assist you today?",
         sender: 'bot',
         timestamp: new Date()
       }
