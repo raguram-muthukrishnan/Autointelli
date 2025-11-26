@@ -40,7 +40,7 @@ const ChatBot = () => {
 
   const connectWebSocket = () => {
     try {
-      const PROXY_URL = 'ws://195.201.164.158:8765';
+      const PROXY_URL = 'wss://195.201.164.158:8765';
       const socket = new WebSocket(PROXY_URL);
 
       socket.onopen = () => {
