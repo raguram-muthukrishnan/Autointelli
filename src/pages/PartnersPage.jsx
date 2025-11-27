@@ -153,7 +153,7 @@ const PartnersPage = () => {
         <div className="partners-form-section">
           <div className="form-header">
             <h2 className="form-title">Let's Work Together</h2>
-            <p className="form-subtitle">Join us in transforming enterprises with intelligent AIOps solutions. Fill out the form below to start the partnership conversation.</p>
+            <p className="form-subtitle">Let us join to transforming enterprises with intelligent AIOps solutions. Fill out the form below to start the partnership conversation.</p>
           </div>
 
           <form className="partners-form" onSubmit={handleSubmit}>

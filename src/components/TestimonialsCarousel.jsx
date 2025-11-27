@@ -31,8 +31,6 @@ const TestimonialsCarousel = () => {
 
         {/* Desktop: Masonry columns */}
         <div className="testimonials-container testimonials-desktop">
-          <div className="testimonials-fade-top"></div>
-          
           <div className="testimonials-columns">
             <div className="testimonials-column">
               {column1.map((testimonial, index) => (
@@ -85,8 +83,6 @@ const TestimonialsCarousel = () => {
               ))}
             </div>
           </div>
-
-          <div className="testimonials-fade-bottom"></div>
         </div>
 
         {/* Mobile: Carousel */}

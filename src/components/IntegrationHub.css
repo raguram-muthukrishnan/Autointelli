@@ -428,25 +428,33 @@
   gap: 1rem;
 }
 
-.integration-list li {
+.integration-item {
   background: rgba(30, 41, 59, 0.8);
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 12px;
-  padding: 1rem 1.5rem;
-  font-family: 'Sk-Modernist', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: #FFFFFF;
-  text-align: center;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
   cursor: pointer;
+  min-height: 80px;
 }
 
-.integration-list li:hover {
+.integration-item:hover {
   background: rgba(30, 41, 59, 1);
   border-color: rgba(255, 200, 0, 0.4);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 200, 0, 0.15);
+}
+
+.integration-logo {
+  width: 100%;
+  height: auto;
+  max-width: 120px;
+  max-height: 50px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 @media (max-width: 768px) {
@@ -455,15 +463,31 @@
     gap: 0.75rem;
   }
 
-  .integration-list li {
-    padding: 0.875rem 1.25rem;
-    font-size: 14px;
+  .integration-item {
+    padding: 1rem;
+    min-height: 70px;
+  }
+
+  .integration-logo {
+    max-width: 100px;
+    max-height: 40px;
   }
 }
 
 @media (max-width: 480px) {
   .integration-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625rem;
+  }
+
+  .integration-item {
+    padding: 0.875rem;
+    min-height: 65px;
+  }
+
+  .integration-logo {
+    max-width: 90px;
+    max-height: 35px;
   }
 }
 

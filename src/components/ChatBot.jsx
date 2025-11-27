@@ -32,7 +32,7 @@ const ChatBot = () => {
     connectWebSocket();
 
     return () => {
-      if (socketRef.current) {
+      if (socketRef.current && typeof socketRef.current.close === 'function') {
         socketRef.current.close();
       }
     };

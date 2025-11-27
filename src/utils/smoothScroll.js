@@ -22,8 +22,10 @@ export const initSmoothScroll = () => {
 
   // RAF loop for Lenis
   function raf(time) {
-    lenisInstance.raf(time);
-    requestAnimationFrame(raf);
+    if (lenisInstance && typeof lenisInstance.raf === 'function') {
+      lenisInstance.raf(time);
+      requestAnimationFrame(raf);
+    }
   }
   requestAnimationFrame(raf);
 

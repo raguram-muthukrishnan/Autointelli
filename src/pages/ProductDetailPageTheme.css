@@ -39,25 +39,27 @@
 }
 
 .product-detail-page .pdp-cta-primary {
-  background: var(--product-gradient);
-  box-shadow: 0 4px 15px var(--product-shadow);
+  background: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
 }
 
 .product-detail-page .pdp-cta-primary:hover {
-  background: var(--product-secondary);
-  box-shadow: 0 6px 20px var(--product-shadow);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
 }
 
 .product-detail-page .pdp-cta-secondary {
-  border: 2px solid var(--product-primary);
-  color: var(--product-primary);
+  border: 2px solid #ffffff;
+  color: #ffffff;
   background: transparent;
 }
 
 .product-detail-page .pdp-cta-secondary:hover {
-  background: var(--product-hover);
-  border-color: var(--product-secondary);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
 }
 
 /* ============================================

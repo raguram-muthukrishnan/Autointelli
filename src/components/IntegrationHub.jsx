@@ -1,7 +1,24 @@
 import './IntegrationHub.css';
 import seamlessIntegrations from '../assets/MainImages/seamless-integrations.png';
+import slackLogo from '../assets/integration/slack-new-logo.svg';
+import jiraLogo from '../assets/integration/jira-1.svg';
+import serviceNowLogo from '../assets/integration/ServiceNow_logo.svg';
+import pagerDutyLogo from '../assets/integration/PagerDuty-GreenRGB.svg';
+import awsLogo from '../assets/integration/Amazon_Web_Services_Logo.svg';
+import azureLogo from '../assets/integration/Azure_DevOps_icon.svg';
+import googleCloudLogo from '../assets/integration/Google_Cloud_logo.svg';
+import datadogLogo from '../assets/integration/dd_icon_rgb.svg';
 
-const integrations = ['Slack', 'Jira', 'ServiceNow', 'PagerDuty', 'AWS', 'Azure', 'Google Cloud', 'Datadog'];
+const integrations = [
+  { name: 'Slack', logo: slackLogo },
+  { name: 'Jira', logo: jiraLogo },
+  { name: 'ServiceNow', logo: serviceNowLogo },
+  { name: 'PagerDuty', logo: pagerDutyLogo },
+  { name: 'AWS', logo: awsLogo },
+  { name: 'Azure', logo: azureLogo },
+  { name: 'Google Cloud', logo: googleCloudLogo },
+  { name: 'Datadog', logo: datadogLogo }
+];
 
 const IntegrationHub = () => {
   return (
@@ -22,7 +39,9 @@ const IntegrationHub = () => {
             </p>
             <ul className="integration-list">
               {integrations.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item.name} className="integration-item">
+                  <img src={item.logo} alt={item.name} className="integration-logo" />
+                </li>
               ))}
             </ul>
             <a href="/products" className="integration-cta">

@@ -11,7 +11,7 @@ export const testimonialsData = {
   testimonials: [
     {
       quote: "Autointelli's AIOps platform transformed our incident management. We reduced MTTR by 60% in just 3 months.",
-      name: 'raguram muthukrishnan',
+      name: 'Sarah Mitchell',
       handle: '@sarahmitchell',
       role: 'VP of IT Operations'
     },

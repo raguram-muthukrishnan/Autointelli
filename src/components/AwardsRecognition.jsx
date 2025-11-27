@@ -1,6 +1,6 @@
 import './AwardsRecogonition.css';
 import medalIcon from '../assets/Awards/medal-award.svg';
-import { ShieldCheck } from 'lucide-react';
+import isoIcon from '../assets/iso-31.svg';
 
 const awards = [
   {
@@ -34,9 +34,9 @@ const awards = [
 ];
 
 const certifications = [
-  { name: 'ISO 27001:2022', color: '#F0CE1D' },
-  { name: 'ISO 9001:2025', color: '#F0CE1D' },
-  { name: 'ISO/IEC 27034-1:2011', color: '#F0CE1D' }
+  { name: 'ISO 27001:2022', color: '#006BB6' },
+  { name: 'ISO 9001:2025', color: '#006BB6' },
+  { name: 'ISO/IEC 27034-1:2011', color: '#006BB6' }
 ];
 
 const AwardsRecognition = () => {
@@ -74,9 +74,9 @@ const AwardsRecognition = () => {
           {certifications.map((cert, index) => (
             <div key={index} className="certification-card">
               <div className="certification-icon">
-                <ShieldCheck size={48} strokeWidth={2} color={cert.color} />
+                <img src={isoIcon} alt="ISO Certification" className="iso-icon" />
               </div>
-              <h3 className="certification-name">{cert.name}</h3>
+              <h3 className="certification-name" style={{ color: cert.color }}>{cert.name}</h3>
             </div>
           ))}
         </div>

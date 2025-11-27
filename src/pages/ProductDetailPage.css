@@ -69,39 +69,39 @@
 }
 
 .pdp-cta-primary {
-  background: var(--product-gradient);
+  background: transparent;
   color: #ffffff;
-  border: none;
+  border: 2px solid #ffffff;
   border-radius: 50px;
   padding: 15px 35px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px var(--product-shadow);
 }
 
 .pdp-cta-primary:hover {
-  background-color: var(--product-secondary);
+  background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px var(--product-shadow);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
 }
 
 .pdp-cta-secondary {
-  background-color: transparent;
-  color: #fff;
-  border: 1px solid #fff;
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 50px;
   padding: 15px 35px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .pdp-cta-secondary:hover {
-  background-color: #fff;
-  color: #212529;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
 }
 
 .pdp-hero-image {

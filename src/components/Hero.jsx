@@ -113,7 +113,7 @@ export default function Hero() {
             OPERATIONS
           </h1>
           <p className="hero-subtitle">
-            SAY "NO" TO APPLICATION DOWNTIME WITH AUTOINTELLI'S REAL TIME OBSERVABILITY PLATFORM
+            Say "NO" to application downtime with Autointelli's real time observability platform
           </p>
           
           <div className="hero-button-set">
@@ -131,7 +131,7 @@ export default function Hero() {
               className="hero-secondary-button"
               size="lg"
             >
-              TALK TO SALES
+              TALK TO US
             </Button>
           </div>
 

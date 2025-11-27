@@ -315,12 +315,19 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Desktop Call to Action Button */}
-        <a href="/contact">
-          <button className="cta-button">
-            Get Started
-          </button>
-        </a>
+        {/* Desktop Call to Action Buttons */}
+        <div className="cta-buttons-container">
+          <a href="/#newsletter">
+            <button className="cta-button cta-subscribe">
+              Subscribe to Autointelli
+            </button>
+          </a>
+          <a href="/contact">
+            <button className="cta-button">
+              Get Started
+            </button>
+          </a>
+        </div>
 
         {/* --- Mobile Menu Icon --- */}
         <button className="menu-icon" onClick={toggleMenu} aria-label="Toggle menu">
@@ -398,6 +405,11 @@ const Header = () => {
           </li>
           
           <li><a href="/contact" onClick={toggleMenu}>Contact</a></li>
+          <li>
+            <a href="/#newsletter" onClick={toggleMenu}>
+              <button className="cta-button cta-subscribe">Subscribe to Autointelli</button>
+            </a>
+          </li>
           <li>
             <a href="/contact" onClick={toggleMenu}>
               <button className="cta-button">Get Started</button>

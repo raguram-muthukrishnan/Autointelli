@@ -69,9 +69,8 @@ export const visitorTracking = {
 
       return response.data;
     } catch (error) {
-      if (error.code === 'ECONNREFUSED' || error.code === 'ERR_NETWORK') {
-        console.info('Backend not available - running in offline mode');
-      } else {
+      // Silently handle backend connection errors in development
+      if (error.code !== 'ECONNREFUSED' && error.code !== 'ERR_NETWORK') {
         console.warn('Error tracking visitor:', error.message);
       }
       return null;
