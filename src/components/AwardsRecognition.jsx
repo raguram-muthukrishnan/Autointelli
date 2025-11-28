@@ -1,5 +1,6 @@
 import './AwardsRecogonition.css';
 import medalIcon from '../assets/Awards/medal-award.svg';
+import leafWreath from '../assets/Awards/leaf.svg';
 import isoIcon from '../assets/iso-31.svg';
 
 const awards = [
@@ -50,18 +51,19 @@ const AwardsRecognition = () => {
         <div className="awards-grid">
           {awards.map((award, index) => (
             <div key={index} className="award-card">
-              <div className="award-icon-wrapper">
-                <img src={medalIcon} alt="Medal Award" className="award-icon" />
+              <div className="award-wreath-container">
+                <img src={leafWreath} alt="Award Wreath" className="award-wreath" />
+                <div className="award-center-content">
+                  <img src={medalIcon} alt="Medal Award" className="award-medal" />
+                  <div className="award-year" style={{ color: award.color }}>
+                    {award.year}
+                  </div>
+                </div>
               </div>
               
               <div className="award-content">
                 <h3 className="award-title">{award.title}</h3>
                 <p className="award-subtitle">{award.subtitle}</p>
-                
-                <div className="award-year" style={{ color: award.color }}>
-                  {award.year}
-                </div>
-                
                 <p className="award-achievement">{award.achievement}</p>
               </div>
             </div>
@@ -69,7 +71,7 @@ const AwardsRecognition = () => {
         </div>
 
         {/* Certifications Section */}
-        <h3 className="certifications-heading">ISO Certificates</h3>
+        <h3 className="certifications-heading">Security and Compliance</h3>
         <div className="certifications-grid">
           {certifications.map((cert, index) => (
             <div key={index} className="certification-card">

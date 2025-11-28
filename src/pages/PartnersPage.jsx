@@ -86,7 +86,7 @@ const PartnersPage = () => {
         <div className="partners-info-section">
           <p className="partners-subtitle">GROW TOGETHER</p>
           <h1 className="partners-title">
-            Partner With Autointelli
+            Team up with Autointelli
           </h1>
           <p className="partners-description">
             Being an Autointelli partner, differentiate your customer offerings by aligning with business insights and operational visibility. You can solve customers specific needs with customized AIOps solutions that enhance business performance and transform enterprises into modern organizations. Let us work together to grow businesses and improve customer satisfaction.

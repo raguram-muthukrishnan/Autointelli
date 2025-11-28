@@ -44,9 +44,6 @@ const IntegrationHub = () => {
                 </li>
               ))}
             </ul>
-            <a href="/products" className="integration-cta">
-              Explore All Integrations
-            </a>
           </div>
         </div>
       </div>

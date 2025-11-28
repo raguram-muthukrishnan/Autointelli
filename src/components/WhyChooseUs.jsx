@@ -8,7 +8,7 @@ const WhyChooseUs = () => {
         <div className="why-choose-content">
           <span className="why-choose-tag">WHY CHOOSE US</span>
           <h2 id="why-choose-title">
-            Why Choose Our ITOps Platform?
+            Why Choose Our AIOps Platform?
           </h2>
           <blockquote className="why-choose-quote">
             "Experience the difference of a truly integrated and intelligent solution."
@@ -62,7 +62,7 @@ const WhyChooseUs = () => {
 
         <div className="why-choose-visual">
           <div className="why-choose-dashboard-image">
-            <img src={whyChooseImg} alt="Why Choose Our ITOps Platform" />
+            <img src={whyChooseImg} alt="Why Choose Our AIOps Platform" />
           </div>
         </div>
       </div>

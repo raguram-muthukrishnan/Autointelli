@@ -4,7 +4,7 @@ import { FiMonitor, FiCpu, FiCalendar, FiUsers } from 'react-icons/fi';
 const results = [
   {
     icon: <FiMonitor />,
-    number: '25K',
+    number: '100K+',
     label: 'Devices Managed',
     color: '#F0CE1D'
   },
@@ -16,7 +16,7 @@ const results = [
   },
   {
     icon: <FiCalendar />,
-    number: '10M',
+    number: '10M+',
     label: 'Events',
     color: '#F0CE1D'
   },

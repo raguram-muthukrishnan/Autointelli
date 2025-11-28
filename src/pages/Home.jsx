@@ -18,7 +18,6 @@ const Home = () => {
   const sections = [
     { id: 'platform-overview', name: 'Platform Overview' },
     { id: 'measurable-results', name: 'Results' },
-    { id: 'testimonials', name: 'Testimonials' },
     { id: 'features', name: 'Features' },
     { id: 'why-choose-us', name: 'Why Choose Us' },
     { id: 'awards', name: 'Awards' },
@@ -85,9 +84,6 @@ const Home = () => {
       <div id="measurable-results" data-section>
         <MeasurableResults />
       </div>
-      <div id="testimonials" data-section>
-        <TestimonialsCarousel />
-      </div>
       <div id="features" data-section>
         <FeaturesShowcase />
       </div>
@@ -103,8 +99,8 @@ const Home = () => {
       <section id="newsletter" data-section className="home-newsletter-section" style={{ background: '#FFFFFF', padding: 0, margin: 0 }}>
         <NewsletterForm 
           categories={['all']}
-          title="Subscribe To Our News letter"
-          subtitle="Sign up today. Writing copy is time-consuming and difficult. Headline's artificial intelligence can take your thoughts."
+          title="Get monthly shortcuts to enhance your IT Ops productivity — No Fluffs."
+          subtitle="Autointelli Community only insights not published anywhere else."
           horizontal={true}
         />
       </section>

@@ -202,7 +202,7 @@ const Header = () => {
                         <p>Trusted by 100+ Enterprises for 24/7 AI-Powered Monitoring</p>
                         <div className="cta-buttons">
                           <a href="/products" className="cta-primary">View All Products</a>
-                          <a href="/contact" className="cta-secondary">Talk to Sales</a>
+                          <a href="/contact" className="cta-secondary">Talk to Us</a>
                         </div>
                       </div>
                     </div>
@@ -319,7 +319,7 @@ const Header = () => {
         <div className="cta-buttons-container">
           <a href="/#newsletter">
             <button className="cta-button cta-subscribe">
-              Subscribe to Autointelli
+              Join Our Community
             </button>
           </a>
           <a href="/contact">
@@ -407,7 +407,7 @@ const Header = () => {
           <li><a href="/contact" onClick={toggleMenu}>Contact</a></li>
           <li>
             <a href="/#newsletter" onClick={toggleMenu}>
-              <button className="cta-button cta-subscribe">Subscribe to Autointelli</button>
+              <button className="cta-button cta-subscribe">Join Our Community</button>
             </a>
           </li>
           <li>

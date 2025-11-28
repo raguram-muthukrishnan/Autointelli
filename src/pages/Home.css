@@ -50,43 +50,26 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 700;
   font-size: 13px;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
   letter-spacing: 0.8px;
   position: relative;
-  padding: 8px 12px;
+  padding: 8px 16px;
   white-space: nowrap;
   flex-shrink: 0;
+  background: transparent;
+  border-radius: 0;
 }
 
 .home-secondary-nav-link:hover {
-  color: #F0CE1D;
-  transform: translateY(-2px);
-}
-
-.home-secondary-nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #F0CE1D;
-  transition: width 0.3s ease;
-}
-
-.home-secondary-nav-link:hover::after {
-  width: 100%;
+  background: #FFD600;
+  color: #000000;
 }
 
 .home-secondary-nav-link.active {
-  color: #F0CE1D;
+  background: #FFD600;
+  color: #000000;
   font-weight: 800;
-}
-
-.home-secondary-nav-link.active::after {
-  width: 100%;
-  background-color: #F0CE1D;
 }
 
 /* Scroll margin for smooth scrolling to sections */

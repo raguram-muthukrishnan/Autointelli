@@ -71,6 +71,18 @@ function SmoothScrollManager() {
   return null;
 }
 
+// Component to scroll to top on route change
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Scroll to top when route changes
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  return null;
+}
+
 function AppContent() {
   // Initialize visitor tracking (with error handling)
   try {
@@ -148,6 +160,7 @@ function AppContent() {
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <SmoothScrollManager />
       <AppContent />
     </Router>

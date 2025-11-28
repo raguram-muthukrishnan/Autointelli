@@ -108,7 +108,7 @@ export default function Hero() {
 
         <div className="hero-content">
           <h1 className="hero-title">
-            MASTER YOUR INCIDENTS:<br />
+            MASTER YOUR INCIDENTS<br />
             TAKE CONTROL OF YOUR IT<br />
             OPERATIONS
           </h1>

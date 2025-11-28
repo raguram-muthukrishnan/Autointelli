@@ -7,7 +7,7 @@ const FinalCta = () => {
     <section className="final-cta" aria-labelledby="final-cta-title">
       <div className="final-cta-inner">
         <div className="final-cta-content">
-          <h2 id="final-cta-title">Ready to Transform Your ITOps?</h2>
+          <h2 id="final-cta-title">Ready to Transform Your AIOps?</h2>
           <p>Start your journey to smarter, more efficient IT operations today.</p>
           <div className="final-cta-actions">
             <Link to="/contact" onClick={() => window.scrollTo(0, 0)} className="final-cta-btn primary">

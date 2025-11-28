@@ -22,7 +22,7 @@ export const productsData =
         "headline": "AI-Powered Monitoring for the Modern Hybrid Network",
         "subheadline": "Gain unified, real-time observability across your entire infrastructure to resolve issues faster and guarantee reliability.",
         "image": nmsImage,
-        "ctaPrimary": "Book a Demo",
+        "ctaPrimary": "Schedule a Demo",
         "ctaSecondary": "Watch Overview",
         "microStats": [
           { "value": "80%", "label": "Alert Noise Reduction" },
@@ -31,7 +31,7 @@ export const productsData =
         ]
       },
       "intro": {
-        "problem": "Today's hybrid networks are complex and chaotic. Disparate tools create blind spots, alert storms overwhelm teams, and manual troubleshooting is too slow, putting your business at risk.",
+        "problem": "Today's hybrid networks are complex and chaotic. Disparate tools create blind spots, alert storms overwhelm clients, and manual troubleshooting is too slow, putting your business at risk.",
         "solution": "Autointelli NMS replaces the chaos with clarity. It provides a single, intelligent platform that unifies observability, correlates data, and uses AI to deliver actionable insights, transforming your IT operations from reactive to proactive."
       },
       "platformOverview": {
@@ -77,7 +77,7 @@ export const productsData =
         ]
       },
       "benefitsByRole": {
-        "headline": "Why Every Team Loves Autointelli NMS",
+        "headline": "Why Every Client Loves Autointelli NMS",
         "roles": [
           {
             "name": "Network Operations (NOC)",
@@ -128,7 +128,7 @@ export const productsData =
           { "icon": "🌍", "title": "Complete Coverage", "description": "From physical links to cloud overlays in one unified platform." },
           { "icon": "👨‍💻", "title": "Operator-Centric Design", "description": "Built for real-world workflows to make engineers' lives easier." },
           { "icon": "🔌", "title": "Open by Design", "description": "APIs, exporters, and webhooks prevent vendor lock-in and simplify integration." },
-          { "icon": "🤖", "title": "AI-Assisted Triage", "description": "Powerful AIOps focuses your team on what truly matters, reducing noise." }
+          { "icon": "🤖", "title": "AI-Assisted Triage", "description": "Powerful AIOps focuses your organization on what truly matters, reducing noise." }
         ]
       },
       "roi": {
@@ -144,8 +144,8 @@ export const productsData =
         "headline": "Ready to Experience Autointelli NMS?",
         "subheadline": "See how AI-driven monitoring transforms visibility and uptime.",
         "buttons": [
-          { "text": "Book a Live Demo", "type": "primary" },
-          { "text": "Contact Sales", "type": "secondary" }
+          { "text": "See How It Works", "type": "primary" },
+          { "text": "Contact Us", "type": "secondary" }
         ]
       },
       "slug": "/products/nms"
@@ -167,7 +167,7 @@ export const productsData =
         ]
       },
       "intro": {
-        "problem": "Multiple monitoring tools create alert storms, overwhelming operations teams and hiding critical issues. Manual event correlation and ticketing is slow, error-prone, and inefficient.",
+        "problem": "Multiple monitoring tools create alert storms, overwhelming operations and hiding critical issues. Manual event correlation and ticketing is slow, error-prone, and inefficient.",
         "solution": "Autointelli Incident Response acts as a central manager for all your alerts. It intelligently aggregates events, filters noise based on dynamic policies, and integrates seamlessly with ITSM and automation tools to streamline the entire response lifecycle."
       },
       "platformOverview": {
@@ -211,7 +211,7 @@ export const productsData =
         ]
       },
       "benefitsByRole": {
-        "headline": "Transforming Operations for Every Team",
+        "headline": "Transforming Operations for Every Client",
         "roles": [
           {
             "name": "NOC / ITOps",
@@ -272,8 +272,8 @@ export const productsData =
         "headline": "Ready to Tame Your Alert Chaos?",
         "subheadline": "See how Autointelli Incident Response can bring calm and clarity to your operations.",
         "buttons": [
-          { "text": "Book a Live Demo", "type": "primary" },
-          { "text": "Contact Sales", "type": "secondary" }
+          { "text": "See How It Works", "type": "primary" },
+          { "text": "Contact Us", "type": "secondary" }
         ]
       }
     },
@@ -407,8 +407,8 @@ export const productsData =
         "headline": "Ready to Automate Your Operations?",
         "subheadline": "Discover how Autointelli Flow can make reliable operations your default.",
         "buttons": [
-          { "text": "Book a Live Demo", "type": "primary" },
-          { "text": "See Pricing", "type": "secondary" }
+          { "text": "See How It Works", "type": "primary" },
+          { "text": "Contact Us", "type": "secondary" }
         ]
       }
     },
@@ -541,7 +541,7 @@ export const productsData =
         "headline": "Ready for a Simpler, More Secure Way to Work?",
         "subheadline": "Discover how browser-based access can transform your organization.",
         "buttons": [
-          { "text": "Request a Demo", "type": "primary" },
+          { "text": "See How It Works", "type": "primary" },
           { "text": "Contact Us", "type": "secondary" }
         ]
       }
@@ -673,8 +673,8 @@ export const productsData =
         "headline": "Ready to Give Your Employees a Smarter Assistant?",
         "subheadline": "See how Alice AI can transform your workplace support.",
         "buttons": [
-          { "text": "Request a Demo", "type": "primary" },
-          { "text": "Contact Sales", "type": "secondary" }
+          { "text": "See How It Works", "type": "primary" },
+          { "text": "Contact Us", "type": "secondary" }
         ]
       }
     },
@@ -807,8 +807,8 @@ export const productsData =
         "headline": "Ready to Elevate Your Helpdesk?",
         "subheadline": "Get in touch for a demo and see how Intellidesk can transform your support.",
         "buttons": [
-          { "text": "Get a Demo", "type": "primary" },
-          { "text": "Contact Sales", "type": "secondary" }
+          { "text": "See How It Works", "type": "primary" },
+          { "text": "Contact Us", "type": "secondary" }
         ]
       }
     },
@@ -940,8 +940,8 @@ export const productsData =
         "headline": "Ready to Streamline Your Asset Management?",
         "subheadline": "Reach out for a demo and see how IntelliAsset can bring precision and intelligence to your operations.",
         "buttons": [
-          { "text": "Request a Demo", "type": "primary" },
-          { "text": "Contact Sales", "type": "secondary" }
+          { "text": "See How It Works", "type": "primary" },
+          { "text": "Contact Us", "type": "secondary" }
         ]
       }
     }

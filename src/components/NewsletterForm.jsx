@@ -99,7 +99,7 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
           <input
             type="email"
             name="email"
-            placeholder="Enter email address"
+            placeholder="Enter your business email"
             value={formData.email}
             onChange={handleChange}
             required
@@ -109,7 +109,7 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
           <input
             type="text"
             name="name"
-            placeholder="Enter you name"
+            placeholder="Name"
             value={formData.name}
             onChange={handleChange}
             required
@@ -121,7 +121,7 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
             disabled={status === 'loading'}
             className="newsletter-horizontal-button"
           >
-            {status === 'loading' ? 'Subscribing...' : 'Get Listed'}
+            {status === 'loading' ? 'Subscribing...' : 'Keep Yourself Updated'}
           </button>
           {message && (
             <div className={`newsletter-horizontal-message ${status}`}>

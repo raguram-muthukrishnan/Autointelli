@@ -76,11 +76,12 @@
 
 .result-number {
   font-family: 'Sk-Modernist', sans-serif;
-  font-size: 48px;
+  font-size: 42px;
   font-weight: 700;
   color: #2d2d2d;
   margin: 0 0 10px 0;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .result-label {

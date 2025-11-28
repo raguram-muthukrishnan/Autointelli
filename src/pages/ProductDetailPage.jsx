@@ -447,7 +447,7 @@ const ProductDetailPage = () => {
                   </div>
 
                   <p className="pdp-cta-footer-text">
-                    Join over <strong>10,000+ companies</strong> already using our platform
+                    Join over <strong>100+ companies</strong> already using our platform
                   </p>
                 </div>
               </div>
