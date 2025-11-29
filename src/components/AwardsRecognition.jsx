@@ -2,6 +2,7 @@ import './AwardsRecogonition.css';
 import medalIcon from '../assets/Awards/medal-award.svg';
 import leafWreath from '../assets/Awards/leaf.svg';
 import isoIcon from '../assets/iso-31.svg';
+import gdprIcon from '../assets/Awards/gdpr.svg';
 
 const awards = [
   {
@@ -35,9 +36,10 @@ const awards = [
 ];
 
 const certifications = [
-  { name: 'ISO 27001:2022', color: '#006BB6' },
-  { name: 'ISO 9001:2025', color: '#006BB6' },
-  { name: 'ISO/IEC 27034-1:2011', color: '#006BB6' }
+  { name: 'ISO 27001:2022', color: '#006BB6', icon: isoIcon },
+  { name: 'ISO 9001:2025', color: '#006BB6', icon: isoIcon },
+  { name: 'ISO/IEC 27034-1:2011', color: '#006BB6', icon: isoIcon },
+  { name: 'EU-GDPR Compliance', color: '#006BB6', icon: gdprIcon }
 ];
 
 const AwardsRecognition = () => {
@@ -76,7 +78,7 @@ const AwardsRecognition = () => {
           {certifications.map((cert, index) => (
             <div key={index} className="certification-card">
               <div className="certification-icon">
-                <img src={isoIcon} alt="ISO Certification" className="iso-icon" />
+                <img src={cert.icon} alt={cert.name} className="iso-icon" />
               </div>
               <h3 className="certification-name" style={{ color: cert.color }}>{cert.name}</h3>
             </div>

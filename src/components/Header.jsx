@@ -324,7 +324,7 @@ const Header = () => {
           </a>
           <a href="/contact">
             <button className="cta-button">
-              Get Started
+              Explore Platform
             </button>
           </a>
         </div>
@@ -412,7 +412,7 @@ const Header = () => {
           </li>
           <li>
             <a href="/contact" onClick={toggleMenu}>
-              <button className="cta-button">Get Started</button>
+              <button className="cta-button">Explore Platform</button>
             </a>
           </li>
         </ul>

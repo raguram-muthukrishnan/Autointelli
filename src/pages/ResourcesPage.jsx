@@ -632,8 +632,8 @@ const ResourcesPage = () => {
               <polyline points="22,6 12,13 2,6"/>
             </svg>
           </div>
-          <h2 className="newsletter-title">Get Resource Updates</h2>
-          <p className="newsletter-subtitle">Be notified when we publish new guides, tutorials, and resources</p>
+          <h2 className="newsletter-title">Get monthly shortcuts to enhance your IT Ops productivity — No Fluffs.</h2>
+          <p className="newsletter-subtitle">Autointelli Community only insights not published anywhere else.</p>
           <NewsletterForm categories={['resource', 'all']} />
         </div>
       </section>

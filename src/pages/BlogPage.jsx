@@ -169,8 +169,8 @@ const BlogPage = () => {
                 <polyline points="22,6 12,13 2,6"/>
               </svg>
             </div>
-            <h2 className="newsletter-title">Stay in the Loop</h2>
-            <p className="newsletter-subtitle">Get the latest insights, tips, and product updates delivered straight to your inbox</p>
+            <h2 className="newsletter-title">Get monthly shortcuts to enhance your IT Ops productivity — No Fluffs.</h2>
+            <p className="newsletter-subtitle">Autointelli Community only insights not published anywhere else.</p>
             <NewsletterForm 
               categories={['blog', 'all']}
             />

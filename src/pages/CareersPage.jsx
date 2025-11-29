@@ -202,8 +202,8 @@ const CareersPage = () => {
               <polyline points="22,6 12,13 2,6"/>
             </svg>
           </div>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#1a1a1a', marginBottom: '10px' }}>Get Career Updates</h2>
-          <p style={{ fontSize: '1rem', color: '#718096', marginBottom: '30px', lineHeight: '1.6' }}>Be the first to know about new job openings and career opportunities at Autointelli</p>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#1a1a1a', marginBottom: '10px' }}>Get monthly shortcuts to enhance your IT Ops productivity — No Fluffs.</h2>
+          <p style={{ fontSize: '1rem', color: '#718096', marginBottom: '30px', lineHeight: '1.6' }}>Autointelli Community only insights not published anywhere else.</p>
           <NewsletterForm 
             categories={['careers', 'all']}
           />

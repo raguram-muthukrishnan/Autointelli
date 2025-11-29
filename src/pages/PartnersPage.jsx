@@ -153,7 +153,7 @@ const PartnersPage = () => {
         <div className="partners-form-section">
           <div className="form-header">
             <h2 className="form-title">Let's Work Together</h2>
-            <p className="form-subtitle">Let us join to transforming enterprises with intelligent AIOps solutions. Fill out the form below to start the partnership conversation.</p>
+            <p className="form-subtitle">Let us join to transform enterprises with intelligent AIOps solutions. Fill out the form below to start the partnership conversation.</p>
           </div>
 
           <form className="partners-form" onSubmit={handleSubmit}>
@@ -250,12 +250,12 @@ const PartnersPage = () => {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              {isSubmitting ? 'Submitting...' : 'Apply for Partnership'}
+              {isSubmitting ? 'Submitting...' : 'Team Up'}
             </button>
 
             {submitSuccess && (
               <div className="success-message">
-                Thank you for your interest! Our partner team will review your application and contact you soon.
+                Thank you for your interest! Our management team will review your application and contact you soon.
               </div>
             )}
             
@@ -277,8 +277,8 @@ const PartnersPage = () => {
               <polyline points="22,6 12,13 2,6"/>
             </svg>
           </div>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#1a1a1a', marginBottom: '10px' }}>Stay Connected</h2>
-          <p style={{ fontSize: '1rem', color: '#718096', marginBottom: '30px', lineHeight: '1.6' }}>Get the latest updates and insights delivered to your inbox</p>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#1a1a1a', marginBottom: '10px' }}>Get monthly shortcuts to enhance your IT Ops productivity — No Fluffs.</h2>
+          <p style={{ fontSize: '1rem', color: '#718096', marginBottom: '30px', lineHeight: '1.6' }}>Autointelli Community only insights not published anywhere else.</p>
           <NewsletterForm 
             categories={['all']}
           />
