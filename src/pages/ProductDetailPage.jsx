@@ -411,11 +411,8 @@ const ProductDetailPage = () => {
               {/* Left Side - Single Image */}
               <div className="pdp-cta-left">
                 <div className="pdp-cta-image-wrapper">
-                  {/* Placeholder for future reference:
-                  <img src={`https://placehold.co/600x700/${colors.primary.replace('#', '')}/ffffff?text=Product+Illustration`} alt={product.finalCta.headline} className="pdp-cta-image" />
-                  */}
                   <img 
-                    src={getRandomStockImage(9)}
+                    src={product.hero?.image || getRandomStockImage(9)}
                     alt={product.finalCta.headline} 
                     className="pdp-cta-image"
                   />
