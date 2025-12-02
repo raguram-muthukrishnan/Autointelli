@@ -8,13 +8,10 @@ import cardIcon7 from '../src/assets/ASSET.png';
 
 // Import client logos from bc removed folder (background removed versions)
 import logo1 from '../bc removed/access health.png';
-import logo2 from '../bc removed/corror health.png';
 import logo3 from '../bc removed/election.png';
 import logo4 from '../bc removed/india cements.png';
 import logo5 from '../bc removed/mahindra.png';
-import logo6 from '../bc removed/maxval.png';
 import logo7 from '../bc removed/motorola.png';
-import logo8 from '../bc removed/redington.png';
 import logo9 from '../bc removed/royal sundaram.png';
 
 export const opsData = {
@@ -62,13 +59,10 @@ export const opsData = {
     subtext: "Chosen by enterprises that demand reliability, security, and scale.",
     logos: [
       { id: 1, src: logo1, alt: "Access Health" },
-      { id: 2, src: logo2, alt: "Corror Health" },
       { id: 3, src: logo3, alt: "Election" },
       { id: 4, src: logo4, alt: "India Cements" },
       { id: 5, src: logo5, alt: "Mahindra" },
-      { id: 6, src: logo6, alt: "Maxval" },
       { id: 7, src: logo7, alt: "Motorola" },
-      { id: 8, src: logo8, alt: "Redington" },
       { id: 9, src: logo9, alt: "Royal Sundaram" },
     ]
   },

@@ -252,11 +252,8 @@ const ProductDetailPage = () => {
                     </div>
                   </div>
                   <div className="card-image-section">
-                    {/* Placeholder for future reference: 
-                    <img src={`https://placehold.co/600x400/${colors.light.replace('#', '')}/${colors.text.replace('#', '')}?text=Challenge+Illustration`} alt="The Challenge" className="card-image" />
-                    */}
                     <img 
-                      src={getRandomStockImage(0)}
+                      src={product.intro.problemImage || getRandomStockImage(0)}
                       alt="The Challenge" 
                       className="card-image"
                     />
@@ -271,11 +268,8 @@ const ProductDetailPage = () => {
               <div className="pdp-intro-card solution-card">
                 <div className="card-content-wrapper">
                   <div className="card-image-section">
-                    {/* Placeholder for future reference:
-                    <img src={`https://placehold.co/600x400/${colors.light.replace('#', '')}/${colors.text.replace('#', '')}?text=Solution+Illustration`} alt="The Solution" className="card-image" />
-                    */}
                     <img 
-                      src={getRandomStockImage(1)}
+                      src={product.intro.solutionImage || getRandomStockImage(1)}
                       alt="The Solution" 
                       className="card-image"
                     />

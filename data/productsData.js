@@ -5,7 +5,26 @@
 import nmsImage from '../src/assets/Products/nms.webp';
 import opsDutyImage from '../src/assets/Products/opsduty.webp';
 import intelliFlowImage from '../src/assets/Products/intelliflow.webp';
+import securitaImage from '../src/assets/Products/securita.png';
 import aliceImage from '../src/assets/Products/alice.png';
+import intellideskImage from '../src/assets/Products/Intellidesk.png';
+import intelliassetImage from '../src/assets/Products/intelli_asset.png';
+
+// Import challenge and solution images
+import nmsProblem from '../src/assets/prob_solution/nms problem.png';
+import nmsSolution from '../src/assets/prob_solution/nms solution.png';
+import opsdutyChallenge from '../src/assets/prob_solution/opsduty challenge.png';
+import opsdutySolution from '../src/assets/prob_solution/opsduty soution.png';
+import intelliflowChallenge from '../src/assets/prob_solution/intelliflow challenge.png';
+import intelliflowSolution from '../src/assets/prob_solution/intelliflow solution.png';
+import securitaChallenge from '../src/assets/prob_solution/securita challenge.png';
+import securitaSolution from '../src/assets/prob_solution/securita solution.png';
+import aliceChallenge from '../src/assets/prob_solution/ALICE AI CHALLENGE.png';
+import aliceSolution from '../src/assets/prob_solution/ALICE AI SOLUTION.png';
+import intellideskChallenge from '../src/assets/prob_solution/INTELLIDESK CHALLENGE.png';
+import intellideskSolution from '../src/assets/prob_solution/INTELLIDESK SOLUTION.png';
+import intelliassetChallenge from '../src/assets/prob_solution/INTELLIASSET  CHALLENEGE.png';
+import intelliassetSolution from '../src/assets/prob_solution/INTELLIASSET  SOLUTION.png';
 
 export const productsData = 
 
@@ -32,7 +51,9 @@ export const productsData =
       },
       "intro": {
         "problem": "Today's hybrid networks are complex and chaotic. Disparate tools create blind spots, alert storms overwhelm clients, and manual troubleshooting is too slow, putting your business at risk.",
-        "solution": "Autointelli NMS replaces the chaos with clarity. It provides a single, intelligent platform that unifies observability, correlates data, and uses AI to deliver actionable insights, transforming your IT operations from reactive to proactive."
+        "solution": "Autointelli NMS replaces the chaos with clarity. It provides a single, intelligent platform that unifies observability, correlates data, and uses AI to deliver actionable insights, transforming your IT operations from reactive to proactive.",
+        "problemImage": nmsProblem,
+        "solutionImage": nmsSolution
       },
       "platformOverview": {
         "headline": "The Complete 360° Network Monitoring Experience",
@@ -168,7 +189,9 @@ export const productsData =
       },
       "intro": {
         "problem": "Multiple monitoring tools create alert storms, overwhelming operations and hiding critical issues. Manual event correlation and ticketing is slow, error-prone, and inefficient.",
-        "solution": "Autointelli Incident Response acts as a central manager for all your alerts. It intelligently aggregates events, filters noise based on dynamic policies, and integrates seamlessly with ITSM and automation tools to streamline the entire response lifecycle."
+        "solution": "Autointelli Incident Response acts as a central manager for all your alerts. It intelligently aggregates events, filters noise based on dynamic policies, and integrates seamlessly with ITSM and automation tools to streamline the entire response lifecycle.",
+        "problemImage": opsdutyChallenge,
+        "solutionImage": opsdutySolution
       },
       "platformOverview": {
         "headline": "From Alert Chaos to Actionable Intelligence",
@@ -295,7 +318,9 @@ export const productsData =
       },
       "intro": {
         "problem": "Manual, repetitive IT processes are slow, error-prone, and drain valuable engineering time. Complex, cross-team runbooks are difficult to execute consistently, leading to long resolution times and compliance risks.",
-        "solution": "Autointelli Flow streamlines these complex runbooks into reliable, auditable workflows. It connects your entire toolchain—monitoring, ITSM, cloud, and security—to eliminate manual toil while keeping humans in the loop for critical decisions."
+        "solution": "Autointelli Flow streamlines these complex runbooks into reliable, auditable workflows. It connects your entire toolchain—monitoring, ITSM, cloud, and security—to eliminate manual toil while keeping humans in the loop for critical decisions.",
+        "problemImage": intelliflowChallenge,
+        "solutionImage": intelliflowSolution
       },
       "platformOverview": {
         "headline": "The Central Nervous System for Your IT Operations",
@@ -419,7 +444,7 @@ export const productsData =
       "hero": {
         "headline": "Access Your Apps and Infrastructure, From Anywhere",
         "subheadline": "A cutting-edge remote access platform for secure, instant, and hassle-free connectivity using only a web browser. No installs, just log in.",
-        "image": intelliFlowImage,
+        "image": securitaImage,
         "ctaPrimary": "Get Secure Access",
         "ctaSecondary": "Watch Demo",
         "microStats": [
@@ -430,7 +455,9 @@ export const productsData =
       },
       "intro": {
         "problem": "Traditional remote access relies on clunky VPNs and agent installations that are difficult to manage, create security vulnerabilities, and provide a poor user experience for employees and third parties.",
-        "solution": "Securita revolutionizes remote access. It provides instant, secure, browser-based connectivity to all your systems—Windows, Linux, and macOS. It's built on a Zero Trust model, ensuring strict identity verification for every session."
+        "solution": "Securita revolutionizes remote access. It provides instant, secure, browser-based connectivity to all your systems—Windows, Linux, and macOS. It's built on a Zero Trust model, ensuring strict identity verification for every session.",
+        "problemImage": securitaChallenge,
+        "solutionImage": securitaSolution
       },
       "platformOverview": {
         "headline": "The Future of Remote Access is Here",
@@ -440,7 +467,7 @@ export const productsData =
           "TLS encrypted communication and session recording",
           "Multi-platform support for Windows, Linux, and macOS"
         ],
-        "diagram": intelliFlowImage
+        "diagram": securitaImage
       },
       "whatItMonitors": {
         "headline": "Unified Access to Your Entire Environment",
@@ -564,7 +591,9 @@ export const productsData =
       },
       "intro": {
         "problem": "Employees face constant delays dealing with routine IT issues like password resets, software access, and policy questions. Traditional support is slow and manual, disrupting productivity and overwhelming IT teams.",
-        "solution": "Alice AI transforms the employee experience by providing an intelligent, conversational assistant that delivers instant solutions. Alice automates routine tasks, answers questions in real-time, and empowers employees to resolve issues themselves, reducing downtime and boosting productivity."
+        "solution": "Alice AI transforms the employee experience by providing an intelligent, conversational assistant that delivers instant solutions. Alice automates routine tasks, answers questions in real-time, and empowers employees to resolve issues themselves, reducing downtime and boosting productivity.",
+        "problemImage": aliceChallenge,
+        "solutionImage": aliceSolution
       },
       "platformOverview": {
         "headline": "Conversational AI for the Modern Workplace",
@@ -685,7 +714,7 @@ export const productsData =
       "hero": {
         "headline": "Revolutionize Your Customer and IT Support",
         "subheadline": "A next-generation intelligent helpdesk platform designed to streamline operations, boost efficiency, and deliver exceptional support experiences.",
-        "image": intelliFlowImage,
+        "image": intellideskImage,
         "ctaPrimary": "Get Started Today",
         "ctaSecondary": "View Features",
         "microStats": [
@@ -696,7 +725,9 @@ export const productsData =
       },
       "intro": {
         "problem": "Traditional helpdesks are siloed and inefficient. Managing support across email, web, and chat is chaotic, leading to slow response times, frustrated users, and overworked agents.",
-        "solution": "Autointelli Intellidesk replaces the chaos with a unified, AI-powered platform. It centralizes all support channels, automates routine tasks with intelligent workflows, and empowers users with a self-service knowledge base, leading to dramatically higher efficiency and satisfaction."
+        "solution": "Autointelli Intellidesk replaces the chaos with a unified, AI-powered platform. It centralizes all support channels, automates routine tasks with intelligent workflows, and empowers users with a self-service knowledge base, leading to dramatically higher efficiency and satisfaction.",
+        "problemImage": intellideskChallenge,
+        "solutionImage": intellideskSolution
       },
       "platformOverview": {
         "headline": "The Intelligent Helpdesk Solution for Modern Teams",
@@ -706,7 +737,7 @@ export const productsData =
           "AI-powered ticket categorization, priority, and routing",
           "Integrated knowledge base and customer self-service portals"
         ],
-        "diagram": intelliFlowImage
+        "diagram": intellideskImage
       },
       "whatItMonitors": {
         "headline": "Managing the Entire Support Lifecycle",
@@ -819,7 +850,7 @@ export const productsData =
       "hero": {
         "headline": "Master Your Assets with IntelliAsset",
         "subheadline": "A cutting-edge IT asset management platform to track, manage, and optimize your hardware, software, and licenses with precision and intelligence.",
-        "image": intelliFlowImage,
+        "image": intelliassetImage,
         "ctaPrimary": "Get Started Today",
         "ctaSecondary": "Take a Tour",
         "microStats": [
@@ -830,7 +861,9 @@ export const productsData =
       },
       "intro": {
         "problem": "Manual asset tracking with spreadsheets is inefficient, inaccurate, and risky. It leads to asset loss, over-purchasing of software licenses, and non-compliance during audits.",
-        "solution": "IntelliAsset provides a powerful, simple-to-use platform to automate asset tracking from acquisition to retirement. Gain full, real-time visibility into your entire asset inventory, ensure software license compliance, and make data-driven decisions to optimize costs."
+        "solution": "IntelliAsset provides a powerful, simple-to-use platform to automate asset tracking from acquisition to retirement. Gain full, real-time visibility into your entire asset inventory, ensure software license compliance, and make data-driven decisions to optimize costs.",
+        "problemImage": intelliassetChallenge,
+        "solutionImage": intelliassetSolution
       },
       "platformOverview": {
         "headline": "Advanced Asset and License Management, Simplified",
@@ -840,7 +873,7 @@ export const productsData =
           "Software license compliance management and reporting",
           "Mobile-friendly barcode and QR code scanning for audits"
         ],
-        "diagram": intelliFlowImage
+        "diagram": intelliassetImage
       },
       "whatItMonitors": {
         "headline": "Complete Visibility Over All Your Organizational Assets",

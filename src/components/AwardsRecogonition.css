@@ -40,9 +40,9 @@
 
 .certifications-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.875rem;
-  max-width: 56.25rem;
+  max-width: 75rem;
   margin: 0 auto;
 }
 
@@ -124,7 +124,7 @@
   height: 100%;
   object-fit: contain;
   opacity: 0.9;
-  filter: brightness(0) saturate(100%) invert(93%) sepia(100%) saturate(2000%) hue-rotate(360deg) brightness(105%) contrast(105%);
+  filter: brightness(0) saturate(100%) invert(87%) sepia(45%) saturate(1234%) hue-rotate(359deg) brightness(101%) contrast(93%);
   top: 1.5rem;
 }
 

@@ -122,7 +122,7 @@ const ContactPage = () => {
               <input
                 type="email"
                 id="email"
-                name="Business email"
+                name="email"
                 placeholder="john@business.com"
                 value={formData.email}
                 onChange={handleInputChange}
