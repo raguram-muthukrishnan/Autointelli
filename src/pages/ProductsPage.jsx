@@ -9,12 +9,10 @@ import FinalCta from '../components/FinalCta';
 import nmsImage from '../assets/Products/nms.webp';
 import opsDutyImage from '../assets/Products/opsduty.webp';
 import intelliFlowImage from '../assets/Products/intelliflow.webp';
+import securitaImage from '../assets/Products/securita.png';
 import aliceImage from '../assets/Products/alice.png';
-
-// Import images from stockimages folder for Securita, IntelliDesk, and Asset
-import securitaImage from '../assets/stockimages/hypervisor-monitoring.png';
-import intelliDeskImage from '../assets/stockimages/ticketing-system-automation.png';
-import assetImage from '../assets/stockimages/orchestration.png';
+import intelliDeskImage from '../assets/Products/Intellidesk.png';
+import assetImage from '../assets/Products/intelli_asset.png';
 
 const ProductsPage = () => {
   // Hero animation uses these 4 images:
