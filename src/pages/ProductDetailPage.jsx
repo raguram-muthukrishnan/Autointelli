@@ -313,11 +313,8 @@ const ProductDetailPage = () => {
                     onMouseLeave={(e) => handleCardHover(e.currentTarget, false)}
                   >
                     <div className="bento-card-bg">
-                      {/* Placeholder for future reference:
-                      <img src={`https://placehold.co/800x600/1a202c/${colors.primary.replace('#', '')}?text=${encodeURIComponent(feature.title)}`} alt={feature.title} className="bento-card-image" />
-                      */}
                       <img 
-                        src={getRandomStockImage(index + 2)}
+                        src={feature.image || getRandomStockImage(index + 2)}
                         alt={feature.title}
                         className="bento-card-image"
                       />

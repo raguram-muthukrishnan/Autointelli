@@ -92,8 +92,8 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 400;
   line-height: normal;
-  color: var(--primary-white);
-  font-size: 15px;
+  color: var(--primary-yellow);
+  font-size: 20px;
   margin: 0;
   text-align: left;
   max-width: 617px;
@@ -201,7 +201,7 @@
   }
 
   .hero-subtitle {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .hero-laptop-image {
@@ -231,7 +231,7 @@
   }
 
   .hero-subtitle {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .hero-laptop-image {
@@ -261,7 +261,7 @@
   }
 
   .hero-subtitle {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .hero-button-set {

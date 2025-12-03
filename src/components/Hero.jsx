@@ -108,12 +108,11 @@ export default function Hero() {
 
         <div className="hero-content">
           <h1 className="hero-title">
-            MASTER YOUR INCIDENTS<br />
             TAKE CONTROL OF YOUR IT<br />
             OPERATIONS
           </h1>
           <p className="hero-subtitle">
-            Say "NO" to application downtime with Autointelli's real time observability platform
+            Say "NO" to Infrastructure downtime with Autointelli's Agentic AI enabled, self-healing capable, AIOps platform.
           </p>
           
           <div className="hero-button-set">

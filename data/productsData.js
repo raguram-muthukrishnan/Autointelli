@@ -26,6 +26,47 @@ import intellideskSolution from '../src/assets/prob_solution/INTELLIDESK SOLUTIO
 import intelliassetChallenge from '../src/assets/prob_solution/INTELLIASSET  CHALLENEGE.png';
 import intelliassetSolution from '../src/assets/prob_solution/INTELLIASSET  SOLUTION.png';
 
+// Import bento grid images
+import bentoUnifiedDiscovery from '../src/assets/bento_images/Unified Discovery & Inventory.jpg';
+import bentoRealTimeHealth from '../src/assets/bento_images/Real-Time Health & Performance.jpg';
+import bentoTopologyMapping from '../src/assets/bento_images/Topology & Dependency Mapping.jpg';
+import bentoIntelligentAlerting from '../src/assets/bento_images/Intelligent Alerting & AIOps.jpg';
+import bentoChangeAwareness from '../src/assets/bento_images/Change Awareness & Complianc.jpg';
+import bentoRunbooksAutomation from '../src/assets/bento_images/Runbooks & Automation Hooks.png';
+import bentoUnifiedAlert from '../src/assets/bento_images/Unified Alert Window.png';
+import bentoEventAggregation from '../src/assets/bento_images/Event Aggregation & Noise Reduction.png';
+import bentoMaintenanceWindow from '../src/assets/bento_images/Maintenance Window Filtration.png';
+import bentoAutomatedITSM from '../src/assets/bento_images/Automated ITSM Ticketing.png';
+import bentoRunbookAutomation from '../src/assets/bento_images/Runbook Automation.png';
+import bentoLowCodeWorkflow from '../src/assets/bento_images/Low‑Code Workflow Builder.png';
+import bentoEventDriven from '../src/assets/bento_images/Event‑Driven Automation.png';
+import bentoHumanInLoop from '../src/assets/bento_images/Human‑in‑the‑Loop.png';
+import bentoAutoRemediation from '../src/assets/bento_images/Auto‑Remediation Library.png';
+import bentoComplianceGovernance from '../src/assets/bento_images/Compliance & Governance.png';
+import bentoSelfServicePortal from '../src/assets/bento_images/Self‑Service Portal.png';
+import bentoBrowserBased from '../src/assets/bento_images/Browser‑Based Access.png';
+import bentoZeroTrust from '../src/assets/bento_images/Zero Trust Security.png';
+import bentoMultiPlatform from '../src/assets/bento_images/Multi‑Platform Compatibility.png';
+import bentoRealTimeMonitoring from '../src/assets/bento_images/Real‑Time Monitoring & Analytics.png';
+import bentoSessionRecording from '../src/assets/bento_images/Session Recording & Playback.png';
+import bentoMobileReady from '../src/assets/bento_images/Mobile‑Ready.png';
+import bentoAgentBased from '../src/assets/bento_images/Agent‑Based Automation.png';
+import bentoInstantSupport from '../src/assets/bento_images/Instant IT Support.png';
+import bentoDocumentQuerying from '../src/assets/bento_images/Document Querying.png';
+import bentoMultiChannelAccess from '../src/assets/bento_images/Multi‑Channel Access.png';
+import bentoScalableArchitecture from '../src/assets/bento_images/Scalable Architecture.png';
+import bentoMultiChannelTicketing from '../src/assets/bento_images/Multi‑Channel Ticketing.png';
+import bentoAIPoweredAutomation from '../src/assets/bento_images/AI‑Powered Automation.png';
+import bentoKnowledgeBase from '../src/assets/bento_images/Knowledge Base & Self‑Service.png';
+import bentoCollaborationReporting from '../src/assets/bento_images/Collaboration & Reporting.png';
+import bentoCustomizableScalable from '../src/assets/bento_images/Customizable & Scalable.png';
+import bentoMultiTenancy from '../src/assets/bento_images/Multi‑Tenancy Capability.png';
+import bentoComprehensiveAsset from '../src/assets/bento_images/Comprehensive Asset Tracking.png';
+import bentoBarcodeQR from '../src/assets/bento_images/Barcode & QR Code Integration.png';
+import bentoSoftwareLicense from '../src/assets/bento_images/Software License Management.png';
+import bentoAssetAssignment from '../src/assets/bento_images/Asset Assignment System.png';
+import bentoAdvancedReporting from '../src/assets/bento_images/Advanced Reporting & Analytics.png';
+
 export const productsData = 
 
 {
@@ -89,12 +130,12 @@ export const productsData =
       "keyFeatures": {
         "headline": "Everything You Need to Keep Your Network Predictable",
         "features": [
-          { "title": "Unified Discovery & Inventory", "description": "Multi-vendor discovery via SNMP, SSH, and cloud APIs with auto-classification." },
-          { "title": "Real-Time Health & Performance", "description": "Track interface-level KPIs and device health (CPU, memory, temp)." },
-          { "title": "Topology & Dependency Mapping", "description": "Visualize L2/L3 topology, service dependency graphs, and estimate blast-radius." },
-          { "title": "Intelligent Alerting & AIOps", "description": "Seasonality-aware baselines and automatic anomaly detection to reduce alert fatigue." },
-          { "title": "Change Awareness & Compliance", "description": "Configuration backup, versioning, drift alerts, and policy compliance checks." },
-          { "title": "Runbooks & Automation Hooks", "description": "Trigger push-button remediations and automation scripts directly from alerts." }
+          { "title": "Unified Discovery & Inventory", "description": "Multi-vendor discovery via SNMP, SSH, and cloud APIs with auto-classification.", "image": bentoUnifiedDiscovery },
+          { "title": "Real-Time Health & Performance", "description": "Track interface-level KPIs and device health (CPU, memory, temp).", "image": bentoRealTimeHealth },
+          { "title": "Topology & Dependency Mapping", "description": "Visualize L2/L3 topology, service dependency graphs, and estimate blast-radius.", "image": bentoTopologyMapping },
+          { "title": "Intelligent Alerting & AIOps", "description": "Seasonality-aware baselines and automatic anomaly detection to reduce alert fatigue.", "image": bentoIntelligentAlerting },
+          { "title": "Change Awareness & Compliance", "description": "Configuration backup, versioning, drift alerts, and policy compliance checks.", "image": bentoChangeAwareness },
+          { "title": "Runbooks & Automation Hooks", "description": "Trigger push-button remediations and automation scripts directly from alerts.", "image": bentoRunbooksAutomation }
         ]
       },
       "benefitsByRole": {
@@ -226,11 +267,11 @@ export const productsData =
       "keyFeatures": {
         "headline": "Designed for Efficient Operations",
         "features": [
-          { "title": "Unified Alert Window", "description": "Integrates with any monitoring tool to provide a single view of all alerts." },
-          { "title": "Event Aggregation & Noise Reduction", "description": "A powerful event aggregation platform that helps significantly reduce alert noise." },
-          { "title": "Maintenance Window Filtration", "description": "Allows for event filtrations to automatically drop alerts during maintenance periods." },
-          { "title": "Automated ITSM Ticketing", "description": "Deep integration with ITSM tools for semi or fully automatic incident ticketing." },
-          { "title": "Runbook Automation", "description": "Connects incidents with automation runbooks for automated remediation of issues." }
+          { "title": "Unified Alert Window", "description": "Integrates with any monitoring tool to provide a single view of all alerts.", "image": bentoUnifiedAlert },
+          { "title": "Event Aggregation & Noise Reduction", "description": "A powerful event aggregation platform that helps significantly reduce alert noise.", "image": bentoEventAggregation },
+          { "title": "Maintenance Window Filtration", "description": "Allows for event filtrations to automatically drop alerts during maintenance periods.", "image": bentoMaintenanceWindow },
+          { "title": "Automated ITSM Ticketing", "description": "Deep integration with ITSM tools for semi or fully automatic incident ticketing.", "image": bentoAutomatedITSM },
+          { "title": "Runbook Automation", "description": "Connects incidents with automation runbooks for automated remediation of issues.", "image": bentoRunbookAutomation }
         ]
       },
       "benefitsByRole": {
@@ -356,12 +397,12 @@ export const productsData =
       "keyFeatures": {
         "headline": "Powerful Features for Reliable Automation at Scale",
         "features": [
-          { "title": "Low-Code Workflow Builder", "description": "Use readable blocks, templates, and versioning for safe iteration, with diff and rollback capabilities." },
-          { "title": "Event-Driven Automation", "description": "Initiate workflows from alerts (NMS/SIEM), tickets (ITSM), Git commits, chat commands, or schedules." },
-          { "title": "Human-in-the-Loop", "description": "Incorporate interactive approvals, data collection forms, and pause/resume steps with fallback paths." },
-          { "title": "Auto-Remediation Library", "description": "Utilize pre-built, guarded actions like restarting services, clearing caches, or failing over a VIP." },
-          { "title": "Compliance & Governance", "description": "Enforce RBAC, separation of duties, and least-privilege runners with immutable audit logs." },
-          { "title": "Self-Service Portal", "description": "Empower users to easily trigger approved automation workflows on demand." }
+          { "title": "Low-Code Workflow Builder", "description": "Use readable blocks, templates, and versioning for safe iteration, with diff and rollback capabilities.", "image": bentoLowCodeWorkflow },
+          { "title": "Event-Driven Automation", "description": "Initiate workflows from alerts (NMS/SIEM), tickets (ITSM), Git commits, chat commands, or schedules.", "image": bentoEventDriven },
+          { "title": "Human-in-the-Loop", "description": "Incorporate interactive approvals, data collection forms, and pause/resume steps with fallback paths.", "image": bentoHumanInLoop },
+          { "title": "Auto-Remediation Library", "description": "Utilize pre-built, guarded actions like restarting services, clearing caches, or failing over a VIP.", "image": bentoAutoRemediation },
+          { "title": "Compliance & Governance", "description": "Enforce RBAC, separation of duties, and least-privilege runners with immutable audit logs.", "image": bentoComplianceGovernance },
+          { "title": "Self-Service Portal", "description": "Empower users to easily trigger approved automation workflows on demand.", "image": bentoSelfServicePortal }
         ]
       },
       "benefitsByRole": {
@@ -493,12 +534,12 @@ export const productsData =
       "keyFeatures": {
         "headline": "Features Built for the Modern, Secure Enterprise",
         "features": [
-          { "title": "Browser-Based Access", "description": "Connect to desktops and applications through any modern web browser. No software installation is required." },
-          { "title": "Zero Trust Security", "description": "Ensure secure connections with strict identity verification, advanced encryption, and multi-factor authentication." },
-          { "title": "Multi-Platform Compatibility", "description": "Seamlessly connect to Windows, Linux, and macOS systems with support for all major remote access protocols." },
-          { "title": "Real-Time Monitoring & Analytics", "description": "Track sessions, generate detailed reports, and maintain full control over access with built-in activity logging." },
-          { "title": "Session Recording & Playback", "description": "Record all remote sessions for audit, compliance, and training purposes with a simple playback interface." },
-          { "title": "Mobile-Ready", "description": "Utilize a fully responsive design for secure access from desktops, tablets, and smartphones." }
+          { "title": "Browser-Based Access", "description": "Connect to desktops and applications through any modern web browser. No software installation is required.", "image": bentoBrowserBased },
+          { "title": "Zero Trust Security", "description": "Ensure secure connections with strict identity verification, advanced encryption, and multi-factor authentication.", "image": bentoZeroTrust },
+          { "title": "Multi-Platform Compatibility", "description": "Seamlessly connect to Windows, Linux, and macOS systems with support for all major remote access protocols.", "image": bentoMultiPlatform },
+          { "title": "Real-Time Monitoring & Analytics", "description": "Track sessions, generate detailed reports, and maintain full control over access with built-in activity logging.", "image": bentoRealTimeMonitoring },
+          { "title": "Session Recording & Playback", "description": "Record all remote sessions for audit, compliance, and training purposes with a simple playback interface.", "image": bentoSessionRecording },
+          { "title": "Mobile-Ready", "description": "Utilize a fully responsive design for secure access from desktops, tablets, and smartphones.", "image": bentoMobileReady }
         ]
       },
       "benefitsByRole": {
@@ -628,11 +669,11 @@ export const productsData =
       "keyFeatures": {
         "headline": "Alice AI's Powerful Capabilities",
         "features": [
-          { "title": "Agent-Based Automation", "description": "Intelligent agents handle tasks like password resets, network checks, and service management, reducing IT workload." },
-          { "title": "Instant IT Support", "description": "Resolve common IT issues like password resets or software access instantly, without waiting for a helpdesk." },
-          { "title": "Document Querying", "description": "Get quick answers from company documents like policies or manuals, making information access effortless." },
-          { "title": "Multi-Channel Access", "description": "Use Alice AI on Telegram, Microsoft Teams, or web interfaces for convenient, anytime support." },
-          { "title": "Scalable Architecture", "description": "Built with a robust architecture, Alice AI scales to support 100+ agents and integrates with various IT Tools." }
+          { "title": "Agent-Based Automation", "description": "Intelligent agents handle tasks like password resets, network checks, and service management, reducing IT workload.", "image": bentoAgentBased },
+          { "title": "Instant IT Support", "description": "Resolve common IT issues like password resets or software access instantly, without waiting for a helpdesk.", "image": bentoInstantSupport },
+          { "title": "Document Querying", "description": "Get quick answers from company documents like policies or manuals, making information access effortless.", "image": bentoDocumentQuerying },
+          { "title": "Multi-Channel Access", "description": "Use Alice AI on Telegram, Microsoft Teams, or web interfaces for convenient, anytime support.", "image": bentoMultiChannelAccess },
+          { "title": "Scalable Architecture", "description": "Built with a robust architecture, Alice AI scales to support 100+ agents and integrates with various IT Tools.", "image": bentoScalableArchitecture }
         ]
       },
       "benefitsByRole": {
@@ -763,12 +804,12 @@ export const productsData =
       "keyFeatures": {
         "headline": "A Feature-Rich Platform for World-Class Support",
         "features": [
-          { "title": "Multi-Channel Ticketing", "description": "Seamless integration with email, web forms, social media, and chat with centralized ticket management." },
-          { "title": "AI-Powered Automation", "description": "Intelligent ticket categorization, priority assignment, automated responses, and smart routing." },
-          { "title": "Knowledge Base & Self-Service", "description": "A dynamic knowledge base with AI suggestions and customer self-service portals for quick resolutions." },
-          { "title": "Collaboration & Reporting", "description": "Team collaboration tools, customizable dashboards, and comprehensive reporting on SLAs and performance." },
-          { "title": "Customizable & Scalable", "description": "Fully customizable queues, processes, and UI with role-based access control that scales to enterprise-level operations." },
-          { "title": "Multi-Tenancy Capability", "description": "Manage multiple departments or clients from a single platform with complete data separation." }
+          { "title": "Multi-Channel Ticketing", "description": "Seamless integration with email, web forms, social media, and chat with centralized ticket management.", "image": bentoMultiChannelTicketing },
+          { "title": "AI-Powered Automation", "description": "Intelligent ticket categorization, priority assignment, automated responses, and smart routing.", "image": bentoAIPoweredAutomation },
+          { "title": "Knowledge Base & Self-Service", "description": "A dynamic knowledge base with AI suggestions and customer self-service portals for quick resolutions.", "image": bentoKnowledgeBase },
+          { "title": "Collaboration & Reporting", "description": "Team collaboration tools, customizable dashboards, and comprehensive reporting on SLAs and performance.", "image": bentoCollaborationReporting },
+          { "title": "Customizable & Scalable", "description": "Fully customizable queues, processes, and UI with role-based access control that scales to enterprise-level operations.", "image": bentoCustomizableScalable },
+          { "title": "Multi-Tenancy Capability", "description": "Manage multiple departments or clients from a single platform with complete data separation.", "image": bentoMultiTenancy }
         ]
       },
       "benefitsByRole": {
@@ -898,12 +939,11 @@ export const productsData =
       "keyFeatures": {
         "headline": "Everything You Need for Total Asset Control",
         "features": [
-          { "title": "Comprehensive Asset Tracking", "description": "Track assets from acquisition to retirement with a full lifecycle history and audit logs." },
-          { "title": "Barcode & QR Code Integration", "description": "Enable fast check-in/check-out and streamlined inventory audits via mobile scanning." },
-          { "title": "Software License Management", "description": "Track licenses, seats, and renewal dates with automated expiration alerts and compliance reports." },
-          { "title": "Asset Assignment System", "description": "Assign assets to users, teams, or locations and track custody with real-time availability status." },
-          { "title": "Advanced Reporting & Analytics", "description": "Utilize custom dashboards and detailed utilization and depreciation reports for data-driven decisions." },
-          { "title": "Email Notifications", "description": "Receive automated alerts for expiring warranties, license renewals, and low inventory." }
+          { "title": "Comprehensive Asset Tracking", "description": "Track assets from acquisition to retirement with a full lifecycle history and audit logs.", "image": bentoComprehensiveAsset },
+          { "title": "Barcode & QR Code Integration", "description": "Enable fast check-in/check-out and streamlined inventory audits via mobile scanning.", "image": bentoBarcodeQR },
+          { "title": "Software License Management", "description": "Track licenses, seats, and renewal dates with automated expiration alerts and compliance reports.", "image": bentoSoftwareLicense },
+          { "title": "Asset Assignment System", "description": "Assign assets to users, teams, or locations and track custody with real-time availability status.", "image": bentoAssetAssignment },
+          { "title": "Advanced Reporting & Analytics", "description": "Utilize custom dashboards and detailed utilization and depreciation reports for data-driven decisions.", "image": bentoAdvancedReporting }
         ]
       },
       "benefitsByRole": {
