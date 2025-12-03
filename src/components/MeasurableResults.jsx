@@ -16,7 +16,7 @@ const results = [
   },
   {
     icon: <FiCalendar />,
-    number: '10 Mil+',
+    number: '10 Mi+',
     label: 'Events Per Day',
     color: '#F0CE1D'
   },

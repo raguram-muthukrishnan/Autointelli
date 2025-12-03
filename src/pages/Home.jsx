@@ -99,7 +99,7 @@ const Home = () => {
       <section id="newsletter" data-section className="home-newsletter-section" style={{ background: '#FFFFFF', padding: 0, margin: 0 }}>
         <NewsletterForm 
           categories={['all']}
-          title="Get monthly shortcuts to enhance your IT Ops productivity — No Fluffs."
+          title="Get monthly shortcuts to enhance your AI Ops productivity — No Fluffs."
           subtitle="Autointelli Community only insights not published anywhere else."
           horizontal={true}
         />

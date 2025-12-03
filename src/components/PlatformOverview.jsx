@@ -104,8 +104,8 @@ const PlatformOverview = () => {
         <header className="platform-hero">
           <span className="platform-tag">Automation</span>
           <h2 id="platform-overview-title">
-            Automate conversations<br />
-            with the power of AI
+            <span className="platform-title-line1">Your Information Technology Guardian</span><br/>
+            Vigilant by Design. Ready by Default
           </h2>
           <p>
             Reduce support volumes and increase satisfaction in minutes<br />

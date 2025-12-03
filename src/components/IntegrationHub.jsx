@@ -44,6 +44,9 @@ const IntegrationHub = () => {
                 </li>
               ))}
             </ul>
+            <p className="integration-disclaimer">
+              All logos and trademarks are the property of their respective owners and are used here for display purposes only.
+            </p>
           </div>
         </div>
       </div>
