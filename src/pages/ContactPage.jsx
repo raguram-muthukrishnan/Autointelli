@@ -229,7 +229,7 @@ const ContactPage = () => {
             </div>
             <div className="contact-text">
               <p className="contact-label">Corporate Office and Tech Center</p>
-              <p className="contact-value">484, Anna Salai, near US Consulate General Office, Thousand Lights West, Teynampet, Chennai 600006</p>
+              <p className="contact-value">581 Naveen towers, 3rd Floor, Anna Salai, Chennai 600002, Tamilnadu, India</p>
             </div>
           </div>
         </div>
