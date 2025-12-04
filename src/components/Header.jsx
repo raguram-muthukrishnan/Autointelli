@@ -322,7 +322,7 @@ const Header = () => {
               Join Our Community
             </button>
           </a>
-          <a href="/contact">
+          <a href="/products">
             <button className="cta-button">
               Explore Platform
             </button>
@@ -411,7 +411,7 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <a href="/contact" onClick={toggleMenu}>
+            <a href="/products" onClick={toggleMenu}>
               <button className="cta-button">Explore Platform</button>
             </a>
           </li>

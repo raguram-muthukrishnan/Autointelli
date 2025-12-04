@@ -3,6 +3,8 @@
 
 // Import product images
 import nmsImage from '../src/assets/Products/nms.webp';
+import nmsHeroImage from '../src/assets/Products/NMS -hero.png';
+import nmsCTAImage from '../src/assets/Products/NMS_CTA.png';
 import opsDutyImage from '../src/assets/Products/opsduty.webp';
 import intelliFlowImage from '../src/assets/Products/intelliflow.webp';
 import securitaImage from '../src/assets/Products/securita.png';
@@ -81,7 +83,7 @@ export const productsData =
       "hero": {
         "headline": "AI-Powered Monitoring for the Modern Hybrid Network",
         "subheadline": "Gain unified, real-time observability across your entire infrastructure to resolve issues faster and guarantee reliability.",
-        "image": nmsImage,
+        "image": nmsHeroImage,
         "ctaPrimary": "Schedule a Demo",
         "ctaSecondary": "Watch Overview",
         "microStats": [
@@ -205,6 +207,7 @@ export const productsData =
       "finalCta": {
         "headline": "Ready to Experience Autointelli NMS?",
         "subheadline": "See how AI-driven monitoring transforms visibility and uptime.",
+        "ctaImage": nmsCTAImage,
         "buttons": [
           { "text": "See How It Works", "type": "primary" },
           { "text": "Contact Us", "type": "secondary" }

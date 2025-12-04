@@ -6,7 +6,7 @@ import { getFeatureIcon } from '../components/FeatureIcons';
 import FinalCta from '../components/FinalCta'; 
 
 // Import product images
-import nmsImage from '../assets/Products/nms.webp';
+import nmsImage from '../assets/Products/NMS -hero.png';
 import opsDutyImage from '../assets/Products/opsduty.webp';
 import intelliFlowImage from '../assets/Products/intelliflow.webp';
 import securitaImage from '../assets/Products/securita.png';
@@ -16,7 +16,7 @@ import assetImage from '../assets/Products/intelli_asset.png';
 
 const ProductsPage = () => {
   // Hero animation uses these 4 images:
-  // 1. nmsImage (nms.webp)
+  // 1. nmsImage (NMS -hero.png)
   // 2. opsDutyImage (opsduty.webp) 
   // 3. intelliFlowImage (intelliflow.webp)
   // 4. aliceImage (alice.png)

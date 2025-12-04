@@ -191,8 +191,8 @@
   }
 
   .awards-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
   .certifications-grid {
@@ -205,18 +205,22 @@
     margin-bottom: 2rem;
   }
 
+  .award-card {
+    padding: 2rem 1.5rem;
+  }
+
   .award-wreath-container {
-    width: 10rem;
-    height: 10rem;
+    width: 11rem;
+    height: 11rem;
   }
 
   .award-medal {
-    width: 3rem;
-    height: 3rem;
+    width: 3.25rem;
+    height: 3.25rem;
   }
 
   .award-title {
-    font-size: 1rem;
+    font-size: 1.0625rem;
   }
 
   .award-subtitle {
@@ -224,7 +228,7 @@
   }
 
   .award-year {
-    font-size: 1.5rem;
+    font-size: 1.625rem;
   }
 
   .award-achievement {

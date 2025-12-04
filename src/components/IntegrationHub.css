@@ -458,6 +458,23 @@
   object-fit: contain;
 }
 
+.integration-count-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff !important;
+  border: 1px solid rgba(148, 163, 184, 0.3) !important;
+}
+
+.integration-count-text {
+  font-family: 'Sk-Modernist', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  line-height: 1.3;
+}
+
 @media (max-width: 768px) {
   .integration-list {
     grid-template-columns: repeat(2, 1fr);

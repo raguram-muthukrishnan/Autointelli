@@ -194,7 +194,8 @@ const ContactPage = () => {
 
       {/* Contact Information Section */}
       <div className="contact-info-bottom">
-        <div className="contact-details">
+        {/* First Row - Email and WhatsApp */}
+        <div className="contact-details contact-row-1">
           <div className="contact-item">
             <div className="contact-icon email-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -232,6 +233,19 @@ const ContactPage = () => {
               <p className="contact-value">581 Naveen towers, 3rd Floor, Anna Salai, Chennai 600002, Tamilnadu, India</p>
             </div>
           </div>
+
+          <div className="contact-item">
+            <div className="contact-icon location-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" strokeWidth="2"/>
+                <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
+              </svg>
+            </div>
+            <div className="contact-text">
+              <p className="contact-label">US Office</p>
+              <p className="contact-value">2661, Meadow Hall Dr Herdon, VA20171, USA.</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -244,7 +258,7 @@ const ContactPage = () => {
               <polyline points="22,6 12,13 2,6"/>
             </svg>
           </div>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#1a1a1a', marginBottom: '10px' }}>Get monthly shortcuts to enhance your IT Ops productivity — No Fluffs.</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#1a1a1a', marginBottom: '10px' }}>Get monthly shortcuts to enhance your AI Ops productivity — No Fluffs.</h2>
           <p style={{ fontSize: '1rem', color: '#718096', marginBottom: '30px', lineHeight: '1.6' }}>Autointelli Community only insights not published anywhere else.</p>
           <NewsletterForm 
             categories={['all']}
@@ -256,3 +270,6 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+
+// Note: Contact page needs manual update to restructure contact-info-bottom section
+// Move location item to second row and add US Office

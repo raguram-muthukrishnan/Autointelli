@@ -277,7 +277,7 @@ const PartnersPage = () => {
               <polyline points="22,6 12,13 2,6"/>
             </svg>
           </div>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#1a1a1a', marginBottom: '10px' }}>Get monthly shortcuts to enhance your IT Ops productivity — No Fluffs.</h2>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#1a1a1a', marginBottom: '10px' }}>Get monthly shortcuts to enhance your AI Ops productivity — No Fluffs.</h2>
           <p style={{ fontSize: '1rem', color: '#718096', marginBottom: '30px', lineHeight: '1.6' }}>Autointelli Community only insights not published anywhere else.</p>
           <NewsletterForm 
             categories={['all']}

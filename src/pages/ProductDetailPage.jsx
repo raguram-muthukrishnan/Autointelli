@@ -409,7 +409,7 @@ const ProductDetailPage = () => {
               <div className="pdp-cta-left">
                 <div className="pdp-cta-image-wrapper">
                   <img 
-                    src={product.hero?.image || getRandomStockImage(9)}
+                    src={product.finalCta?.ctaImage || product.hero?.image || getRandomStockImage(9)}
                     alt={product.finalCta.headline} 
                     className="pdp-cta-image"
                   />
