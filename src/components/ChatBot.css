@@ -263,6 +263,51 @@
   border-bottom-left-radius: 4px;
 }
 
+/* Markdown styling for bot messages */
+.chatbot-message.bot .message-content p {
+  margin: 0 0 8px 0;
+}
+
+.chatbot-message.bot .message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.chatbot-message.bot .message-content strong {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.chatbot-message.bot .message-content ol,
+.chatbot-message.bot .message-content ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.chatbot-message.bot .message-content li {
+  margin: 4px 0;
+}
+
+.chatbot-message.bot .message-content h1,
+.chatbot-message.bot .message-content h2,
+.chatbot-message.bot .message-content h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 8px 0 4px 0;
+  color: #0f172a;
+}
+
+.chatbot-message.bot .message-content a {
+  color: #F0CE1D;
+  text-decoration: underline;
+}
+
+.chatbot-message.bot .message-content code {
+  background: rgba(0,0,0,0.1);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
 .chatbot-message.system {
   align-items: center;
   justify-content: center;
