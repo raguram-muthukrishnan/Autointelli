@@ -145,7 +145,11 @@ const ChatBot = () => {
       }
 
       const data = await response.json();
-      const assistantMessage = data.choices[0]?.message?.content || getFallbackResponse(userMessage);
+      const assistantMessage = data.choices[0]?.message?.content;
+
+      if (!assistantMessage) {
+        throw new Error('No response from API');
+      }
 
       // Update conversation history
       setConversationHistory([
@@ -156,79 +160,8 @@ const ChatBot = () => {
       return assistantMessage;
     } catch (error) {
       console.error('OpenRouter API error:', error);
-      return getFallbackResponse(userMessage);
+      return "I apologize, but I'm having trouble connecting right now. Please try again or contact support@autointelli.com for assistance.";
     }
-  };
-
-  // Fallback responses when API is not available
-  const getFallbackResponse = (userInput) => {
-    const input = userInput.toLowerCase();
-    
-    // Check for off-topic questions first
-    const offTopicKeywords = ['weather', 'joke', 'news', 'sports', 'movie', 'music', 'recipe', 'game', 'play', 'code', 'program', 'python', 'javascript', 'calculate', 'math', 'history', 'science', 'politics'];
-    if (offTopicKeywords.some(keyword => input.includes(keyword))) {
-      return "I'm specialized in helping you with AutoIntelli's IT operations solutions. I can tell you about our products like NMS, OpsDuty, IntelliFlow, Securita, Alice AI, IntelliDesk, or IntelliAsset. How can I help you with these?";
-    }
-
-    // AutoIntelli-specific responses
-    if (input.includes('nms') || input.includes('network monitoring') || input.includes('network management')) {
-      return "**Autointelli NMS (360)** is our AI-Powered Network Monitoring System that provides unified, real-time observability across your entire infrastructure.\n\n**Key Benefits:**\n• 80% alert noise reduction\n• 60% MTTR improvement\n• 99.95% target availability\n\n**Features:** Unified Discovery, Real-Time Health Monitoring, Topology Mapping, Intelligent AIOps Alerting, Change Awareness, and Runbook Automation.\n\nWould you like to schedule a demo?";
-    }
-    
-    if (input.includes('opsduty') || input.includes('ops duty') || input.includes('incident')) {
-      return "**Autointelli OpsDuty** is our Unified Incident Response & Alert Management platform.\n\n**Key Benefits:**\n• 90% alert noise reduction\n• 100% automated ticketing\n• 75% faster remediation\n\n**Features:** Unified Alert Window, Event Aggregation, Maintenance Window Filtration, Automated ITSM Ticketing, and Runbook Automation.\n\nIt integrates with ServiceNow, Jira, Zabbix, Prometheus, and Slack. Would you like more details?";
-    }
-    
-    if (input.includes('intelliflow') || input.includes('flow') || input.includes('automation') || input.includes('orchestration')) {
-      return "**IntelliFlow** is our IT Process Automation & Orchestration Platform with a low-code workflow builder.\n\n**Key Benefits:**\n• 70% MTTR reduction\n• 80% automation coverage\n• 50% fewer failed changes\n\n**Features:** Low-Code Workflow Builder, Event-Driven Automation, Human-in-the-Loop approvals, Auto-Remediation Library, and Self-Service Portal.\n\nPerfect for incident response, provisioning, and change management!";
-    }
-    
-    if (input.includes('securita') || input.includes('remote access') || input.includes('vpn') || input.includes('browser access')) {
-      return "**Autointelli Securita** is our Privileged Access Control Platform offering browser-based remote access with Zero Trust security.\n\n**Key Benefits:**\n• Zero client installs required\n• 100% browser-based\n• Zero Trust security model\n\n**Features:** Multi-Platform (Windows, Linux, macOS), Session Recording, Real-Time Monitoring, and Mobile-Ready.\n\nPerfect for secure employee access, vendor access, and remote IT support!";
-    }
-    
-    if (input.includes('alice') && !input.includes('alice ai')) {
-      return "I am **Alice AI**, AutoIntelli's intelligent conversational assistant! I provide 24/7 instant IT support, L1 ticket automation, and integrate with 100+ tools.\n\n**My Capabilities:**\n• Agent-Based Automation\n• Instant IT Support (password resets, etc.)\n• Document Querying\n• Multi-Channel Access (Teams, Telegram, Web)\n\nI help reduce IT workload by 70% and provide instant solutions!";
-    }
-    
-    if (input.includes('intellidesk') || input.includes('helpdesk') || input.includes('service desk') || input.includes('ticketing')) {
-      return "**IntelliDesk** is our AI-powered Intelligent IT Service Desk Platform.\n\n**Key Benefits:**\n• 50% faster resolution time\n• AI-powered automation\n• All channels unified\n\n**Features:** Multi-Channel Ticketing, AI-Powered Automation, Knowledge Base & Self-Service, Collaboration Tools, and Multi-Tenancy.\n\nPerfect for customer support, internal IT helpdesk, and field service coordination!";
-    }
-    
-    if (input.includes('asset') || input.includes('intelliasset') || input.includes('inventory')) {
-      return "**IntelliAsset** is our comprehensive IT Asset Management Platform.\n\n**Features:**\n• Comprehensive Asset Tracking\n• Barcode & QR Code Integration\n• Software License Management\n• Asset Assignment System\n• Advanced Reporting & Analytics\n\nTrack, manage, and optimize all your hardware, software, and licenses with precision!";
-    }
-    
-    if (input.includes('price') || input.includes('cost') || input.includes('pricing') || input.includes('quote')) {
-      return "Our solutions are competitively priced based on your specific needs and scale. We offer flexible licensing options including:\n\n• Per-device licensing\n• Per-user licensing\n• Enterprise packages\n\n📧 Contact our sales team at **sales@autointelli.com** for a custom quote.\n\nWe also offer **30-day free trials** for all products!";
-    }
-    
-    if (input.includes('demo') || input.includes('trial') || input.includes('free')) {
-      return "Great choice! We offer:\n\n✅ **Personalized live demos** for all products\n✅ **30-day free trials** to experience the full platform\n\nYou can schedule a demo through our contact page or reach out to:\n📧 sales@autointelli.com\n\nWhich product would you like to explore?";
-    }
-    
-    if (input.includes('contact') || input.includes('support') || input.includes('email') || input.includes('phone')) {
-      return "**Contact AutoIntelli:**\n\n📧 **Sales:** sales@autointelli.com\n📧 **Support:** support@autointelli.com\n📧 **General:** info@autointelli.com\n\nOur support team is available 24/7 to help with any questions or technical issues!";
-    }
-    
-    if (input.includes('integration') || input.includes('api') || input.includes('connect')) {
-      return "All AutoIntelli products offer robust integrations:\n\n**Supported Platforms:**\n• ITSM: ServiceNow, Jira\n• Communication: Slack, Microsoft Teams, Telegram\n• Monitoring: Prometheus, Grafana, Zabbix, Splunk\n• Cloud: AWS, Azure, GCP, Kubernetes\n• DevOps: GitHub, Jenkins, Ansible, Terraform\n• Identity: Okta, Azure AD, SAML, LDAP\n\nAll integrations use REST APIs and webhooks for seamless connectivity!";
-    }
-    
-    if (input.includes('product') || input.includes('solution') || input.includes('offer') || input.includes('what do you')) {
-      return "**AutoIntelli Product Suite:**\n\n1. **NMS (360)** - AI-Powered Network Monitoring\n2. **OpsDuty** - Incident Response & Alert Management\n3. **IntelliFlow** - IT Process Automation\n4. **Securita** - Browser-Based Remote Access\n5. **Alice AI** - Intelligent AI Assistant\n6. **IntelliDesk** - IT Service Desk\n7. **IntelliAsset** - IT Asset Management\n\nWhich product would you like to learn more about?";
-    }
-    
-    if (input.includes('thank') || input.includes('thanks')) {
-      return "You're welcome! I'm here to help you discover how AutoIntelli can transform your IT operations.\n\nFeel free to ask about:\n• Any of our 7 products\n• Pricing and demos\n• Integrations\n• Contact information\n\nIs there anything else I can help you with?";
-    }
-    
-    if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
-      return "Hello! Welcome to AutoIntelli! 👋\n\nI'm Alice AI, your dedicated assistant for IT operations solutions. I can help you learn about:\n\n• **NMS** - Network Monitoring\n• **OpsDuty** - Incident Response\n• **IntelliFlow** - Process Automation\n• **Securita** - Remote Access\n• **IntelliDesk** - Service Desk\n• **IntelliAsset** - Asset Management\n\nWhat would you like to explore today?";
-    }
-    
-    // Default response
-    return "I'm Alice AI, your AutoIntelli assistant! I specialize in our IT operations management solutions.\n\n**Our Products:**\n• NMS (Network Monitoring)\n• OpsDuty (Incident Response)\n• IntelliFlow (Process Automation)\n• Securita (Remote Access)\n• IntelliDesk (Service Desk)\n• IntelliAsset (Asset Management)\n\nHow can I help you explore these solutions today?";
   };
 
   const scrollToBottom = () => {
@@ -270,16 +203,7 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      let botResponse;
-      
-      // Try OpenRouter API if key is configured
-      if (OPENROUTER_API_KEY) {
-        botResponse = await callOpenRouterAPI(userInput);
-      } else {
-        // Use fallback responses
-        botResponse = getFallbackResponse(userInput);
-      }
-      
+      const botResponse = await callOpenRouterAPI(userInput);
       addBotMessage(botResponse);
     } catch (error) {
       console.error('Error processing message:', error);
