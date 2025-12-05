@@ -120,6 +120,9 @@ const ChatBot = () => {
       { role: 'user', content: userMessage }
     ];
 
+    console.log('API Key configured:', !!OPENROUTER_API_KEY);
+    console.log('Sending request to OpenRouter...');
+
     try {
       const response = await fetch(OPENROUTER_API_URL, {
         method: 'POST',
@@ -140,14 +143,24 @@ const ChatBot = () => {
         })
       });
 
+      console.log('Response status:', response.status);
+
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const errorText = await response.text();
+        console.error('API Error Response:', errorText);
+        throw new Error(`API error: ${response.status} - ${errorText}`);
       }
 
       const data = await response.json();
-      const assistantMessage = data.choices[0]?.message?.content;
+      console.log('API Response:', data);
+      console.log('Choices:', data.choices);
+      console.log('First choice:', data.choices?.[0]);
+      console.log('Message:', data.choices?.[0]?.message);
+      
+      const assistantMessage = data.choices?.[0]?.message?.content || data.choices?.[0]?.text;
 
       if (!assistantMessage) {
+        console.error('Could not extract message from response:', JSON.stringify(data, null, 2));
         throw new Error('No response from API');
       }
 
