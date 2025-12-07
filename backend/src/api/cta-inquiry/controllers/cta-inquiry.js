@@ -84,7 +84,7 @@ Hi ${name},
 Thank you for reaching out to Autointelli. Your inquiry has been received, and our team will respond shortly.
 
 If you would like to schedule a discussion at your convenience, please use the link below:
-${process.env.CALENDLY_LINK || 'https://calendly.com/autointelli'}
+${process.env.CALENDLY_LINK || 'https://calendly.com/autointellimarketing/30min'}
 
 Your Message
 ${message}
@@ -109,7 +109,7 @@ This is an automated message. Please do not reply.
             </p>
 
             <div style="margin: 30px 0; text-align: center;">
-              <a href="${process.env.CALENDLY_LINK || 'https://calendly.com/autointelli'}" 
+              <a href="${process.env.CALENDLY_LINK || 'https://calendly.com/autointellimarketing/30min'}" 
                  style="display: inline-block; background: #FFD600; color: #000; padding: 14px 30px; text-decoration: none; border-radius: 8px; font-weight: 700;">
                 Schedule a Meeting →
               </a>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ContactPage.css';
 import NewsletterForm from '../components/NewsletterForm';
 import { submitCTAInquiry } from '../api';
@@ -16,6 +16,32 @@ const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const iframeRef = useRef(null);
+
+  // Handle iframe scroll behavior
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    const handleMouseEnter = () => {
+      // Disable page scroll when hovering over iframe
+      document.body.style.overflow = 'hidden';
+    };
+
+    const handleMouseLeave = () => {
+      // Re-enable page scroll when leaving iframe
+      document.body.style.overflow = '';
+    };
+
+    iframe.addEventListener('mouseenter', handleMouseEnter);
+    iframe.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      iframe.removeEventListener('mouseenter', handleMouseEnter);
+      iframe.removeEventListener('mouseleave', handleMouseLeave);
+      document.body.style.overflow = ''; // Cleanup
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -92,11 +118,13 @@ const ContactPage = () => {
         {/* Left Side - Calendly Iframe */}
         <div className="contact-calendly-section">
           <iframe
-            src="https://calendly.com/autointelli"
+            ref={iframeRef}
+            src="https://calendly.com/autointellimarketing/30min"
             width="100%"
             height="700"
             frameBorder="0"
             title="Schedule a Meeting"
+            scrolling="yes"
           ></iframe>
         </div>
 

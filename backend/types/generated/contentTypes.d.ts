@@ -464,6 +464,41 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiChatbotInteractionChatbotInteraction
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'chatbot_interactions';
+  info: {
+    description: 'User interactions with the chatbot';
+    displayName: 'Chatbot Interaction';
+    pluralName: 'chatbot-interactions';
+    singularName: 'chatbot-interaction';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    conversation_history: Schema.Attribute.JSON;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    first_message: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::chatbot-interaction.chatbot-interaction'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    session_id: Schema.Attribute.String;
+    source_page: Schema.Attribute.String;
+    total_messages: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCtaInquiryCtaInquiry extends Struct.CollectionTypeSchema {
   collectionName: 'cta_inquiries';
   info: {
@@ -1444,6 +1479,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::blog.blog': ApiBlogBlog;
+      'api::chatbot-interaction.chatbot-interaction': ApiChatbotInteractionChatbotInteraction;
       'api::cta-inquiry.cta-inquiry': ApiCtaInquiryCtaInquiry;
       'api::event.event': ApiEventEvent;
       'api::job-application.job-application': ApiJobApplicationJobApplication;

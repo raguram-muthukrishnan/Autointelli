@@ -46,6 +46,9 @@ const AdminLayout = () => {
           <Link to="/admin/dashboard/inquiries" className="nav-link">
             Contact Inquiries
           </Link>
+          <Link to="/admin/dashboard/chatbot-interactions" className="nav-link">
+            Chatbot Interactions
+          </Link>
           <Link to="/admin/dashboard/partner-requests" className="nav-link">
             Partner Requests
           </Link>

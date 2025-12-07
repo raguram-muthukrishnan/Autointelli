@@ -14,7 +14,7 @@ const FinalCta = () => {
               Start Free Trial
             </Link>
             <a 
-              href="https://calendly.com/autointelli" 
+              href="https://calendly.com/autointellimarketing/30min" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="final-cta-btn secondary"

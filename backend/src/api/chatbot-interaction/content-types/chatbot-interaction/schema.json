@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chatbot_interactions",
+  "info": {
+    "singularName": "chatbot-interaction",
+    "pluralName": "chatbot-interactions",
+    "displayName": "Chatbot Interaction",
+    "description": "User interactions with the chatbot"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "conversation_history": {
+      "type": "json",
+      "required": false
+    },
+    "source_page": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "string"
+    },
+    "first_message": {
+      "type": "text"
+    },
+    "total_messages": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

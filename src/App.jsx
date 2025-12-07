@@ -45,6 +45,7 @@ import DashboardNewsletter from './admin/DashboardNewsletter';
 import DashboardUsers from './admin/DashboardUsers';
 import DashboardVisitors from './admin/DashboardVisitors';
 import DashboardResourceDownloads from './admin/DashboardResourceDownloads';
+import DashboardChatbotInteractions from './admin/DashboardChatbotInteractions';
 import ProtectedRoute from './components/ProtectedRoute';
 
 // Component to handle smooth scroll based on route
@@ -111,6 +112,7 @@ function AppContent() {
             <Route path="careers" element={<DashboardCareers />} />
             <Route path="applications" element={<DashboardApplications />} />
             <Route path="inquiries" element={<DashboardInquiries />} />
+            <Route path="chatbot-interactions" element={<DashboardChatbotInteractions />} />
             <Route path="partner-requests" element={<DashboardPartnerRequests />} />
             <Route path="newsletter" element={<DashboardNewsletter />} />
             <Route path="users" element={<DashboardUsers />} />

@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { v4 as uuidv4 } from 'uuid';
 import './ChatBot.css';
 
 // OpenRouter API configuration
 const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'http://localhost:1337';
 
 // System prompt for AutoIntelli products - focused only on company products
 const SYSTEM_PROMPT = `You are Alice AI, AutoIntelli's official assistant. ONLY answer questions about AutoIntelli products. For off-topic questions, politely redirect to AutoIntelli solutions.
@@ -24,22 +26,39 @@ OFFERS: 30-day free trials, personalized demos available.
 Be concise, professional, and always encourage demos for detailed info.`;
 
 const ChatBot = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: "Hi! I'm Alice AI, your AutoIntelli assistant. I can help you with information about our IT operations management solutions including NMS, OpsDuty, IntelliFlow, Securita, IntelliDesk, and IntelliAsset. How can I assist you today?",
-      sender: 'bot',
-      timestamp: new Date()
-    }
-  ]);
+  // Initialize isOpen from sessionStorage to persist across page navigation
+  const [isOpen, setIsOpen] = useState(() => {
+    const savedState = sessionStorage.getItem('chatbot_is_open');
+    return savedState === 'true';
+  });
+  const [userEmail, setUserEmail] = useState('');
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [sessionId] = useState(() => uuidv4());
+  const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [conversationHistory, setConversationHistory] = useState([]);
+  const [hasNewMessage, setHasNewMessage] = useState(false); // New message indicator
+  const [hasPlayedSound, setHasPlayedSound] = useState(false); // Track if sound played
+  const [chatCompleted, setChatCompleted] = useState(false); // Track if user finished chatting
   const messagesEndRef = useRef(null);
+  const audioRef = useRef(null);
+  const notificationTimerRef = useRef(null);
 
-  // Initialize connection
+  // Persist isOpen state to sessionStorage whenever it changes
+  useEffect(() => {
+    sessionStorage.setItem('chatbot_is_open', isOpen.toString());
+  }, [isOpen]);
+
+  // Persist messages to sessionStorage whenever they change
+  useEffect(() => {
+    if (messages.length > 0) {
+      sessionStorage.setItem('chatbot_messages', JSON.stringify(messages));
+    }
+  }, [messages]);
+
+  // Initialize connection and check session state
   useEffect(() => {
     // Check if API key is configured
     if (OPENROUTER_API_KEY) {
@@ -49,7 +68,163 @@ const ChatBot = () => {
       console.warn('OpenRouter API key not configured. Using fallback responses.');
       setIsConnected(true); // Still show as connected for fallback mode
     }
+
+    // Check if user has completed chat (closed after chatting)
+    const completed = sessionStorage.getItem('chatbot_completed');
+    if (completed === 'true') {
+      setChatCompleted(true);
+      return; // Don't show notification or play sound
+    }
+
+    // Check if email is already captured in this session
+    const storedEmail = sessionStorage.getItem('chatbot_email');
+    
+    // Try to restore messages from sessionStorage
+    const storedMessages = sessionStorage.getItem('chatbot_messages');
+    if (storedMessages) {
+      try {
+        const parsedMessages = JSON.parse(storedMessages);
+        setMessages(parsedMessages.map(msg => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp)
+        })));
+      } catch (error) {
+        console.log('Could not restore messages:', error);
+      }
+    }
+    
+    if (storedEmail) {
+      setUserEmail(storedEmail);
+      setEmailSubmitted(true);
+      // Show welcome message only if no stored messages
+      if (!storedMessages) {
+        setMessages([
+          {
+            id: 1,
+            text: "Hi! I'm Alice AI, your AutoIntelli assistant. I can help you with information about our IT operations management solutions including NMS, OpsDuty, IntelliFlow, Securita, IntelliDesk, and IntelliAsset. How can I assist you today?",
+            sender: 'bot',
+            timestamp: new Date()
+          }
+        ]);
+      }
+    } else {
+      // Show email request message only if no stored messages
+      if (!storedMessages) {
+        setMessages([
+          {
+            id: 1,
+            text: "Hi! I'm Alice AI 👋\n\nBefore we start, could you please share your email address? This helps us provide you with personalized assistance.",
+            sender: 'bot',
+            timestamp: new Date()
+          }
+        ]);
+      }
+    }
+
+    // Show new message indicator and play sound on first visit
+    const hasVisited = sessionStorage.getItem('chatbot_visited');
+    if (!hasVisited && !completed) {
+      setHasNewMessage(true);
+      playNotificationSound();
+      sessionStorage.setItem('chatbot_visited', 'true');
+    }
   }, []);
+
+  // Play notification sound on page navigation (with interval)
+  useEffect(() => {
+    const completed = sessionStorage.getItem('chatbot_completed');
+    if (completed === 'true') return; // Don't play if chat completed
+
+    const hasVisited = sessionStorage.getItem('chatbot_visited');
+    
+    // If not first visit and chat not completed, play sound after delay
+    if (hasVisited && !isOpen) {
+      notificationTimerRef.current = setTimeout(() => {
+        playNotificationSound();
+        setHasNewMessage(true);
+      }, 15000); // 15 seconds after page load
+    }
+
+    return () => {
+      if (notificationTimerRef.current) {
+        clearTimeout(notificationTimerRef.current);
+      }
+    };
+  }, [isOpen]);
+
+  // Play notification sound
+  const playNotificationSound = () => {
+    try {
+      // Create audio element for notification sound
+      const audio = new Audio('/notification_sound.mp3');
+      audio.volume = 0.5;
+      audio.play().catch(err => console.log('Audio play failed:', err));
+      setHasPlayedSound(true);
+    } catch (error) {
+      console.log('Could not play notification sound:', error);
+    }
+  };
+
+  // Save interaction to backend
+  const saveInteractionToBackend = async (email, firstMessage = null) => {
+    try {
+      const response = await fetch(`${STRAPI_URL}/api/chatbot-interactions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: {
+            email: email,
+            session_id: sessionId,
+            source_page: window.location.pathname,
+            first_message: firstMessage,
+            conversation_history: conversationHistory,
+            total_messages: messages.filter(m => m.sender === 'user').length
+          }
+        })
+      });
+
+      if (!response.ok) {
+        console.error('Failed to save chatbot interaction');
+      }
+    } catch (error) {
+      console.error('Error saving chatbot interaction:', error);
+    }
+  };
+
+  // Handle email submission from chat input
+  const handleEmailSubmitFromChat = async () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!emailRegex.test(inputValue.trim())) {
+      addBotMessage("That doesn't look like a valid email address. Please enter a valid email (e.g., name@company.com)");
+      setInputValue('');
+      return;
+    }
+
+    const email = inputValue.trim();
+    
+    // Store email in session
+    sessionStorage.setItem('chatbot_email', email);
+    setUserEmail(email);
+    setEmailSubmitted(true);
+    setInputValue('');
+
+    // Add user's email as a message
+    setMessages(prev => [...prev, {
+      id: prev.length + 1,
+      text: email,
+      sender: 'user',
+      timestamp: new Date()
+    }]);
+
+    // Save to backend
+    await saveInteractionToBackend(email);
+
+    // Show thank you message
+    addBotMessage("Thank you! 🎉 I'm here to help. Feel free to ask me anything about AutoIntelli's products and services like NMS, OpsDuty, IntelliFlow, Securita, and more!");
+  };
 
   const addBotMessage = (text) => {
     setMessages(prev => [...prev, {
@@ -149,6 +324,12 @@ const ChatBot = () => {
       return;
     }
 
+    // If email not submitted yet, treat input as email
+    if (!emailSubmitted) {
+      await handleEmailSubmitFromChat();
+      return;
+    }
+
     // Add user message
     const userMessage = {
       id: messages.length + 1,
@@ -159,12 +340,19 @@ const ChatBot = () => {
 
     setMessages(prev => [...prev, userMessage]);
     const userInput = inputValue;
+    const isFirstMessage = messages.filter(m => m.sender === 'user' && m.text !== userEmail).length === 0;
     setInputValue('');
     setIsLoading(true);
 
     try {
       const botResponse = await callOpenRouterAPI(userInput);
       addBotMessage(botResponse);
+
+      // Update backend with conversation
+      const storedEmail = sessionStorage.getItem('chatbot_email');
+      if (storedEmail) {
+        saveInteractionToBackend(storedEmail, isFirstMessage ? userInput : null);
+      }
     } catch (error) {
       console.error('Error processing message:', error);
       addBotMessage("I apologize, but I encountered an error. Please try again or contact support@autointelli.com for assistance.");
@@ -173,31 +361,62 @@ const ChatBot = () => {
     }
   };
 
+  // Handle opening chatbot
+  const handleOpenChat = () => {
+    setIsOpen(true);
+    setHasNewMessage(false); // Clear notification badge
+  };
+
+  // Handle closing chatbot
+  const handleCloseChat = () => {
+    setIsOpen(false);
+    
+    // If user has chatted (email submitted), mark chat as completed
+    if (emailSubmitted) {
+      sessionStorage.setItem('chatbot_completed', 'true');
+      setChatCompleted(true);
+    }
+  };
+
   const handleClearChat = () => {
-    setMessages([
+    const storedEmail = sessionStorage.getItem('chatbot_email');
+    const newMessages = storedEmail ? [
       {
         id: 1,
         text: "Hi! I'm Alice AI, your AutoIntelli assistant. I can help you with information about our IT operations management solutions including NMS, OpsDuty, IntelliFlow, Securita, IntelliDesk, and IntelliAsset. How can I assist you today?",
         sender: 'bot',
         timestamp: new Date()
       }
-    ]);
+    ] : [
+      {
+        id: 1,
+        text: "Hi! I'm Alice AI 👋\n\nBefore we start, could you please share your email address? This helps us provide you with personalized assistance.",
+        sender: 'bot',
+        timestamp: new Date()
+      }
+    ];
+    
+    setMessages(newMessages);
     setConversationHistory([]); // Clear conversation history for LLM
+    sessionStorage.setItem('chatbot_messages', JSON.stringify(newMessages)); // Update stored messages
   };
 
   return (
     <div className="chatbot-container">
       {/* Chat Icon Button */}
-      <button
-        className={`chatbot-icon-button ${isOpen ? 'hidden' : ''}`}
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Open chat"
-        title="Chat with Alice AI"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </button>
+      {!chatCompleted && (
+        <button
+          className={`chatbot-icon-button ${isOpen ? 'hidden' : ''}`}
+          onClick={handleOpenChat}
+          aria-label="Open chat"
+          title="Chat with Alice AI"
+        >
+          {hasNewMessage && <span className="notification-badge"></span>}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+      )}
 
       {/* Chat Window */}
       {isOpen && (
@@ -219,7 +438,7 @@ const ChatBot = () => {
             </div>
             <button
               className="chatbot-close-button"
-              onClick={() => setIsOpen(false)}
+              onClick={handleCloseChat}
               aria-label="Close chat"
             >
               ✕
@@ -262,9 +481,15 @@ const ChatBot = () => {
           {/* Input Area */}
           <form className="chatbot-input-form" onSubmit={handleSendMessage}>
             <input
-              type="text"
+              type={emailSubmitted ? "text" : "email"}
               className="chatbot-input"
-              placeholder={isConnected ? "Type your message..." : "Connecting..."}
+              placeholder={
+                !isConnected 
+                  ? "Connecting..." 
+                  : !emailSubmitted 
+                    ? "Enter your email address..." 
+                    : "Type your message..."
+              }
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               disabled={isLoading || !isConnected}

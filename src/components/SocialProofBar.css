@@ -1,6 +1,6 @@
 .social-proof {
   background: #f3f3f3;
-  padding: 2.75rem 0;
+  padding: 2.5rem 0;
   margin-top: 0;
 }
 
@@ -52,7 +52,7 @@
   overflow-x: hidden;
 
   --logoloop-gap: 60px;
-  --logoloop-logoHeight: 60px;
+  --logoloop-logoHeight: 70px;
   --logoloop-fadeColorAuto: #fff6dd;
 }
 
@@ -98,7 +98,8 @@
 .logoloop__item img {
   height: var(--logoloop-logoHeight);
   width: auto;
-  max-width: 200px; /* Ensure consistent sizing */
+  min-width: 110px; /* Ensure minimum visibility */
+  max-width: 240px; /* Ensure consistent sizing */
   max-height: var(--logoloop-logoHeight); /* Force consistent height */
   display: block;
   object-fit: contain;
@@ -204,13 +205,14 @@
   }
 
   .logoloop {
-    --logoloop-gap: 24px;
-    --logoloop-logoHeight: 24px;
+    --logoloop-gap: 50px;
+    --logoloop-logoHeight: 60px;
   }
 
   .logoloop__item img {
-    max-width: 120px;
-    max-height: 24px;
+    max-width: 200px;
+    max-height: 60px;
+    min-width: 110px;
   }
 }
 
@@ -229,12 +231,13 @@
   }
 
   .logoloop {
-    --logoloop-gap: 20px;
-    --logoloop-logoHeight: 20px;
+    --logoloop-gap: 32px;
+    --logoloop-logoHeight: 45px;
   }
 
   .logoloop__item img {
-    max-width: 100px;
-    max-height: 20px;
+    max-width: 150px;
+    max-height: 45px;
+    min-width: 90px;
   }
 }

@@ -83,7 +83,7 @@ Thank you for expressing your interest in partnering with Autointelli. We apprec
 
 Our partnerships team is reviewing your request and will respond within 2–3 business days. If you prefer to connect sooner, you may schedule a meeting using the link below:
 
-${process.env.CALENDLY_LINK || 'https://calendly.com/autointelli'}
+${process.env.CALENDLY_LINK || 'https://calendly.com/autointellimarketing/30min'}
 
 Best regards,
 Autointelli Partnerships Team
@@ -105,7 +105,7 @@ This is an automated message. Please do not reply.
             </p>
 
             <div style="margin: 30px 0; text-align: center;">
-              <a href="${process.env.CALENDLY_LINK || 'https://calendly.com/autointelli'}" 
+              <a href="${process.env.CALENDLY_LINK || 'https://calendly.com/autointellimarketing/30min'}" 
                  style="display: inline-block; background: #FFD600; color: #000; padding: 14px 30px; text-decoration: none; border-radius: 8px; font-weight: 700;">
                 Schedule a Partnership Meeting →
               </a>

@@ -289,7 +289,13 @@ LogoLoop.displayName = 'LogoLoop';
 
 const SocialProofBar = () => {
   const logos = useMemo(
-    () => opsData.trustedBy.logos.map((logo) => ({ src: logo.src, alt: logo.alt, title: logo.alt })),
+    () => opsData.trustedBy.logos.map((logo) => ({ 
+      src: logo.src, 
+      alt: logo.alt, 
+      title: logo.alt,
+      width: logo.width,
+      height: logo.height
+    })),
     []
   );
 
@@ -303,7 +309,7 @@ const SocialProofBar = () => {
           className="social-proof-loop"
           logos={logos}
           speed={80}
-          logoHeight={60}
+          logoHeight={70}
           gap={60}
           scaleOnHover
         />
