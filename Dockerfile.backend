@@ -1,0 +1,33 @@
+# Backend Dockerfile  
+FROM node:20-alpine
+
+# Install build dependencies
+RUN apk add --no-cache python3 make g++ cairo-dev jpeg-dev pango-dev giflib-dev pixman-dev
+
+# Create app directory and user in one step
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S strapi -u 1001 && \
+    mkdir -p /app && \
+    chown strapi:nodejs /app
+
+WORKDIR /app
+
+# Copy package files with correct ownership
+COPY --chown=strapi:nodejs backend/package.json backend/package-lock.json ./
+
+# Install dependencies as strapi user
+USER strapi
+RUN npm ci && npm cache clean --force
+
+# Copy application files with correct ownership
+COPY --chown=strapi:nodejs backend/ ./
+
+# Create necessary directories
+RUN mkdir -p public/uploads
+
+# Build the admin panel
+RUN npm run build
+
+EXPOSE 1337
+
+CMD ["npm", "start"]

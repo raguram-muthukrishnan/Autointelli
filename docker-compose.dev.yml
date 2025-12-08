@@ -1,0 +1,45 @@
+services:
+  # Strapi Backend with SQLite (for development)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: .tmp/data.db
+      APP_KEYS: "toBeModified1,toBeModified2,toBeModified3,toBeModified4"
+      API_TOKEN_SALT: "tobemodified"
+      ADMIN_JWT_SECRET: "tobemodified"
+      TRANSFER_TOKEN_SALT: "tobemodified"
+      JWT_SECRET: "tobemodified"
+      ENCRYPTION_KEY: "tobemodified"
+      HOST: "0.0.0.0"
+      PORT: 1337
+      NODE_ENV: development
+    volumes:
+      - strapi_data:/app/.tmp
+      - strapi_uploads:/app/public/uploads
+    ports:
+      - "1337:1337"
+    networks:
+      - autointelli
+
+  # React Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - autointelli
+
+volumes:
+  strapi_data:
+  strapi_uploads:
+
+networks:
+  autointelli:
+    driver: bridge
