@@ -72,6 +72,10 @@
   width: max-content;
   will-change: transform;
   user-select: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 
 .logoloop__list {
@@ -107,9 +111,13 @@
   image-rendering: -webkit-optimize-contrast;
   -webkit-user-drag: none;
   pointer-events: none;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
   filter: grayscale(80%) brightness(1.1);
   opacity: 0.9;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .logoloop--scale-hover .logoloop__item {
@@ -174,9 +182,26 @@
   );
 }
 
+/* Fallback CSS animation for better compatibility */
+@supports not (will-change: transform) {
+  @keyframes logoloop-scroll {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .logoloop__track {
+    animation: logoloop-scroll 30s linear infinite;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .logoloop__track {
     transform: translate3d(0, 0, 0) !important;
+    animation: none !important;
   }
 
   .logoloop__item img,

@@ -77,10 +77,22 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, isHovered, pauseOn
   const lastTimestampRef = useRef(null);
   const offsetRef = useRef(0);
   const velocityRef = useRef(0);
+  const isVisibleRef = useRef(true);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
+
+    // Handle page visibility changes
+    const handleVisibilityChange = () => {
+      isVisibleRef.current = !document.hidden;
+      if (isVisibleRef.current) {
+        // Reset timestamp when page becomes visible again
+        lastTimestampRef.current = null;
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     if (seqWidth > 0) {
       offsetRef.current = ((offsetRef.current % seqWidth) + seqWidth) % seqWidth;
@@ -88,11 +100,17 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, isHovered, pauseOn
     }
 
     const animate = (timestamp) => {
+      // Skip animation if page is not visible
+      if (!isVisibleRef.current) {
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
+
       if (lastTimestampRef.current === null) {
         lastTimestampRef.current = timestamp;
       }
 
-      const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
+      const deltaTime = Math.max(0, Math.min(timestamp - lastTimestampRef.current, 100)) / 1000; // Cap deltaTime to prevent jumps
       lastTimestampRef.current = timestamp;
 
       const target = pauseOnHover && isHovered ? 0 : targetVelocity;
@@ -106,6 +124,7 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, isHovered, pauseOn
         offsetRef.current = nextOffset;
 
         const translateX = -offsetRef.current;
+        // Use will-change and transform for better performance
         track.style.transform = `translate3d(${translateX}px, 0, 0)`;
       }
 
@@ -115,6 +134,7 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, isHovered, pauseOn
     rafRef.current = requestAnimationFrame(animate);
 
     return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
