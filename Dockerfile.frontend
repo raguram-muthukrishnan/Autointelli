@@ -6,6 +6,10 @@ RUN apk update && apk upgrade
 
 WORKDIR /app
 
+# Accept build arguments
+ARG VITE_OPENROUTER_API_KEY
+ENV VITE_OPENROUTER_API_KEY=$VITE_OPENROUTER_API_KEY
+
 # Copy package files
 COPY package.json package-lock.json ./
 

@@ -60,6 +60,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend
+      args:
+        - VITE_OPENROUTER_API_KEY=${VITE_OPENROUTER_API_KEY}
+    environment:
+      - VITE_OPENROUTER_API_KEY=${VITE_OPENROUTER_API_KEY}
     ports:
       - "8080:80"
     depends_on:
