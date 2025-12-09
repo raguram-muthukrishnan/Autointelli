@@ -7,15 +7,23 @@ services:
     environment:
       DATABASE_CLIENT: sqlite
       DATABASE_FILENAME: .tmp/data.db
-      APP_KEYS: "toBeModified1,toBeModified2,toBeModified3,toBeModified4"
-      API_TOKEN_SALT: "tobemodified"
-      ADMIN_JWT_SECRET: "tobemodified"
-      TRANSFER_TOKEN_SALT: "tobemodified"
-      JWT_SECRET: "tobemodified"
-      ENCRYPTION_KEY: "tobemodified"
-      HOST: "0.0.0.0"
-      PORT: 1337
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
+      JWT_SECRET: ${JWT_SECRET}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      HOST: ${HOST}
+      PORT: ${PORT}
       NODE_ENV: development
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      SMTP_FROM: ${SMTP_FROM}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      CALENDLY_LINK: ${CALENDLY_LINK}
+      FRONTEND_URL: ${FRONTEND_URL}
     volumes:
       - strapi_data:/app/.tmp
       - strapi_uploads:/app/public/uploads
