@@ -17,7 +17,7 @@ COPY --chown=strapi:nodejs backend/package.json backend/package-lock.json ./
 
 # Install dependencies as strapi user
 USER strapi
-RUN npm ci && npm cache clean --force
+RUN npm install --legacy-peer-deps && npm cache clean --force
 
 # Copy application files with correct ownership
 COPY --chown=strapi:nodejs backend/ ./
