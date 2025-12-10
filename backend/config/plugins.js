@@ -48,14 +48,24 @@ module.exports = ({ env }) => ({
       providerOptions: {
         host: env('SMTP_HOST', 'smtp.gmail.com'),
         port: env('SMTP_PORT', 587),
+        secure: false, // true for 465, false for other ports
         auth: {
           user: env('SMTP_USER'),
           pass: env('SMTP_PASS'),
         },
+        tls: {
+          // Do not fail on invalid certs
+          rejectUnauthorized: false,
+        },
+        // Add connection timeout and socket timeout
+        connectionTimeout: 60000, // 60 seconds
+        socketTimeout: 60000, // 60 seconds
+        // Enable debug logging
+        debug: env('NODE_ENV') === 'development',
       },
       settings: {
-        defaultFrom: env('SMTP_FROM', 'noreply@autointelli.com'),
-        defaultReplyTo: env('SMTP_FROM', 'noreply@autointelli.com'),
+        defaultFrom: env('SMTP_FROM'),
+        defaultReplyTo: env('SMTP_FROM'),
       },
     },
   },

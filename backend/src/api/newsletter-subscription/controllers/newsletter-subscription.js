@@ -59,9 +59,11 @@ module.exports = createCoreController('api::newsletter-subscription.newsletter-s
 
     // Send welcome email (optional)
     try {
-      await strapi.plugins['email'].services.email.send({
+      console.log('📧 Sending welcome email to:', email);
+      await strapi.plugins.email.services.email.send({
         to: email,
-        from: process.env.SMTP_FROM || 'noreply@autointelli.com',
+        from: `Autointelli <${process.env.SMTP_FROM || 'mail.autointelli.com'}>`,
+        replyTo: process.env.SMTP_FROM || 'mail.autointelli.com',
         subject: 'Welcome to Autointelli Newsletter',
         text: `Hi ${name},
 
@@ -90,8 +92,10 @@ Autointelli Team`,
           </div>
         `,
       });
+      console.log('✅ Welcome email sent successfully to:', email);
     } catch (emailError) {
-      console.error('Failed to send welcome email:', emailError);
+      console.error('❌ Failed to send welcome email:', emailError.message);
+      console.error('Email error details:', emailError);
       // Don't fail the subscription if email fails
     }
 

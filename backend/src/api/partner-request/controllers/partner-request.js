@@ -17,9 +17,10 @@ module.exports = createCoreController('api::partner-request.partner-request', ({
 
     try {
       // Send email to admin
-      await strapi.plugins['email'].services.email.send({
-        to: process.env.ADMIN_EMAIL || 'admin@autointelli.com',
-        from: process.env.SMTP_FROM || 'noreply@autointelli.com',
+      await strapi.plugins.email.services.email.send({
+        to: process.env.ADMIN_EMAIL,
+        from: `Autointelli Partnerships <${process.env.SMTP_FROM}>`,
+        replyTo: business_email,
         subject: `New Partnership Request from ${company_name}`,
         text: `
 A new partnership request has been submitted.
@@ -72,9 +73,10 @@ ${process.env.PUBLIC_URL}/admin/content-manager/collection-types/api::partner-re
       });
 
       // Send thank you email to partner with Calendly link
-      await strapi.plugins['email'].services.email.send({
+      await strapi.plugins.email.services.email.send({
         to: business_email,
-        from: process.env.SMTP_FROM || 'noreply@autointelli.com',
+        from: `Autointelli Partnerships <${process.env.SMTP_FROM}>`,
+        replyTo: process.env.SMTP_FROM,
         subject: 'Thank You for Your Partnership Interest – Autointelli',
         text: `
 Hi ${contact_name},

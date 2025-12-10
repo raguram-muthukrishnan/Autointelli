@@ -17,9 +17,10 @@ module.exports = createCoreController('api::cta-inquiry.cta-inquiry', ({ strapi 
 
     try {
       // Send email to admin
-      await strapi.plugins['email'].services.email.send({
-        to: process.env.ADMIN_EMAIL || 'admin@autointelli.com',
-        from: process.env.SMTP_FROM || 'noreply@autointelli.com',
+      await strapi.plugins.email.services.email.send({
+        to: process.env.ADMIN_EMAIL,
+        from: `Autointelli <${process.env.SMTP_FROM}>`,
+        replyTo: email,
         subject: `New Inquiry from ${name}`,
         text: `
 A new customer inquiry has been received.
@@ -74,9 +75,10 @@ ${process.env.PUBLIC_URL}/admin/content-manager/collection-types/api::cta-inquir
       });
 
       // Send thank you email to user with Calendly link
-      await strapi.plugins['email'].services.email.send({
+      await strapi.plugins.email.services.email.send({
         to: email,
-        from: process.env.SMTP_FROM || 'noreply@autointelli.com',
+        from: `Autointelli <${process.env.SMTP_FROM}>`,
+        replyTo: process.env.SMTP_FROM,
         subject: 'Thank You for Contacting Autointelli',
         text: `
 Hi ${name},

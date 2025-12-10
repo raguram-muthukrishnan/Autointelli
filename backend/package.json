@@ -15,7 +15,7 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "engines": {
-    "node": ">=18.0.0",
+    "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
   },
   "dependencies": {
@@ -24,6 +24,7 @@
     "@strapi/provider-email-nodemailer": "^5.31.2",
     "@strapi/strapi": "^5.31.2",
     "better-sqlite3": "^12.4.1",
+    "dotenv": "^17.2.3",
     "lodash": "^4.17.21",
     "nodemailer": "^7.0.10",
     "pg": "8.8.0",
@@ -31,10 +32,6 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "styled-components": "^6.0.0"
-  },
-  "engines": {
-    "node": ">=18.0.0 <=22.x.x",
-    "npm": ">=6.0.0"
   },
   "strapi": {
     "uuid": "56674a75-b9f0-4426-ad86-412bfa75d4c0",

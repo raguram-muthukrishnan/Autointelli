@@ -132,9 +132,10 @@ You are receiving this email because you opted in for Autointelli ${contentTypeL
           
           console.log(`📧 Sending email to ${subscriber.email}...`);
           
-          await strapi.plugins['email'].services.email.send({
+          await strapi.plugins.email.services.email.send({
             to: subscriber.email,
-            from: process.env.SMTP_FROM || 'noreply@autointelli.com',
+            from: `Autointelli Newsletter <${process.env.SMTP_FROM || 'mail.autointelli.com'}>`,
+            replyTo: process.env.SMTP_FROM || 'mail.autointelli.com',
             subject,
             text: textContent,
             html: personalizedHtml,

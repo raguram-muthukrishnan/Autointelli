@@ -26,9 +26,10 @@ module.exports = createCoreController('api::job-application.job-application', ({
 
       // Send thank you email to applicant
       try {
-        await strapi.plugins['email'].services.email.send({
+        await strapi.plugins.email.services.email.send({
           to: data.email,
-          from: process.env.SMTP_FROM || 'careers@autointelli.com',
+          from: `Autointelli Careers <${process.env.SMTP_FROM}>`,
+          replyTo: process.env.SMTP_FROM,
           subject: 'Application Received – Autointelli',
           text: `Dear ${data.full_name},
 
@@ -73,9 +74,10 @@ Autointelli HR Team`,
 
       // Send notification email to admin
       try {
-        await strapi.plugins['email'].services.email.send({
-          to: process.env.ADMIN_EMAIL || 'careers@autointelli.com',
-          from: process.env.SMTP_FROM || 'noreply@autointelli.com',
+        await strapi.plugins.email.services.email.send({
+          to: process.env.ADMIN_EMAIL,
+          from: `Autointelli Careers <${process.env.SMTP_FROM}>`,
+          replyTo: data.email,
           subject: `New Job Application – ${data.job_title}`,
           text: `A new job application has been submitted for the ${data.job_title} position.
 
