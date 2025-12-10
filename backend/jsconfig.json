@@ -6,6 +6,14 @@
     "checkJs": true,
     "allowJs": true
   },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.example.js",
+    "src/**/*.example.ts"
+  ],
   "typeAcquisition": {
     "enable": false
   }
