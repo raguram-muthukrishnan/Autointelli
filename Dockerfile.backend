@@ -16,29 +16,30 @@ RUN apt-get update && apt-get install -y \
 # Create app directory and user
 WORKDIR /srv/app
 RUN useradd -ms /bin/bash strapi && \
-    chown -R strapi:nodejs /srv/app
+    chown -R strapi:strapi /srv/app
 
 USER strapi
 
 # Copy only package files first (best practice)
-COPY --chown=strapi:nodejs backend/package.json backend/package-lock.json ./
+COPY --chown=strapi:strapi backend/package.json backend/package-lock.json ./
 
 # Install dependencies safely (REPLACE npm ci)
 RUN npm cache clean --force && \
-    npm install --legacy-peer-deps --omit=dev && \
+    npm install --legacy-peer-deps && \
+    npm install esbuild --legacy-peer-deps && \
     npm cache clean --force
 
 # Copy the full backend source
-COPY --chown=strapi:nodejs backend/ ./
+COPY --chown=strapi:strapi backend/ ./
 
 # Create necessary directories
 RUN mkdir -p public/uploads
 
-# Build the Strapi admin panel
-RUN npm run build
+# Set production environment
+ENV NODE_ENV=production
 
 # Expose the Strapi port
 EXPOSE 1337
 
-# Start the Strapi server
+# Start the Strapi server (will auto-build admin panel on first run)
 CMD ["npm", "start"]
