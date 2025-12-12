@@ -7,20 +7,24 @@ import cardIcon6 from '../src/assets/ALICE.png';
 import cardIcon7 from '../src/assets/ASSET.png';
 
 // Import client logos from Clientlogos folder
-import logo1 from '../src/assets/Clientlogos/access health.png';
 import logo2 from '../src/assets/Clientlogos/brila_group.png';
-import logo3 from '../src/assets/Clientlogos/birla sun life_final.jpg';
 import logo4 from '../src/assets/Clientlogos/election.png';
 import logo5 from '../src/assets/Clientlogos/india cements.png';
 import logo6 from '../src/assets/Clientlogos/mahindra.png';
 import logo7 from '../src/assets/Clientlogos/ministry-and-health-family-welfare.png';
 import logo8 from '../src/assets/Clientlogos/motorola.png';
-import logo9 from '../src/assets/Clientlogos/NxtGenLogo300x300-1652937696205.png';
 import logo10 from '../src/assets/Clientlogos/Rapiddata.png';
-import logo11 from '../src/assets/Clientlogos/royal sundaram.png';
-import logo12 from '../src/assets/Clientlogos/rs-new-logo.png';
 import logo13 from '../src/assets/Clientlogos/sundaramfinance-final.png';
 import logo14 from '../src/assets/Clientlogos/UPL.png';
+import logo15 from '../src/assets/Clientlogos/accenture.png';
+import logo16 from '../src/assets/Clientlogos/Fujitsu-Logo.svg';
+import logo17 from '../src/assets/Clientlogos/idea.png';
+import logo18 from '../src/assets/Clientlogos/indian_railway.png';
+import logo19 from '../src/assets/Clientlogos/Iress_logo.png';
+import logo20 from '../src/assets/Clientlogos/kotak.png';
+import logo21 from '../src/assets/Clientlogos/L&T.png';
+import logo22 from '../src/assets/Clientlogos/Ministry_of_Science_and_Technology_India.svg.png';
+import logo23 from '../src/assets/Clientlogos/TNeGA- .png';
 
 export const opsData = {
   title: "MONITOR AND MANAGE ALL YOUR IT INFRA OPERATIONS",
@@ -66,18 +70,22 @@ export const opsData = {
     title: "Trusted By",
     subtext: "Chosen by enterprises that demand reliability, security, and scale.",
     logos: [
-      { id: 1, src: logo1, alt: "Access Health", width: 200, height: 70 },
       { id: 2, src: logo2, alt: "Birla Group", width: 160, height: 70 },
-      { id: 3, src: logo3, alt: "Birla Sun Life", width: 160, height: 70 },
-      { id: 4, src: logo4, alt: "Election Commission", width: 160, height: 70 },
-      { id: 5, src: logo5, alt: "India Cements", width: 200, height: 70 },
-      { id: 6, src: logo6, alt: "Mahindra", width: 200, height: 70 },
+      { id: 15, src: logo15, alt: "Accenture", width: 200, height: 70 },
       { id: 7, src: logo7, alt: "Ministry of Health and Family Welfare", width: 160, height: 70 },
+      { id: 6, src: logo6, alt: "Mahindra", width: 200, height: 70 },
+      { id: 16, src: logo16, alt: "Fujitsu", width: 200, height: 70 },
+      { id: 4, src: logo4, alt: "Election Commission", width: 160, height: 70 },
+      { id: 19, src: logo19, alt: "Iress", width: 200, height: 70 },
+      { id: 23, src: logo23, alt: "TNeGA", width: 160, height: 70 },
+      { id: 5, src: logo5, alt: "India Cements", width: 200, height: 70 },
+      { id: 20, src: logo20, alt: "Kotak", width: 200, height: 70 },
+      { id: 22, src: logo22, alt: "Ministry of Science and Technology", width: 160, height: 70 },
       { id: 8, src: logo8, alt: "Motorola", width: 200, height: 70 },
-      { id: 9, src: logo9, alt: "NxtGen", width: 160, height: 70 },
+      { id: 17, src: logo17, alt: "Idea", width: 160, height: 70 },
       { id: 10, src: logo10, alt: "Rapiddata", width: 200, height: 70 },
-      { id: 11, src: logo11, alt: "Royal Sundaram", width: 200, height: 70 },
-      { id: 12, src: logo12, alt: "Royal Sundaram", width: 160, height: 70 },
+      { id: 21, src: logo21, alt: "L&T", width: 200, height: 70 },
+      { id: 18, src: logo18, alt: "Indian Railway", width: 160, height: 70 },
       { id: 13, src: logo13, alt: "Sundaram Finance", width: 200, height: 70 },
       { id: 14, src: logo14, alt: "UPL", width: 200, height: 70 },
     ]
