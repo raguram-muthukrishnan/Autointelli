@@ -69,7 +69,30 @@ const apiFetch = async (endpoint, options = {}) => {
 
 // Blogs
 export const fetchBlogs = async () => {
-  return await apiFetch('/blogs?populate=*');
+  try {
+    return await apiFetch('/blogs?populate=*');
+  } catch (error) {
+    // If authentication fails for public content, try without auth
+    if (error.message.includes('Invalid credentials') || error.message.includes('Unauthorized')) {
+      try {
+        const response = await fetch(`${BASE_URL}/blogs?populate=*`, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return await response.json();
+      } catch (fallbackError) {
+        console.warn('Both authenticated and unauthenticated blog requests failed:', fallbackError);
+        return { data: [] };
+      }
+    }
+    throw error;
+  }
 };
 
 export const createBlog = async (title) => {
@@ -84,7 +107,30 @@ export const createBlog = async (title) => {
 // Webinars
 export const fetchWebinars = async () => {
   // Note: If webinars schema has a 'published' field, add: &filters[published][$eq]=true
-  return await apiFetch('/webinars?populate=*&sort=start_time:desc');
+  try {
+    return await apiFetch('/webinars?populate=*&sort=start_time:desc');
+  } catch (error) {
+    // If authentication fails for public content, try without auth
+    if (error.message.includes('Invalid credentials') || error.message.includes('Unauthorized')) {
+      try {
+        const response = await fetch(`${BASE_URL}/webinars?populate=*&sort=start_time:desc`, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return await response.json();
+      } catch (fallbackError) {
+        console.warn('Both authenticated and unauthenticated webinar requests failed:', fallbackError);
+        return { data: [] };
+      }
+    }
+    throw error;
+  }
 };
 
 export const fetchWebinarBySlug = async (slug) => {
@@ -139,7 +185,30 @@ export const createWebinar = async (title) => {
 // Events
 export const fetchEvents = async () => {
   // Note: If events schema has a 'published' field, add: &filters[published][$eq]=true
-  return await apiFetch('/events?populate=*&sort=start_time:desc');
+  try {
+    return await apiFetch('/events?populate=*&sort=start_time:desc');
+  } catch (error) {
+    // If authentication fails for public content, try without auth
+    if (error.message.includes('Invalid credentials') || error.message.includes('Unauthorized')) {
+      try {
+        const response = await fetch(`${BASE_URL}/events?populate=*&sort=start_time:desc`, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return await response.json();
+      } catch (fallbackError) {
+        console.warn('Both authenticated and unauthenticated event requests failed:', fallbackError);
+        return { data: [] };
+      }
+    }
+    throw error;
+  }
 };
 
 export const fetchEventBySlug = async (slug) => {
@@ -303,12 +372,37 @@ export const updateFileInfo = async (fileId, fileInfo) => {
 
 // Newsletter Subscriptions
 export const subscribeNewsletter = async (name, email, categories = []) => {
-  return await apiFetch('/newsletter-subscriptions', {
-    method: 'POST',
-    body: JSON.stringify({
-      data: { name, email, categories }
-    }),
-  });
+  try {
+    // Try without authentication first for public newsletter subscription
+    const response = await fetch(`${BASE_URL}/newsletter-subscriptions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: { name, email, categories }
+      }),
+    });
+
+    if (response.ok) {
+      return await response.json();
+    }
+
+    // If unauthenticated request fails, fall back to authenticated request
+    if (response.status === 401 || response.status === 403) {
+      return await apiFetch('/newsletter-subscriptions', {
+        method: 'POST',
+        body: JSON.stringify({
+          data: { name, email, categories }
+        }),
+      });
+    }
+
+    throw new Error(`HTTP error! status: ${response.status}`);
+  } catch (error) {
+    console.error('Newsletter subscription failed:', error);
+    throw error;
+  }
 };
 
 export const unsubscribeNewsletter = async (token) => {
@@ -329,12 +423,37 @@ export const fetchJobBySlug = async (slug) => {
 
 // Job Applications
 export const submitJobApplication = async (applicationData) => {
-  return await apiFetch('/job-applications', {
-    method: 'POST',
-    body: JSON.stringify({
-      data: applicationData
-    }),
-  });
+  try {
+    // Try without authentication first for public form submissions
+    const response = await fetch(`${BASE_URL}/job-applications`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: applicationData
+      }),
+    });
+
+    if (response.ok) {
+      return await response.json();
+    }
+
+    // If unauthenticated request fails, fall back to authenticated request
+    if (response.status === 401 || response.status === 403) {
+      return await apiFetch('/job-applications', {
+        method: 'POST',
+        body: JSON.stringify({
+          data: applicationData
+        }),
+      });
+    }
+
+    throw new Error(`HTTP error! status: ${response.status}`);
+  } catch (error) {
+    console.error('Job application submission failed:', error);
+    throw error;
+  }
 };
 
 export const uploadResume = async (file) => {
@@ -363,22 +482,72 @@ export const uploadResume = async (file) => {
 
 // CTA Inquiries
 export const submitCTAInquiry = async (inquiryData) => {
-  return await apiFetch('/cta-inquiries', {
-    method: 'POST',
-    body: JSON.stringify({
-      data: inquiryData
-    }),
-  });
+  try {
+    // Try without authentication first for public form submissions
+    const response = await fetch(`${BASE_URL}/cta-inquiries`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: inquiryData
+      }),
+    });
+
+    if (response.ok) {
+      return await response.json();
+    }
+
+    // If unauthenticated request fails, fall back to authenticated request
+    if (response.status === 401 || response.status === 403) {
+      return await apiFetch('/cta-inquiries', {
+        method: 'POST',
+        body: JSON.stringify({
+          data: inquiryData
+        }),
+      });
+    }
+
+    throw new Error(`HTTP error! status: ${response.status}`);
+  } catch (error) {
+    console.error('CTA inquiry submission failed:', error);
+    throw error;
+  }
 };
 
 // Partner Requests
 export const submitPartnerRequest = async (partnerData) => {
-  return await apiFetch('/partner-requests', {
-    method: 'POST',
-    body: JSON.stringify({
-      data: partnerData
-    }),
-  });
+  try {
+    // Try without authentication first for public form submissions
+    const response = await fetch(`${BASE_URL}/partner-requests`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: partnerData
+      }),
+    });
+
+    if (response.ok) {
+      return await response.json();
+    }
+
+    // If unauthenticated request fails, fall back to authenticated request
+    if (response.status === 401 || response.status === 403) {
+      return await apiFetch('/partner-requests', {
+        method: 'POST',
+        body: JSON.stringify({
+          data: partnerData
+        }),
+      });
+    }
+
+    throw new Error(`HTTP error! status: ${response.status}`);
+  } catch (error) {
+    console.error('Partner request submission failed:', error);
+    throw error;
+  }
 };
 
 // Resources
@@ -427,7 +596,39 @@ export const fetchResources = async (params = {}) => {
   // Sort by creation date descending (newest first)
   query += '&sort=createdAt:desc';
   
-  return await apiFetch(query);
+  // For public resources, try without authentication first to avoid 401 errors
+  try {
+    const response = await fetch(`${BASE_URL}${query}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    if (response.ok) {
+      return await response.json();
+    }
+    
+    // If unauthenticated request fails, fall back to authenticated request
+    if (response.status === 401 || response.status === 403) {
+      return await apiFetch(query);
+    }
+    
+    throw new Error(`HTTP error! status: ${response.status}`);
+  } catch (error) {
+    // Last resort: return empty result set
+    console.warn('All resource requests failed:', error);
+    return {
+      data: [],
+      meta: {
+        pagination: {
+          page: page,
+          pageSize: pageSize,
+          pageCount: 0,
+          total: 0
+        }
+      }
+    };
+  }
 };
 
 /**

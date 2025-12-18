@@ -26,17 +26,29 @@ module.exports = {
       if (publicRole) {
         const publicPermissions = [
           { action: "plugin::upload.content-api.upload" },
+          { action: "api::webinar.webinar.find" },
+          { action: "api::webinar.webinar.findOne" },
           { action: "api::webinar.webinar.create" },
           { action: "api::webinar.webinar.update" },
           { action: "api::webinar.webinar.delete" },
+          { action: "api::event.event.find" },
+          { action: "api::event.event.findOne" },
           { action: "api::event.event.create" },
           { action: "api::event.event.update" },
           { action: "api::event.event.delete" },
+          { action: "api::blog.blog.find" },
+          { action: "api::blog.blog.findOne" },
           { action: "api::blog.blog.create" },
           { action: "api::blog.blog.update" },
           { action: "api::blog.blog.delete" },
           { action: "api::resource.resource.find" },
           { action: "api::resource.resource.findOne" },
+          { action: "api::newsletter-subscription.newsletter-subscription.create" },
+          { action: "api::cta-inquiry.cta-inquiry.create" },
+          { action: "api::partner-request.partner-request.create" },
+          { action: "api::job-application.job-application.create" },
+          { action: "api::chatbot-interaction.chatbot-interaction.create" },
+          { action: "api::visitor.visitor.create" },
         ];
 
         for (const perm of publicPermissions) {
