@@ -7,6 +7,7 @@ module.exports = ({ env }) => ({
   },
   admin: {
     url: env('ADMIN_URL', '/strapi-admin'),
+    path: '/admin',
   },
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
