@@ -67,8 +67,7 @@ services:
       - VITE_OPENROUTER_API_KEY=${VITE_OPENROUTER_API_KEY}
       - VITE_STRAPI_URL=${VITE_STRAPI_URL}
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
     depends_on:
       - backend
     networks:
