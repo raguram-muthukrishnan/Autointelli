@@ -25,7 +25,7 @@ module.exports = (config, { strapi }) => {
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: https:",
         "font-src 'self' data:",
-        "connect-src 'self' https://autointelli.com https://analytics.strapi.io",
+        "connect-src 'self' https: http: ws: wss:",
         "frame-src 'none'",
         "object-src 'none'",
         "base-uri 'self'",
