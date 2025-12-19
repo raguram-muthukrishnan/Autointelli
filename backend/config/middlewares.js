@@ -15,14 +15,11 @@ module.exports = [
         'http://127.0.0.1:3000',
         'http://127.0.0.1:5173',
         'http://127.0.0.1:8080',
-        // Production server
-        'http://95.217.214.128:8080',
-        'http://95.217.214.128:1337',
-        // Add your production domains here
-        'https://your-vercel-app.vercel.app',
-        'https://autointelli.vercel.app',
-        // Add custom domain when you get one
-        'https://yourdomain.com'
+        // Production domains
+        'https://autointelli.com',
+        'https://www.autointelli.com',
+        'http://autointelli.com',
+        'http://www.autointelli.com',
       ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization'],
