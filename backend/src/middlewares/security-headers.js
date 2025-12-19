@@ -11,15 +11,16 @@ module.exports = (config, { strapi }) => {
     ctx.set('X-Frame-Options', 'DENY');
     ctx.set('X-XSS-Protection', '1; mode=block');
     ctx.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-    
+
     // Permissions Policy - Disable unnecessary features
-    ctx.set('Permissions-Policy', 
+    ctx.set('Permissions-Policy',
       'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()'
     );
 
     // Content Security Policy for admin panel
     if (ctx.url.startsWith('/admin')) {
       ctx.set('Content-Security-Policy', [
+        "upgrade-insecure-requests", // Force browser to upgrade http:// calls to https://
         "default-src 'self'",
         "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
         "style-src 'self' 'unsafe-inline'",

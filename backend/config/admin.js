@@ -17,7 +17,8 @@ module.exports = ({ env }) => ({
     nps: env.bool('FLAG_NPS', true),
     promoteEE: env.bool('FLAG_PROMOTE_EE', true),
   },
-  url: env('ADMIN_URL', '/admin'),
+  // Use relative path to avoid protocol mismatch issues (relying on browser to handle protocol)
+  url: '/admin',
   serveAdminPanel: true,
   forgotPassword: {
     from: env('ADMIN_EMAIL', 'no-reply@autointelli.com'),
