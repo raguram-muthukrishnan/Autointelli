@@ -8,15 +8,6 @@ module.exports = ({ env }) => ({
   },
   // Disable telemetry to prevent analytics errors
   telemetryDisabled: true,
-  admin: {
-    path: '/admin',
-    autoOpen: false,
-    forgotPassword: {
-      emailTemplate: {
-        subject: 'Reset password',
-      },
-    },
-  },
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
