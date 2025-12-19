@@ -6,6 +6,8 @@ module.exports = ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
+  // Disable telemetry to prevent analytics errors
+  telemetryDisabled: true,
   admin: {
     path: '/admin',
     autoOpen: false,
