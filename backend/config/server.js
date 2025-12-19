@@ -6,8 +6,13 @@ module.exports = ({ env }) => ({
     keys: env.array('APP_KEYS'),
   },
   admin: {
-    url: env('ADMIN_URL', '/strapi-admin'),
     path: '/admin',
+    autoOpen: false,
+    forgotPassword: {
+      emailTemplate: {
+        subject: 'Reset password',
+      },
+    },
   },
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),

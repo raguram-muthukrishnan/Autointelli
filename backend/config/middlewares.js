@@ -2,6 +2,7 @@ module.exports = [
   'strapi::logger',
   'strapi::errors',
   'global::upload-error-handler', // Custom middleware to handle Windows upload errors
+  'global::security-headers', // Custom security headers to prevent external tracking
   'strapi::security',
   {
     name: 'strapi::cors',

@@ -31,23 +31,24 @@ import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import UnsubscribePage from './pages/UnsubscribePage';
 
+// CUSTOM ADMIN DISABLED - Using Strapi admin at /strapi-admin instead
 // Import admin components
-import Login from './admin/Login';
-import AdminLayout from './admin/AdminLayout';
-import Dashboard from './admin/Dashboard';
-import DashboardBlogs from './admin/DashboardBlogs';
-import DashboardWebinarsEvents from './admin/DashboardWebinarsEvents';
-import DashboardResources from './admin/DashboardResources';
-import DashboardCareers from './admin/DashboardCareers';
-import DashboardApplications from './admin/DashboardApplications';
-import DashboardInquiries from './admin/DashboardInquiries';
-import DashboardPartnerRequests from './admin/DashboardPartnerRequests';
-import DashboardNewsletter from './admin/DashboardNewsletter';
-import DashboardUsers from './admin/DashboardUsers';
-import DashboardVisitors from './admin/DashboardVisitors';
-import DashboardResourceDownloads from './admin/DashboardResourceDownloads';
-import DashboardChatbotInteractions from './admin/DashboardChatbotInteractions';
-import ProtectedRoute from './components/ProtectedRoute';
+// import Login from './admin/Login';
+// import AdminLayout from './admin/AdminLayout';
+// import Dashboard from './admin/Dashboard';
+// import DashboardBlogs from './admin/DashboardBlogs';
+// import DashboardWebinarsEvents from './admin/DashboardWebinarsEvents';
+// import DashboardResources from './admin/DashboardResources';
+// import DashboardCareers from './admin/DashboardCareers';
+// import DashboardApplications from './admin/DashboardApplications';
+// import DashboardInquiries from './admin/DashboardInquiries';
+// import DashboardPartnerRequests from './admin/DashboardPartnerRequests';
+// import DashboardNewsletter from './admin/DashboardNewsletter';
+// import DashboardUsers from './admin/DashboardUsers';
+// import DashboardVisitors from './admin/DashboardVisitors';
+// import DashboardResourceDownloads from './admin/DashboardResourceDownloads';
+// import DashboardChatbotInteractions from './admin/DashboardChatbotInteractions';
+// import ProtectedRoute from './components/ProtectedRoute';
 
 // Component to handle smooth scroll based on route
 function SmoothScrollManager() {
@@ -96,7 +97,8 @@ function AppContent() {
   return (
     <div>
         <Routes>
-          {/* Admin Routes - No Header/Footer */}
+          {/* CUSTOM ADMIN ROUTES DISABLED - Use Strapi admin at /strapi-admin or direct at http://localhost:1337/admin */}
+          {/* 
           <Route path="/admin" element={<Login />} />
           <Route
             path="/admin/dashboard"
@@ -120,6 +122,7 @@ function AppContent() {
             <Route path="visitors" element={<DashboardVisitors />} />
             <Route path="resource-downloads" element={<DashboardResourceDownloads />} />
           </Route>
+          */}
 
           {/* Public Routes - With Header/Footer */}
           <Route
