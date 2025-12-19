@@ -97,9 +97,8 @@ export default function Hero() {
               loop 
               muted 
               playsInline 
-              preload="none"
+              preload="metadata"
               className="hero-background-video"
-              poster="/images/hero-poster.jpg"
             >
               <source src="/videos/hero-background.mp4" type="video/mp4" />
             </video>
