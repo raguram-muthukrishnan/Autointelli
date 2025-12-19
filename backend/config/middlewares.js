@@ -8,22 +8,10 @@ module.exports = [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      origin: [
-        'http://localhost:3000',
-        'http://localhost:5173', 
-        'http://localhost:8080',
-        'http://127.0.0.1:3000',
-        'http://127.0.0.1:5173',
-        'http://127.0.0.1:8080',
-        // Production domains
-        'https://autointelli.com',
-        'https://www.autointelli.com',
-        'http://autointelli.com',
-        'http://www.autointelli.com',
-      ],
+      origin: ['*'], // Allow all origins to fix "Failed to fetch" errors on deployment
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
-      headers: ['Content-Type', 'Authorization'],
-      credentials: true,
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      keepHeaderOnError: true,
     },
   },
   'strapi::poweredBy',

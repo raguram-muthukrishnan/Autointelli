@@ -25,6 +25,16 @@ COPY --chown=strapi:nodejs backend/ ./
 # Create necessary directories
 RUN mkdir -p public/uploads
 
+# Accept build arguments to bake in the correct URLs (Needed for Strapi Admin)
+ARG PUBLIC_URL
+ARG ADMIN_URL
+ARG NODE_ENV=production
+
+# Set them as ENV vars so 'npm run build' can see them
+ENV PUBLIC_URL=$PUBLIC_URL
+ENV ADMIN_URL=$ADMIN_URL
+ENV NODE_ENV=$NODE_ENV
+
 # Build the admin panel
 RUN npm run build
 

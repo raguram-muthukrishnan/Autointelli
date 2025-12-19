@@ -35,6 +35,7 @@
   },
   "strapi": {
     "uuid": "56674a75-b9f0-4426-ad86-412bfa75d4c0",
+    "telemetryDisabled": true,
     "installId": "9fa869da9b2960668c65c0873559cf9e2510aab990fdb0d8bf405e769900b152"
   }
 }
