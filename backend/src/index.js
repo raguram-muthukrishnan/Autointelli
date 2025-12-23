@@ -19,7 +19,7 @@ module.exports = {
   async bootstrap({ strapi }) {
     try {
       // --- AUTO-FIX: Reset Corrupted Admin Views ---
-      const fixKey = 'fix_all_plugins_2025_12_23';
+      const fixKey = 'fix_all_plugins_2025_12_24_final';
       const store = strapi.store({ type: 'plugin', name: 'admin', key: 'fixes' });
       const hasRun = await store.get({ key: fixKey });
 
