@@ -18,33 +18,51 @@ module.exports = {
    */
   async bootstrap({ strapi }) {
     try {
-      // --- AUTO-FIX: Reset Corrupted Admin Views ---
-      const fixKey = 'fix_all_plugins_2025_12_24_final';
+      // --- AUTO-FIX: Ensure proper Content Manager configuration ---
+      const fixKey = 'ensure_blog_config_2025_12_24';
       const store = strapi.store({ type: 'plugin', name: 'admin', key: 'fixes' });
       const hasRun = await store.get({ key: fixKey });
 
       if (!hasRun) {
-        strapi.log.info('🛠️ Auto-Fix: Resetting ALL plugin configurations...');
+        strapi.log.info('🛠️ Auto-Fix: Ensuring blog Content Manager configuration has default sort...');
 
-        // Delete Content Manager configurations
-        const deletedCM = await strapi.db.query('strapi::core-store').deleteMany({
-          where: {
-            key: {
-              $startsWith: 'plugin_content_manager_configuration',
-            },
-          },
-        });
+        // Check blog configuration
+        const configStore = strapi.store({ type: 'plugin', name: 'content_manager' });
+        const blogConfig = await configStore.get({ key: 'content_types::api::blog.blog' });
 
-        // Delete Upload plugin configurations
-        const deletedUpload = await strapi.db.query('strapi::core-store').deleteMany({
-          where: {
-            key: {
-              $startsWith: 'plugin_upload_',
-            },
-          },
-        });
+        if (!blogConfig || !blogConfig.settings || !blogConfig.settings.defaultSortBy) {
+          strapi.log.info('📝 Creating proper blog configuration with default sort...');
+          
+          await configStore.set({
+            key: 'content_types::api::blog.blog',
+            value: {
+              uid: 'api::blog.blog',
+              settings: {
+                bulkable: true,
+                filterable: true,
+                searchable: true,
+                pageSize: 10,
+                mainField: 'title',
+                defaultSortBy: 'title',
+                defaultSortOrder: 'ASC'
+              },
+              metadatas: {
+                id: { edit: {}, list: { label: 'id', searchable: true, sortable: true } },
+                title: { edit: { label: 'Title', description: '', placeholder: '', visible: true, editable: true }, list: { label: 'Title', searchable: true, sortable: true } },
+                slug: { edit: { label: 'Slug', description: '', placeholder: '', visible: true, editable: true }, list: { label: 'Slug', searchable: true, sortable: true } },
+                category: { edit: { label: 'Category', description: '', placeholder: '', visible: true, editable: true }, list: { label: 'Category', searchable: true, sortable: true } },
+                date: { edit: { label: 'Date', description: '', placeholder: '', visible: true, editable: true }, list: { label: 'Date', searchable: true, sortable: true } }
+              },
+              layouts: {
+                list: ['id', 'title', 'slug', 'date'],
+                edit: [[{ name: 'title', size: 6 }, { name: 'slug', size: 6 }], [{ name: 'category', size: 6 }, { name: 'date', size: 6 }], [{ name: 'excerpt', size: 12 }], [{ name: 'description', size: 12 }], [{ name: 'image', size: 6 }], [{ name: 'featured', size: 4 }, { name: 'published', size: 4 }]]
+              }
+            }
+          });
+          
+          strapi.log.info('✅ Blog configuration created successfully');
+        }
 
-        strapi.log.info(`✅ Auto-Fix: Reset ${deletedCM.count || 0} Content Manager configs and ${deletedUpload.count || 0} Upload configs.`);
         await store.set({ key: fixKey, value: true });
       }
       // ---------------------------------------------
