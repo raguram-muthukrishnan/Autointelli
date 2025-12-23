@@ -22,12 +22,13 @@ services:
         - PUBLIC_URL=${PUBLIC_URL}
         - ADMIN_URL=${ADMIN_URL}
         - NODE_ENV=${NODE_ENV}
+    network_mode: host
     env_file:
       - .env
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
-      DATABASE_HOST: ${DATABASE_HOST}
-      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_HOST: localhost
+      DATABASE_PORT: 5433
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
@@ -54,12 +55,10 @@ services:
       FRONTEND_URL: ${FRONTEND_URL}
     volumes:
       - strapi_uploads:/app/public/uploads
-    ports:
-      - "1337:1337"
+    # ports not needed with network_mode: host
+    # - "1337:1337"
     depends_on:
       - database
-    networks:
-      - autointelli
 
   # React Frontend
   frontend:
