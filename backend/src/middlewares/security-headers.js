@@ -20,7 +20,6 @@ module.exports = (config, { strapi }) => {
     // Content Security Policy for admin panel
     if (ctx.url.startsWith('/admin')) {
       ctx.set('Content-Security-Policy', [
-        "upgrade-insecure-requests", // Force browser to upgrade http:// calls to https://
         "default-src 'self'",
         "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
         "style-src 'self' 'unsafe-inline'",

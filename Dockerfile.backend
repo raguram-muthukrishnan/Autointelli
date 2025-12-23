@@ -35,10 +35,6 @@ ENV PUBLIC_URL=$PUBLIC_URL
 ENV ADMIN_URL=$ADMIN_URL
 ENV NODE_ENV=$NODE_ENV
 
-# Force Admin to use relative paths for API calls if possible, or same host
-ENV STRAPI_ADMIN_BACKEND_URL=/
-ENV STRAPI_ADMIN_zm_BACKEND_URL=/
-
 # Build the admin panel
 RUN npm run build
 
