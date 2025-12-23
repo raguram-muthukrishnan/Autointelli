@@ -34,7 +34,7 @@
       "type": "boolean"
     },
     "description": {
-      "type": "blocks"
+      "type": "richtext"
     },
     "image": {
       "type": "media",
