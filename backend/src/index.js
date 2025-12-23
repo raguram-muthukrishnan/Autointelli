@@ -18,27 +18,35 @@ module.exports = {
    */
   async bootstrap({ strapi }) {
     try {
-      // --- AUTO-FIX: Disabled temporarily to let configs regenerate ---
-      /*
-      const fixKey = 'fix_admin_crash_2025_12_23_final';
+      // --- AUTO-FIX: Reset Corrupted Admin Views ---
+      const fixKey = 'fix_all_plugins_2025_12_23';
       const store = strapi.store({ type: 'plugin', name: 'admin', key: 'fixes' });
       const hasRun = await store.get({ key: fixKey });
 
       if (!hasRun) {
-        strapi.log.info('🛠️ Auto-Fix: Checking for corrupted Content Manager configurations...');
+        strapi.log.info('🛠️ Auto-Fix: Resetting ALL plugin configurations...');
 
-        const deleted = await strapi.db.query('strapi::core-store').deleteMany({
+        // Delete Content Manager configurations
+        const deletedCM = await strapi.db.query('strapi::core-store').deleteMany({
           where: {
             key: {
-              $startsWith: 'plugin_content_manager_configuration_content_types',
+              $startsWith: 'plugin_content_manager_configuration',
             },
           },
         });
 
-        strapi.log.info(`✅ Auto-Fix: Reset ${deleted.count || 0} view configurations to defaults.`);
+        // Delete Upload plugin configurations
+        const deletedUpload = await strapi.db.query('strapi::core-store').deleteMany({
+          where: {
+            key: {
+              $startsWith: 'plugin_upload_',
+            },
+          },
+        });
+
+        strapi.log.info(`✅ Auto-Fix: Reset ${deletedCM.count || 0} Content Manager configs and ${deletedUpload.count || 0} Upload configs.`);
         await store.set({ key: fixKey, value: true });
       }
-      */
       // ---------------------------------------------
 
       // Configure Public role permissions
