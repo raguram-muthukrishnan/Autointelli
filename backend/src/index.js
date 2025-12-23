@@ -19,12 +19,13 @@ module.exports = {
   async bootstrap({ strapi }) {
     try {
       // --- AUTO-FIX: Reset Corrupted Admin Views ---
-      // This block runs once to fix the white screen "TypeError: reading 'sort'" error
+      // TEMPORARILY running on EVERY restart to force reset
       const fixKey = 'fix_admin_crash_2025_12_23_blog';
       const store = strapi.store({ type: 'plugin', name: 'admin', key: 'fixes' });
-      const hasRun = await store.get({ key: fixKey });
+      // const hasRun = await store.get({ key: fixKey });
 
-      if (!hasRun) {
+      // FORCE RUN (comment out the if check)
+      if (true) {
         strapi.log.info('🛠️ Auto-Fix: Checking for corrupted Content Manager configurations...');
 
         // Delete all content manager configurations from core-store
