@@ -18,8 +18,8 @@ module.exports = {
    */
   async bootstrap({ strapi }) {
     try {
-      // --- AUTO-FIX: Reset Corrupted Admin Views ---
-      // This block runs once to fix the white screen "TypeError: reading 'sort'" error
+      // --- AUTO-FIX: Disabled temporarily to let configs regenerate ---
+      /*
       const fixKey = 'fix_admin_crash_2025_12_23_final';
       const store = strapi.store({ type: 'plugin', name: 'admin', key: 'fixes' });
       const hasRun = await store.get({ key: fixKey });
@@ -27,8 +27,6 @@ module.exports = {
       if (!hasRun) {
         strapi.log.info('🛠️ Auto-Fix: Checking for corrupted Content Manager configurations...');
 
-        // Delete all content manager configurations from core-store
-        // This forces Strapi to regenerate them from the current schema
         const deleted = await strapi.db.query('strapi::core-store').deleteMany({
           where: {
             key: {
@@ -38,10 +36,9 @@ module.exports = {
         });
 
         strapi.log.info(`✅ Auto-Fix: Reset ${deleted.count || 0} view configurations to defaults.`);
-
-        // Mark as run so we don't reset views on every restart
         await store.set({ key: fixKey, value: true });
       }
+      */
       // ---------------------------------------------
 
       // Configure Public role permissions
