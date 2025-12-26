@@ -57,13 +57,29 @@ module.exports = createCoreController('api::resource.resource', ({ strapi }) => 
       // @ts-ignore - file is populated but TypeScript doesn't recognize it
       const file = resource.file;
 
-      // Construct file path - Strapi stores files in public/uploads by default
-      const uploadsDir = path.join(strapi.dirs.static.public, 'uploads');
-      const filePath = path.join(uploadsDir, file.hash + file.ext);
+      // Construct file path - handle both local and uploaded files
+      let filePath;
+      
+      // Check if file has a URL (uploaded file)
+      if (file.url) {
+        // For local provider, files are in public/uploads
+        if (file.provider === 'local') {
+          const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+          filePath = path.join(uploadsDir, file.hash + file.ext);
+        } else {
+          // For external providers (S3, etc), redirect to the URL
+          return ctx.redirect(file.url);
+        }
+      } else {
+        strapi.log.error(`Resource ${id} file has no URL`);
+        return ctx.notFound('File URL not found');
+      }
 
       // Check if file exists on disk
       if (!fs.existsSync(filePath)) {
         strapi.log.error(`File not found on disk: ${filePath}`);
+        strapi.log.error(`Looking in: ${filePath}`);
+        strapi.log.error(`File details:`, JSON.stringify(file, null, 2));
         return ctx.notFound('File not found on server');
       }
 
