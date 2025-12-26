@@ -258,7 +258,7 @@ const ContactPage = () => {
             </div>
             <div className="contact-text">
               <p className="contact-label">Corporate Office and Tech Center</p>
-              <p className="contact-value">581 Naveen towers, 3rd Floor, Anna Salai, Chennai 600002, Tamilnadu, India</p>
+              <p className="contact-value">Door no 484 3rd floor mount road anna Salai  Chennai - 600040, Tamilnadu, India</p>
             </div>
           </div>
 
