@@ -200,6 +200,33 @@
   color: #2d3748;
 }
 
+/* Content Error Styling */
+.content-error {
+  background: #fff5f5;
+  border: 2px solid #feb2b2;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 20px 0;
+  color: #c53030;
+}
+
+.content-error summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 12px;
+  color: #742a2a;
+}
+
+.content-error pre {
+  background: #fff;
+  padding: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  color: #1a202c;
+  margin-top: 8px;
+}
+
 .article-content p {
   margin: 0 0 1.5em 0;
 }

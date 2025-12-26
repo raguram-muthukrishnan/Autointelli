@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:1337';
+const API_URL = import.meta.env.VITE_STRAPI_URL || 'http://localhost:1337';
 
 /**
  * Submit resource download with email capture

@@ -5,12 +5,47 @@ import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import { buildImageUrl } from '../utils/imageUtils';
 import './BlogDetailPage.css';
 
+// Error boundary component for BlocksRenderer
+const RenderBlogContent = ({ description, onError }) => {
+  try {
+    return (
+      <BlocksRenderer 
+        content={description}
+        blocks={{
+          paragraph: ({ children }) => <p>{children}</p>,
+          heading: ({ children, level }) => {
+            const HeadingTag = `h${level}`;
+            return React.createElement(HeadingTag, {}, children);
+          },
+          list: ({ children, format }) => {
+            const ListTag = format === 'ordered' ? 'ol' : 'ul';
+            return React.createElement(ListTag, {}, children);
+          },
+          'list-item': ({ children }) => <li>{children}</li>,
+          link: ({ children, url }) => <a href={url} target="_blank" rel="noopener noreferrer">{children}</a>,
+          image: ({ image }) => {
+            const imageUrl = buildImageUrl(image, '');
+            return imageUrl ? <img src={imageUrl} alt={image.alternativeText || ''} /> : null;
+          },
+          quote: ({ children }) => <blockquote>{children}</blockquote>,
+          code: ({ children }) => <pre><code>{children}</code></pre>,
+        }}
+      />
+    );
+  } catch (error) {
+    console.error('Error rendering blog content:', error);
+    onError(error);
+    return null;
+  }
+};
+
 const BlogDetailPage = () => {
   const { slug } = useParams();
   const [blog, setBlog] = useState(null);
   const [relatedPosts, setRelatedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [renderError, setRenderError] = useState(null);
 
   useEffect(() => {
     const fetchBlogAndRelated = async () => {
@@ -156,8 +191,16 @@ const BlogDetailPage = () => {
 
         {/* Article Content */}
         <div className="article-content">
-          {blog.description && blog.description.length > 0 ? (
-            <BlocksRenderer content={blog.description} />
+          {renderError ? (
+            <div className="content-error">
+              <p>⚠️ There was an error rendering the blog content.</p>
+              <details>
+                <summary>Error details</summary>
+                <pre>{renderError.toString()}</pre>
+              </details>
+            </div>
+          ) : blog.description && Array.isArray(blog.description) && blog.description.length > 0 ? (
+            <RenderBlogContent description={blog.description} onError={setRenderError} />
           ) : (
             <p>No content available for this article.</p>
           )}
