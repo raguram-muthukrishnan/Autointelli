@@ -21,11 +21,11 @@ module.exports = (config, { strapi }) => {
     if (ctx.url.startsWith('/admin')) {
       ctx.set('Content-Security-Policy', [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-        "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: blob: https:",
-        "font-src 'self' data:",
-        "connect-src 'self' https: http: ws: wss:",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://autointelli.com",
+        "style-src 'self' 'unsafe-inline' https://autointelli.com",
+        "img-src 'self' data: blob: https://autointelli.com https:",
+        "font-src 'self' data: https://autointelli.com",
+        "connect-src 'self' https://autointelli.com https://www.autointelli.com ws://autointelli.com wss://autointelli.com",
         "frame-src 'none'",
         "object-src 'none'",
         "base-uri 'self'",
