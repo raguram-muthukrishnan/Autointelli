@@ -233,7 +233,9 @@ const ResourcesPage = () => {
       });
       
       // Call the download endpoint which tracks the download
-      const blob = await downloadResource(selectedResource.id);
+      // Use documentId for Strapi v5
+      const resourceId = selectedResource.documentId || selectedResource.id;
+      const blob = await downloadResource(resourceId);
       
       // Create download link
       const url = window.URL.createObjectURL(blob);
