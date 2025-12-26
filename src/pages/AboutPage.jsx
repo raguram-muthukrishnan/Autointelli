@@ -1,5 +1,6 @@
 import React from 'react';
 import './AboutPage.css';
+import logoRound from '../assets/LOGO ROUND.png';
 
 const AboutPage = () => {
   const customerSegments = [
@@ -44,7 +45,7 @@ const AboutPage = () => {
             </div>
           </div>
           <div className="about-hero-card about-logo-card">
-            <img src={require('../assets/LOGO ROUND.png')} alt="Autointelli Logo" className="about-logo-image" />
+            <img src={logoRound} alt="Autointelli Logo" className="about-logo-image" />
           </div>
           <div className="about-hero-card about-stat-card-dark">
             <div className="about-stat-small">
