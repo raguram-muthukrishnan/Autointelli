@@ -73,6 +73,11 @@ const BlogDetailPage = () => {
         const attr = currentBlog.attributes || currentBlog;
         const placeholderImage = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600"%3E%3Crect fill="%23f0f0f0" width="1200" height="600"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="48" dy="10.5" font-weight="bold" x="50%25" y="50%25" text-anchor="middle"%3EBlog Post%3C/text%3E%3C/svg%3E';
 
+        // Debug: Log description data
+        console.log('Blog description:', attr.description);
+        console.log('Description type:', typeof attr.description);
+        console.log('Is array:', Array.isArray(attr.description));
+
         const formattedBlog = {
           id: currentBlog.id,
           title: attr.title,
