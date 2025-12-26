@@ -97,7 +97,10 @@ module.exports = createCoreController('api::resource.resource', ({ strapi }) => 
       // Set appropriate headers for file download
       ctx.set('Content-Type', file.mime || 'application/octet-stream');
       ctx.set('Content-Disposition', `attachment; filename="${encodeURIComponent(file.name)}"`);
-      ctx.set('Content-Length', String(file.size * 1024)); // Strapi stores size in KB, convert to string
+      
+      // Get actual file size from disk instead of using Strapi's size field
+      const stats = fs.statSync(filePath);
+      ctx.set('Content-Length', String(stats.size));
 
       // Stream the file
       ctx.body = fs.createReadStream(filePath);
