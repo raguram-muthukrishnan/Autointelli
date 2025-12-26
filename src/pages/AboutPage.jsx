@@ -37,23 +37,20 @@ const AboutPage = () => {
       {/* Hero Cards Section */}
       <section className="about-hero-cards">
         <div className="about-hero-grid">
-          <div className="about-hero-card">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop" alt="Team member" className="about-hero-image" />
-          </div>
           <div className="about-hero-card about-stat-card">
             <div className="about-stat-large">
               <span className="stat-value">95%</span>
               <span className="stat-label">Customer Satisfaction Rate</span>
             </div>
           </div>
+          <div className="about-hero-card about-logo-card">
+            <img src={require('../assets/LOGO ROUND.png')} alt="Autointelli Logo" className="about-logo-image" />
+          </div>
           <div className="about-hero-card about-stat-card-dark">
             <div className="about-stat-small">
               <span className="stat-value">10+</span>
               <span className="stat-label">Years of excellence in IT operations automation</span>
             </div>
-          </div>
-          <div className="about-hero-card">
-            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop" alt="Team member" className="about-hero-image" />
           </div>
         </div>
       </section>
