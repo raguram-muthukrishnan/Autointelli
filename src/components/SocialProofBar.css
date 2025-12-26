@@ -81,6 +81,9 @@
 .logoloop__list {
   display: flex;
   align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .logoloop__item {
@@ -88,6 +91,7 @@
   margin-right: var(--logoloop-gap);
   font-size: var(--logoloop-logoHeight);
   line-height: 1;
+  list-style: none;
 }
 
 .logoloop__item:last-child {
