@@ -199,8 +199,14 @@ const BlogDetailPage = () => {
                 <pre>{renderError.toString()}</pre>
               </details>
             </div>
-          ) : blog.description && Array.isArray(blog.description) && blog.description.length > 0 ? (
-            <RenderBlogContent description={blog.description} onError={setRenderError} />
+          ) : blog.description ? (
+            Array.isArray(blog.description) && blog.description.length > 0 ? (
+              <RenderBlogContent description={blog.description} onError={setRenderError} />
+            ) : typeof blog.description === 'string' ? (
+              <div dangerouslySetInnerHTML={{ __html: blog.description.replace(/\n/g, '<br />') }} />
+            ) : (
+              <p>No content available for this article.</p>
+            )
           ) : (
             <p>No content available for this article.</p>
           )}
