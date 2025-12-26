@@ -23,18 +23,13 @@ module.exports = createCoreController('api::resource.resource', ({ strapi }) => 
       }
 
       // Fetch the resource with file populated
-      // In Strapi v5, use findMany with filters for documentId
+      // In Strapi v5, use documentService with documentId
       let resource;
       try {
-        const results = await strapi.entityService.findMany(
-          'api::resource.resource',
-          {
-            filters: { documentId: id },
-            populate: ['file']
-          }
-        );
-        
-        resource = results && results.length > 0 ? results[0] : null;
+        resource = await strapi.documents('api::resource.resource').findOne({
+          documentId: id,
+          populate: ['file']
+        });
       } catch (error) {
         strapi.log.error('Error fetching resource:', error);
         return ctx.notFound('Resource not found');
@@ -86,10 +81,10 @@ module.exports = createCoreController('api::resource.resource', ({ strapi }) => 
         return ctx.notFound('File not found on server');
       }
 
-      // Atomically increment download count using raw query for true atomicity
+      // Atomically increment download count using document service
       try {
-        await strapi.db.query('api::resource.resource').update({
-          where: { id },
+        await strapi.documents('api::resource.resource').update({
+          documentId: id,
           data: {
             downloadCount: resource.downloadCount + 1
           }
