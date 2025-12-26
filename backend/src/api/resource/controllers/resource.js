@@ -23,15 +23,18 @@ module.exports = createCoreController('api::resource.resource', ({ strapi }) => 
       }
 
       // Fetch the resource with file populated
+      // In Strapi v5, use findMany with filters for documentId
       let resource;
       try {
-        resource = await strapi.entityService.findOne(
+        const results = await strapi.entityService.findMany(
           'api::resource.resource',
-          id,
           {
+            filters: { documentId: id },
             populate: ['file']
           }
         );
+        
+        resource = results && results.length > 0 ? results[0] : null;
       } catch (error) {
         strapi.log.error('Error fetching resource:', error);
         return ctx.notFound('Resource not found');
