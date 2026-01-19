@@ -68,9 +68,11 @@ services:
       args:
         - VITE_OPENROUTER_API_KEY=${VITE_OPENROUTER_API_KEY}
         - VITE_STRAPI_URL=${VITE_STRAPI_URL}
+        - VITE_TURNSTILE_SITE_KEY=${VITE_TURNSTILE_SITE_KEY}
     environment:
       - VITE_OPENROUTER_API_KEY=${VITE_OPENROUTER_API_KEY}
       - VITE_STRAPI_URL=${VITE_STRAPI_URL}
+      - VITE_TURNSTILE_SITE_KEY=${VITE_TURNSTILE_SITE_KEY}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
