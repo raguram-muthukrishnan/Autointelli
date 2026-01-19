@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { subscribeNewsletter } from '../api';
 import './NewsletterForm.css';
+import CaptchaWrapper from '../components/CaptchaWrapper';
 
 const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false, horizontal = false }) => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
   });
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
   const [message, setMessage] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -29,6 +31,12 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
       return;
     }
 
+    if (!captchaToken && !inline) {
+      setStatus('error');
+      setMessage('Please complete the captcha');
+      return;
+    }
+
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
@@ -42,7 +50,8 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
       setStatus('success');
       setMessage('Thank you for subscribing! Check your email for confirmation.');
       setFormData({ name: '', email: '' });
-      
+      setCaptchaToken(null);
+
       // Reset success message after 5 seconds
       setTimeout(() => {
         setStatus('idle');
@@ -116,8 +125,11 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
             disabled={status === 'loading'}
             className="newsletter-horizontal-input"
           />
-          <button 
-            type="submit" 
+          <div style={{ margin: '10px 0' }}>
+            <CaptchaWrapper onChange={setCaptchaToken} />
+          </div>
+          <button
+            type="submit"
             disabled={status === 'loading'}
             className="newsletter-horizontal-button"
           >
@@ -137,7 +149,7 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
     <div className="newsletter-form-container">
       {title && <h3 className="newsletter-title">{title}</h3>}
       {subtitle && <p className="newsletter-subtitle">{subtitle}</p>}
-      
+
       <form className="newsletter-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <input
@@ -151,7 +163,7 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
             className="newsletter-input"
           />
         </div>
-        
+
         <div className="form-group">
           <input
             type="email"
@@ -165,8 +177,12 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
           />
         </div>
 
-        <button 
-          type="submit" 
+
+
+        <CaptchaWrapper onChange={setCaptchaToken} />
+
+        <button
+          type="submit"
           disabled={status === 'loading'}
           className="newsletter-button"
         >
@@ -179,36 +195,38 @@ const NewsletterForm = ({ categories = ['all'], title, subtitle, inline = false,
             <>
               Join Our Community
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
               </svg>
             </>
           )}
         </button>
 
-        {message && (
-          <div className={`newsletter-message ${status}`}>
-            {status === 'success' && (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            )}
-            {status === 'error' && (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="15" y1="9" x2="9" y2="15"/>
-                <line x1="9" y1="9" x2="15" y2="15"/>
-              </svg>
-            )}
-            <span>{message}</span>
-          </div>
-        )}
-      </form>
+        {
+          message && (
+            <div className={`newsletter-message ${status}`}>
+              {status === 'success' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              )}
+              {status === 'error' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="15" y1="9" x2="9" y2="15" />
+                  <line x1="9" y1="9" x2="15" y2="15" />
+                </svg>
+              )}
+              <span>{message}</span>
+            </div>
+          )
+        }
+      </form >
 
       <p className="newsletter-privacy">
         We respect your privacy. Unsubscribe at any time.
       </p>
-    </div>
+    </div >
   );
 };
 

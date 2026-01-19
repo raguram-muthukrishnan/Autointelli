@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './ResourceDownloadModal.css';
+import CaptchaWrapper from '../components/CaptchaWrapper';
 
 const ResourceDownloadModal = ({ isOpen, onClose, resourceName, resourceUrl, onDownload }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,18 +28,24 @@ const ResourceDownloadModal = ({ isOpen, onClose, resourceName, resourceUrl, onD
       return;
     }
 
+    if (!captchaToken) {
+      setError('Please complete the captcha');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       // Call the onDownload callback with email and name
       await onDownload(email, name);
-      
+
       // Close modal
       onClose();
-      
+
       // Reset form
       setEmail('');
       setName('');
+      setCaptchaToken(null);
     } catch (err) {
       setError('Failed to process download. Please try again.');
     } finally {
@@ -104,8 +112,12 @@ const ResourceDownloadModal = ({ isOpen, onClose, resourceName, resourceUrl, onD
               {error && <span className="resource-form-error">{error}</span>}
             </div>
 
-            <button 
-              type="submit" 
+
+
+            <CaptchaWrapper onChange={setCaptchaToken} />
+
+            <button
+              type="submit"
               className="resource-modal-submit"
               disabled={isSubmitting}
             >
@@ -127,13 +139,13 @@ const ResourceDownloadModal = ({ isOpen, onClose, resourceName, resourceUrl, onD
             </button>
 
             <p className="resource-modal-privacy">
-              By downloading, you agree to receive occasional emails from us. 
+              By downloading, you agree to receive occasional emails from us.
               You can unsubscribe at any time. View our <a href="/privacy">Privacy Policy</a>.
             </p>
           </form>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { submitJobApplication, uploadResume } from '../api';
 import './JobApplicationModal.css';
+import CaptchaWrapper from '../components/CaptchaWrapper';
 
 const JobApplicationModal = ({ job, onClose }) => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ const JobApplicationModal = ({ job, onClose }) => {
   const [resumeFile, setResumeFile] = useState(null);
   const [status, setStatus] = useState('idle'); // idle, uploading, submitting, success, error
   const [message, setMessage] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -59,6 +61,14 @@ const JobApplicationModal = ({ job, onClose }) => {
       return;
     }
 
+
+
+    if (!captchaToken) {
+      setStatus('error');
+      setMessage('Please complete the captcha');
+      return;
+    }
+
     if (!resumeFile) {
       setStatus('error');
       setMessage('Please upload your resume');
@@ -87,7 +97,8 @@ const JobApplicationModal = ({ job, onClose }) => {
 
       setStatus('success');
       setMessage('Application submitted successfully! Check your email for confirmation.');
-      
+      setCaptchaToken(null);
+
       // Close modal after 3 seconds
       setTimeout(() => {
         onClose();
@@ -106,8 +117,8 @@ const JobApplicationModal = ({ job, onClose }) => {
           <h2>Apply for {job.title}</h2>
           <button className="modal-close" onClick={onClose}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="18" y1="6" x2="6" y2="18"/>
-              <line x1="6" y1="6" x2="18" y2="18"/>
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
         </div>
@@ -249,19 +260,23 @@ const JobApplicationModal = ({ job, onClose }) => {
               <div className={`form-message ${status}`}>
                 {status === 'success' && (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="20 6 9 17 4 12"/>
+                    <polyline points="20 6 9 17 4 12" />
                   </svg>
                 )}
                 {status === 'error' && (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="15" y1="9" x2="9" y2="15"/>
-                    <line x1="9" y1="9" x2="15" y2="15"/>
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
                   </svg>
                 )}
                 <span>{message}</span>
               </div>
+
+
             )}
+
+            <CaptchaWrapper onChange={setCaptchaToken} />
 
             <div className="form-actions">
               <button

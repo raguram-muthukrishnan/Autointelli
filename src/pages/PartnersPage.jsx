@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './PartnersPage.css';
 import NewsletterForm from '../components/NewsletterForm';
 import { submitPartnerRequest } from '../api';
+import CaptchaWrapper from '../components/CaptchaWrapper';
 
 const PartnersPage = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ const PartnersPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,17 +41,18 @@ const PartnersPage = () => {
     if (!formData.phone.trim()) formErrors.phone = "Phone number is required";
     if (!formData.partnerType) formErrors.partnerType = "Please select a partner type";
     if (!formData.message.trim()) formErrors.message = "Message is required";
+    if (!captchaToken) formErrors.captcha = "Please complete the captcha";
     return formErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validateForm();
-    
+
     if (Object.keys(formErrors).length === 0) {
       setIsSubmitting(true);
       setSubmitError('');
-      
+
       try {
         // Map form data to match Strapi schema field names
         const partnerRequestData = {
@@ -60,12 +63,13 @@ const PartnersPage = () => {
           partner_type: formData.partnerType,
           about_business: formData.message
         };
-        
+
         await submitPartnerRequest(partnerRequestData);
-        
+
         setSubmitSuccess(true);
         setFormData({ companyName: '', contactName: '', email: '', phone: '', partnerType: '', message: '' });
-        
+        setCaptchaToken(null);
+
         // Reset success message after 5 seconds
         setTimeout(() => setSubmitSuccess(false), 5000);
       } catch (error) {
@@ -95,12 +99,12 @@ const PartnersPage = () => {
           {/* Partnership Benefits */}
           <div className="benefits-section">
             <h3 className="benefits-heading">Why Partner With Us</h3>
-            
+
             <div className="benefit-item">
               <div className="benefit-icon revenue-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-                  <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
               <div className="benefit-content">
@@ -112,8 +116,8 @@ const PartnersPage = () => {
             <div className="benefit-item">
               <div className="benefit-icon market-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" strokeWidth="2"/>
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                  <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" strokeWidth="2" />
                 </svg>
               </div>
               <div className="benefit-content">
@@ -125,8 +129,8 @@ const PartnersPage = () => {
             <div className="benefit-item">
               <div className="benefit-icon support-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M8 10h8M8 14h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M8 10h8M8 14h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </div>
               <div className="benefit-content">
@@ -138,7 +142,7 @@ const PartnersPage = () => {
             <div className="benefit-item">
               <div className="benefit-icon marketing-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 8A6 6 0 106 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M18 8A6 6 0 106 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
               <div className="benefit-content">
@@ -246,9 +250,12 @@ const PartnersPage = () => {
               {errors.message && <span className="error-message">{errors.message}</span>}
             </div>
 
+            <CaptchaWrapper onChange={setCaptchaToken} />
+            {errors.captcha && <div className="error-message" style={{ marginBottom: '10px' }}>{errors.captcha}</div>}
+
             <button type="submit" className="submit-button" disabled={isSubmitting}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               {isSubmitting ? 'Submitting...' : 'Team Up'}
             </button>
@@ -258,7 +265,7 @@ const PartnersPage = () => {
                 Thank you for your interest! Our management team will review your application and contact you soon.
               </div>
             )}
-            
+
             {submitError && (
               <div className="error-message-box">
                 {submitError}
@@ -273,13 +280,13 @@ const PartnersPage = () => {
         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
           <div className="newsletter-icon" style={{ marginBottom: '20px' }}>
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F0CE1D" strokeWidth="2" style={{ margin: '0 auto', display: 'block' }}>
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
             </svg>
           </div>
           <h2 style={{ fontSize: '1.8rem', fontWeight: '700', color: '#1a1a1a', marginBottom: '10px' }}>Get monthly shortcuts to enhance your AI Ops productivity — No Fluffs.</h2>
           <p style={{ fontSize: '1rem', color: '#718096', marginBottom: '30px', lineHeight: '1.6' }}>Autointelli Community only insights not published anywhere else.</p>
-          <NewsletterForm 
+          <NewsletterForm
             categories={['all']}
           />
         </div>

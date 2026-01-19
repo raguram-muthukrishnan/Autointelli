@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { v4 as uuidv4 } from 'uuid';
 import './ChatBot.css';
 
+
 // OpenRouter API configuration
 const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
@@ -46,6 +47,7 @@ const ChatBot = () => {
   const audioRef = useRef(null);
   const notificationTimerRef = useRef(null);
 
+
   // Persist isOpen state to sessionStorage whenever it changes
   useEffect(() => {
     sessionStorage.setItem('chatbot_is_open', isOpen.toString());
@@ -78,7 +80,7 @@ const ChatBot = () => {
 
     // Check if email is already captured in this session
     const storedEmail = sessionStorage.getItem('chatbot_email');
-    
+
     // Try to restore messages from sessionStorage
     const storedMessages = sessionStorage.getItem('chatbot_messages');
     if (storedMessages) {
@@ -92,7 +94,7 @@ const ChatBot = () => {
         console.log('Could not restore messages:', error);
       }
     }
-    
+
     if (storedEmail) {
       setUserEmail(storedEmail);
       setEmailSubmitted(true);
@@ -136,7 +138,7 @@ const ChatBot = () => {
     if (completed === 'true') return; // Don't play if chat completed
 
     const hasVisited = sessionStorage.getItem('chatbot_visited');
-    
+
     // If not first visit and chat not completed, play sound after delay
     if (hasVisited && !isOpen) {
       notificationTimerRef.current = setTimeout(() => {
@@ -196,7 +198,7 @@ const ChatBot = () => {
   // Handle email submission from chat input
   const handleEmailSubmitFromChat = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
+
     if (!emailRegex.test(inputValue.trim())) {
       addBotMessage("That doesn't look like a valid email address. Please enter a valid email (e.g., name@company.com)");
       setInputValue('');
@@ -204,7 +206,7 @@ const ChatBot = () => {
     }
 
     const email = inputValue.trim();
-    
+
     // Store email in session
     sessionStorage.setItem('chatbot_email', email);
     setUserEmail(email);
@@ -278,7 +280,7 @@ const ChatBot = () => {
       console.log('Choices:', data.choices);
       console.log('First choice:', data.choices?.[0]);
       console.log('Message:', data.choices?.[0]?.message);
-      
+
       const assistantMessage = data.choices?.[0]?.message?.content || data.choices?.[0]?.text;
 
       if (!assistantMessage) {
@@ -318,7 +320,7 @@ const ChatBot = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    
+
     if (!inputValue.trim()) return;
     if (!isConnected) {
       return;
@@ -370,7 +372,7 @@ const ChatBot = () => {
   // Handle closing chatbot
   const handleCloseChat = () => {
     setIsOpen(false);
-    
+
     // If user has chatted (email submitted), mark chat as completed
     if (emailSubmitted) {
       sessionStorage.setItem('chatbot_completed', 'true');
@@ -395,7 +397,7 @@ const ChatBot = () => {
         timestamp: new Date()
       }
     ];
-    
+
     setMessages(newMessages);
     setConversationHistory([]); // Clear conversation history for LLM
     sessionStorage.setItem('chatbot_messages', JSON.stringify(newMessages)); // Update stored messages
@@ -413,14 +415,14 @@ const ChatBot = () => {
         >
           {hasNewMessage && <span className="notification-badge"></span>}
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <div 
+        <div
           className="chatbot-window"
           onMouseEnter={handleChatWindowMouseEnter}
           onMouseLeave={handleChatWindowMouseLeave}
@@ -478,16 +480,18 @@ const ChatBot = () => {
             <div ref={messagesEndRef} />
           </div>
 
+
+
           {/* Input Area */}
           <form className="chatbot-input-form" onSubmit={handleSendMessage}>
             <input
               type={emailSubmitted ? "text" : "email"}
               className="chatbot-input"
               placeholder={
-                !isConnected 
-                  ? "Connecting..." 
-                  : !emailSubmitted 
-                    ? "Enter your email address..." 
+                !isConnected
+                  ? "Connecting..."
+                  : !emailSubmitted
+                    ? "Enter your email address..."
                     : "Type your message..."
               }
               value={inputValue}
@@ -501,7 +505,7 @@ const ChatBot = () => {
               aria-label="Send message"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.99701575 L3.03521743,10.4380088 C3.03521743,10.5951061 3.19218622,10.7522035 3.50612381,10.7522035 L16.6915026,11.5376905 C16.6915026,11.5376905 17.1624089,11.5376905 17.1624089,12.0089827 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" fill="currentColor"/>
+                <path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.99701575 L3.03521743,10.4380088 C3.03521743,10.5951061 3.19218622,10.7522035 3.50612381,10.7522035 L16.6915026,11.5376905 C16.6915026,11.5376905 17.1624089,11.5376905 17.1624089,12.0089827 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" fill="currentColor" />
               </svg>
             </button>
           </form>
