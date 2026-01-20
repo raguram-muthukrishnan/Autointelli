@@ -168,8 +168,10 @@ const ChatBot = () => {
   };
 
   // Save interaction to backend
-  const saveInteractionToBackend = async (email, firstMessage = null) => {
+  const saveInteractionToBackend = async (email, firstMessage = null, updatedHistory = null) => {
     try {
+      const historyToSave = updatedHistory || conversationHistory;
+      
       const response = await fetch(`${STRAPI_URL}/api/chatbot-interactions`, {
         method: 'POST',
         headers: {
@@ -181,14 +183,16 @@ const ChatBot = () => {
             session_id: sessionId,
             source_page: window.location.pathname,
             first_message: firstMessage,
-            conversation_history: conversationHistory,
-            total_messages: messages.filter(m => m.sender === 'user').length
+            conversation_history: historyToSave,
+            total_messages: messages.filter(m => m.sender === 'user').length + 1 // +1 for current message
           }
         })
       });
 
       if (!response.ok) {
         console.error('Failed to save chatbot interaction');
+      } else {
+        console.log('✅ Chatbot interaction saved successfully');
       }
     } catch (error) {
       console.error('Error saving chatbot interaction:', error);
@@ -309,13 +313,24 @@ const ChatBot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Prevent page scroll when hovering over chatbot window
-  const handleChatWindowMouseEnter = () => {
-    document.body.style.overflow = 'hidden';
-  };
+  // Handle scroll - prevent page scroll only when chatbot can still scroll
+  const chatWindowRef = useRef(null);
 
-  const handleChatWindowMouseLeave = () => {
-    document.body.style.overflow = '';
+  const handleWheel = (e) => {
+    const messagesContainer = e.currentTarget.querySelector('.chatbot-messages');
+    if (!messagesContainer) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = messagesContainer;
+    const isAtTop = scrollTop === 0;
+    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+    // Prevent page scroll if we're not at the boundaries
+    if (
+      (e.deltaY < 0 && !isAtTop) || // Scrolling up and not at top
+      (e.deltaY > 0 && !isAtBottom)  // Scrolling down and not at bottom
+    ) {
+      e.stopPropagation();
+    }
   };
 
   const handleSendMessage = async (e) => {
@@ -350,10 +365,16 @@ const ChatBot = () => {
       const botResponse = await callOpenRouterAPI(userInput);
       addBotMessage(botResponse);
 
-      // Update backend with conversation
+      // Update backend with conversation - pass the updated history
       const storedEmail = sessionStorage.getItem('chatbot_email');
       if (storedEmail) {
-        saveInteractionToBackend(storedEmail, isFirstMessage ? userInput : null);
+        // Create the updated history with both user and bot messages
+        const updatedHistory = [
+          ...conversationHistory,
+          { role: 'user', content: userInput },
+          { role: 'assistant', content: botResponse }
+        ];
+        saveInteractionToBackend(storedEmail, isFirstMessage ? userInput : null, updatedHistory);
       }
     } catch (error) {
       console.error('Error processing message:', error);
@@ -423,9 +444,9 @@ const ChatBot = () => {
       {/* Chat Window */}
       {isOpen && (
         <div
+          ref={chatWindowRef}
           className="chatbot-window"
-          onMouseEnter={handleChatWindowMouseEnter}
-          onMouseLeave={handleChatWindowMouseLeave}
+          onWheel={handleWheel}
         >
           {/* Header with AI Image */}
           <div className="chatbot-header">
