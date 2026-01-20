@@ -9,7 +9,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::newsletter-subscription.newsletter-subscription', ({ strapi }) => ({
   // Override default create to handle subscription
   async create(ctx) {
-    const { name, email, categories } = ctx.request.body.data || ctx.request.body;
+    const { name, email, categories, submittedAt } = ctx.request.body.data || ctx.request.body;
 
     // Validate required fields
     if (!name || !email) {
@@ -32,6 +32,7 @@ module.exports = createCoreController('api::newsletter-subscription.newsletter-s
             name,
             categories: categories || [],
             subscribed: true,
+            submittedAt: submittedAt || new Date().toISOString(),
           },
         }
       );
@@ -54,6 +55,7 @@ module.exports = createCoreController('api::newsletter-subscription.newsletter-s
         categories: categories || [],
         subscribed: true,
         unsubscribe_token,
+        submittedAt: submittedAt || new Date().toISOString(),
       },
     });
 
