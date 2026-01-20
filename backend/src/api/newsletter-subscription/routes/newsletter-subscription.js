@@ -24,6 +24,14 @@ const customRouter = (innerRouter, extraRoutes = []) => {
 const myExtraRoutes = [
   {
     method: 'POST',
+    path: '/newsletter-subscriptions',
+    handler: 'newsletter-subscription.create',
+    config: {
+      auth: false,
+    },
+  },
+  {
+    method: 'POST',
     path: '/newsletter-subscriptions/unsubscribe/:token',
     handler: 'newsletter-subscription.unsubscribe',
     config: {
