@@ -28,6 +28,8 @@ const myExtraRoutes = [
     handler: 'newsletter-subscription.create',
     config: {
       auth: false,
+      policies: [],
+      middlewares: [],
     },
   },
   {
@@ -36,6 +38,8 @@ const myExtraRoutes = [
     handler: 'newsletter-subscription.unsubscribe',
     config: {
       auth: false,
+      policies: [],
+      middlewares: [],
     },
   },
 ];

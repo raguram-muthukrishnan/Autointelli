@@ -9,12 +9,19 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::newsletter-subscription.newsletter-subscription', ({ strapi }) => ({
   // Override default create to handle subscription
   async create(ctx) {
-    const { name, email, categories, submittedAt } = ctx.request.body.data || ctx.request.body;
+    try {
+      console.log('📧 Newsletter subscription request received');
+      console.log('Request body:', JSON.stringify(ctx.request.body, null, 2));
+      
+      const { name, email, categories, submittedAt } = ctx.request.body.data || ctx.request.body;
 
-    // Validate required fields
-    if (!name || !email) {
-      return ctx.badRequest('Name and email are required');
-    }
+      // Validate required fields
+      if (!name || !email) {
+        console.error('❌ Validation failed: Name or email missing');
+        return ctx.badRequest('Name and email are required');
+      }
+
+      console.log(`Processing subscription for: ${email}`);
 
     // Check if email already exists
     const existing = await strapi.entityService.findMany('api::newsletter-subscription.newsletter-subscription', {
@@ -105,6 +112,11 @@ Autointelli Team`,
       data: subscription,
       message: 'Subscribed successfully',
     });
+    } catch (error) {
+      console.error('❌ Newsletter subscription error:', error);
+      console.error('Error stack:', error.stack);
+      return ctx.badRequest(error.message || 'Failed to subscribe');
+    }
   },
 
   // Unsubscribe endpoint

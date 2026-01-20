@@ -34,8 +34,7 @@
       "private": true
     },
     "submittedAt": {
-      "type": "datetime",
-      "required": true
+      "type": "datetime"
     }
   }
 }
