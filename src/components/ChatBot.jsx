@@ -257,7 +257,7 @@ const ChatBot = () => {
           'X-Title': 'AutoIntelli ChatBot'
         },
         body: JSON.stringify({
-          model: 'mistralai/mistral-7b-instruct:free',
+          model: 'z-ai/glm-4.5-air:free',
           messages: [
             { role: 'system', content: SYSTEM_PROMPT },
             ...newHistory

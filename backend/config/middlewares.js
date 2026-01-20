@@ -8,7 +8,14 @@ module.exports = [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      origin: ['https://autointelli.com', 'https://www.autointelli.com'], // Production domains
+      origin: [
+        'https://autointelli.com',
+        'https://www.autointelli.com',
+        'http://localhost:5173', // Vite dev server
+        'http://localhost:3000', // Alternative dev port
+        'http://127.0.0.1:5173',
+        'http://127.0.0.1:3000'
+      ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],
       credentials: true,
