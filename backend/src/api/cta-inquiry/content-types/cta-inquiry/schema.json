@@ -39,6 +39,10 @@
     "calendly_requested": {
       "type": "boolean",
       "default": false
+    },
+    "submittedAt": {
+      "type": "datetime",
+      "required": true
     }
   }
 }

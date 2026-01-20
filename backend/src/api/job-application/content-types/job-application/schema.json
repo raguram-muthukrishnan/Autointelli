@@ -49,15 +49,28 @@
     "resume": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["files"]
+      "allowedTypes": [
+        "files"
+      ]
     },
     "status": {
       "type": "enumeration",
-      "enum": ["New", "Reviewing", "Shortlisted", "Interview Scheduled", "Rejected", "Hired"],
+      "enum": [
+        "New",
+        "Reviewing",
+        "Shortlisted",
+        "Interview Scheduled",
+        "Rejected",
+        "Hired"
+      ],
       "default": "New"
     },
     "notes": {
       "type": "text"
+    },
+    "submittedAt": {
+      "type": "datetime",
+      "required": true
     }
   }
 }

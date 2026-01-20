@@ -32,6 +32,10 @@
     "unsubscribe_token": {
       "type": "string",
       "private": true
+    },
+    "submittedAt": {
+      "type": "datetime",
+      "required": true
     }
   }
 }

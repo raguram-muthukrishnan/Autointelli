@@ -41,6 +41,10 @@
     "about_business": {
       "type": "text",
       "required": true
+    },
+    "submittedAt": {
+      "type": "datetime",
+      "required": true
     }
   }
 }

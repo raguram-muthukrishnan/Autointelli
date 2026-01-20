@@ -5,7 +5,7 @@ const apiFetch = async (endpoint, options = {}) => {
   try {
     // Get JWT token from localStorage if it exists
     const jwt = localStorage.getItem('jwt');
-    
+
     const headers = {
       'Content-Type': 'application/json',
       ...options.headers,
@@ -27,10 +27,10 @@ const apiFetch = async (endpoint, options = {}) => {
       // Provide more detailed error information
       const errorText = await response.text();
       let errorMessage = `HTTP error! status: ${response.status}`;
-      
+
       try {
         const errorData = JSON.parse(errorText);
-        
+
         // Check for detailed validation errors
         if (errorData.error?.details?.errors) {
           const validationErrors = errorData.error.details.errors
@@ -40,14 +40,14 @@ const apiFetch = async (endpoint, options = {}) => {
         } else {
           errorMessage = errorData.error?.message || errorMessage;
         }
-        
+
         // Log full error for debugging
         console.error('Full API error:', errorData);
       } catch (e) {
         // If not JSON, use the text
         if (errorText) errorMessage += ` - ${errorText}`;
       }
-      
+
       throw new Error(errorMessage);
     }
 
@@ -58,7 +58,7 @@ const apiFetch = async (endpoint, options = {}) => {
       // Return empty object if response is empty
       return text ? JSON.parse(text) : {};
     }
-    
+
     // For non-JSON responses, return success indicator
     return { success: true };
   } catch (error) {
@@ -80,11 +80,11 @@ export const fetchBlogs = async () => {
             'Content-Type': 'application/json'
           }
         });
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         return await response.json();
       } catch (fallbackError) {
         console.warn('Both authenticated and unauthenticated blog requests failed:', fallbackError);
@@ -118,11 +118,11 @@ export const fetchWebinars = async () => {
             'Content-Type': 'application/json'
           }
         });
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         return await response.json();
       } catch (fallbackError) {
         console.warn('Both authenticated and unauthenticated webinar requests failed:', fallbackError);
@@ -135,28 +135,28 @@ export const fetchWebinars = async () => {
 
 export const fetchWebinarBySlug = async (slug) => {
   console.log('API: Fetching webinar by slug:', slug);
-  
+
   // Try by slug first
   const data = await apiFetch(`/webinars?filters[slug][$eq]=${slug}&populate=*`);
   console.log('API: Webinar response by slug:', data);
   console.log('API: Webinar data.data:', data.data);
   console.log('API: Webinar data.data length:', data.data?.length);
-  
+
   if (data.data && data.data.length > 0) {
     return data.data[0];
   }
-  
+
   // Try by documentId
   console.log('API: No webinar found by slug, trying by documentId:', slug);
   const byDocId = await apiFetch(`/webinars?filters[documentId][$eq]=${slug}&populate=*`);
   console.log('API: Webinar response by documentId:', byDocId);
   console.log('API: Webinar byDocId.data:', byDocId.data);
   console.log('API: Webinar byDocId.data length:', byDocId.data?.length);
-  
+
   if (byDocId.data && byDocId.data.length > 0) {
     return byDocId.data[0];
   }
-  
+
   // Try by numeric ID as last resort (only if slug is numeric)
   if (!isNaN(slug)) {
     console.log('API: No webinar found by documentId, trying by numeric ID:', slug);
@@ -168,7 +168,7 @@ export const fetchWebinarBySlug = async (slug) => {
       console.error('API: Failed to fetch by numeric ID:', err);
     }
   }
-  
+
   console.error('API: Webinar not found with slug:', slug);
   return null;
 };
@@ -196,11 +196,11 @@ export const fetchEvents = async () => {
             'Content-Type': 'application/json'
           }
         });
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         return await response.json();
       } catch (fallbackError) {
         console.warn('Both authenticated and unauthenticated event requests failed:', fallbackError);
@@ -213,28 +213,28 @@ export const fetchEvents = async () => {
 
 export const fetchEventBySlug = async (slug) => {
   console.log('API: Fetching event by slug:', slug);
-  
+
   // Try by slug first
   const data = await apiFetch(`/events?filters[slug][$eq]=${slug}&populate=*`);
   console.log('API: Event response by slug:', data);
   console.log('API: Event data.data:', data.data);
   console.log('API: Event data.data length:', data.data?.length);
-  
+
   if (data.data && data.data.length > 0) {
     return data.data[0];
   }
-  
+
   // Try by documentId
   console.log('API: No event found by slug, trying by documentId:', slug);
   const byDocId = await apiFetch(`/events?filters[documentId][$eq]=${slug}&populate=*`);
   console.log('API: Event response by documentId:', byDocId);
   console.log('API: Event byDocId.data:', byDocId.data);
   console.log('API: Event byDocId.data length:', byDocId.data?.length);
-  
+
   if (byDocId.data && byDocId.data.length > 0) {
     return byDocId.data[0];
   }
-  
+
   // Try by numeric ID as last resort (only if slug is numeric)
   if (!isNaN(slug)) {
     console.log('API: No event found by documentId, trying by numeric ID:', slug);
@@ -246,7 +246,7 @@ export const fetchEventBySlug = async (slug) => {
       console.error('API: Failed to fetch by numeric ID:', err);
     }
   }
-  
+
   console.error('API: Event not found with slug:', slug);
   return null;
 };
@@ -310,7 +310,7 @@ export const uploadFile = async (file, options = {}) => {
   }
 
   console.log('🔵 [UPLOAD] Sending request to:', `${BASE_URL}/upload`);
-  
+
   try {
     const response = await fetch(`${BASE_URL}/upload`, {
       method: 'POST',
@@ -373,6 +373,8 @@ export const updateFileInfo = async (fileId, fileInfo) => {
 // Newsletter Subscriptions
 export const subscribeNewsletter = async (name, email, categories = []) => {
   try {
+    const submittedAt = new Date().toISOString();
+
     // Try without authentication first for public newsletter subscription
     const response = await fetch(`${BASE_URL}/newsletter-subscriptions`, {
       method: 'POST',
@@ -380,7 +382,7 @@ export const subscribeNewsletter = async (name, email, categories = []) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        data: { name, email, categories }
+        data: { name, email, categories, submittedAt }
       }),
     });
 
@@ -393,7 +395,7 @@ export const subscribeNewsletter = async (name, email, categories = []) => {
       return await apiFetch('/newsletter-subscriptions', {
         method: 'POST',
         body: JSON.stringify({
-          data: { name, email, categories }
+          data: { name, email, categories, submittedAt }
         }),
       });
     }
@@ -424,6 +426,9 @@ export const fetchJobBySlug = async (slug) => {
 // Job Applications
 export const submitJobApplication = async (applicationData) => {
   try {
+    const submittedAt = new Date().toISOString();
+    const dataWithTimestamp = { ...applicationData, submittedAt };
+
     // Try without authentication first for public form submissions
     const response = await fetch(`${BASE_URL}/job-applications`, {
       method: 'POST',
@@ -431,7 +436,7 @@ export const submitJobApplication = async (applicationData) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        data: applicationData
+        data: dataWithTimestamp
       }),
     });
 
@@ -444,7 +449,7 @@ export const submitJobApplication = async (applicationData) => {
       return await apiFetch('/job-applications', {
         method: 'POST',
         body: JSON.stringify({
-          data: applicationData
+          data: dataWithTimestamp
         }),
       });
     }
@@ -483,6 +488,9 @@ export const uploadResume = async (file) => {
 // CTA Inquiries
 export const submitCTAInquiry = async (inquiryData) => {
   try {
+    const submittedAt = new Date().toISOString();
+    const dataWithTimestamp = { ...inquiryData, submittedAt };
+
     // Try without authentication first for public form submissions
     const response = await fetch(`${BASE_URL}/cta-inquiries`, {
       method: 'POST',
@@ -490,7 +498,7 @@ export const submitCTAInquiry = async (inquiryData) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        data: inquiryData
+        data: dataWithTimestamp
       }),
     });
 
@@ -503,7 +511,7 @@ export const submitCTAInquiry = async (inquiryData) => {
       return await apiFetch('/cta-inquiries', {
         method: 'POST',
         body: JSON.stringify({
-          data: inquiryData
+          data: dataWithTimestamp
         }),
       });
     }
@@ -518,6 +526,9 @@ export const submitCTAInquiry = async (inquiryData) => {
 // Partner Requests
 export const submitPartnerRequest = async (partnerData) => {
   try {
+    const submittedAt = new Date().toISOString();
+    const dataWithTimestamp = { ...partnerData, submittedAt };
+
     // Try without authentication first for public form submissions
     const response = await fetch(`${BASE_URL}/partner-requests`, {
       method: 'POST',
@@ -525,7 +536,7 @@ export const submitPartnerRequest = async (partnerData) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        data: partnerData
+        data: dataWithTimestamp
       }),
     });
 
@@ -538,7 +549,7 @@ export const submitPartnerRequest = async (partnerData) => {
       return await apiFetch('/partner-requests', {
         method: 'POST',
         body: JSON.stringify({
-          data: partnerData
+          data: dataWithTimestamp
         }),
       });
     }
@@ -562,40 +573,40 @@ export const submitPartnerRequest = async (partnerData) => {
  * @returns {Promise} Response with data and pagination metadata
  */
 export const fetchResources = async (params = {}) => {
-  const { 
-    page = 1, 
-    pageSize = 12, 
-    category, 
+  const {
+    page = 1,
+    pageSize = 12,
+    category,
     search
   } = params;
-  
+
   // Check if published filter is explicitly provided
   const published = params.hasOwnProperty('published') ? params.published : true;
-  
+
   let query = `/resources?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=*`;
-  
+
   // Filter by published status (only if not explicitly set to null/undefined)
   if (published !== null && published !== undefined) {
     query += `&filters[published][$eq]=${published}`;
   }
-  
+
   // Filter by categories (OR logic - match any selected category)
   if (category && Array.isArray(category) && category.length > 0) {
     category.forEach(cat => {
       query += `&filters[category][$in]=${encodeURIComponent(cat)}`;
     });
   }
-  
+
   // Search in title and description (case-insensitive)
   if (search && search.trim()) {
     const searchTerm = encodeURIComponent(search.trim());
     query += `&filters[$or][0][title][$containsi]=${searchTerm}`;
     query += `&filters[$or][1][description][$containsi]=${searchTerm}`;
   }
-  
+
   // Sort by creation date descending (newest first)
   query += '&sort=createdAt:desc';
-  
+
   // For public resources, try without authentication first to avoid 401 errors
   try {
     const response = await fetch(`${BASE_URL}${query}`, {
@@ -603,16 +614,16 @@ export const fetchResources = async (params = {}) => {
         'Content-Type': 'application/json'
       }
     });
-    
+
     if (response.ok) {
       return await response.json();
     }
-    
+
     // If unauthenticated request fails, fall back to authenticated request
     if (response.status === 401 || response.status === 403) {
       return await apiFetch(query);
     }
-    
+
     throw new Error(`HTTP error! status: ${response.status}`);
   } catch (error) {
     // Last resort: return empty result set
@@ -638,31 +649,31 @@ export const fetchResources = async (params = {}) => {
  */
 export const downloadResource = async (id) => {
   const jwt = localStorage.getItem('jwt');
-  
+
   const headers = {};
   if (jwt) {
     headers.Authorization = `Bearer ${jwt}`;
   }
-  
+
   const response = await fetch(`${BASE_URL}/resources/${id}/download`, {
     method: 'GET',
     headers,
   });
-  
+
   if (!response.ok) {
     const errorText = await response.text();
     let errorMessage = `Download failed! status: ${response.status}`;
-    
+
     try {
       const errorData = JSON.parse(errorText);
       errorMessage = errorData.error?.message || errorMessage;
     } catch (e) {
       if (errorText) errorMessage += ` - ${errorText}`;
     }
-    
+
     throw new Error(errorMessage);
   }
-  
+
   // Return the blob for download
   return await response.blob();
 };
@@ -694,14 +705,14 @@ export const createResource = async (resourceData) => {
 export const validateResourceFile = (file) => {
   const allowedTypes = ['application/pdf', 'text/csv'];
   const maxSize = 10 * 1024 * 1024; // 10MB in bytes
-  
+
   if (!file) {
     return {
       isValid: false,
       error: 'Please select a file to upload'
     };
   }
-  
+
   // Check file type
   if (!allowedTypes.includes(file.type)) {
     return {
@@ -709,7 +720,7 @@ export const validateResourceFile = (file) => {
       error: 'Only PDF and CSV files are allowed'
     };
   }
-  
+
   // Check file size
   if (file.size > maxSize) {
     return {
@@ -717,7 +728,7 @@ export const validateResourceFile = (file) => {
       error: 'File size must not exceed 10MB'
     };
   }
-  
+
   return {
     isValid: true,
     error: null
