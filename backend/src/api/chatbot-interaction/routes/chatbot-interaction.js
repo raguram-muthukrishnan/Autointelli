@@ -28,6 +28,15 @@ const myExtraRoutes = [
       middlewares: [],
     },
   },
+  {
+    method: 'GET',
+    path: '/chatbot-interactions/export-csv',
+    handler: 'chatbot-interaction.exportCsv',
+    config: {
+      policies: [],
+      middlewares: [],
+    },
+  },
 ];
 
 module.exports = customRouter(defaultRouter, myExtraRoutes);

@@ -117,6 +117,17 @@ const config = {
 
 const bootstrap = (app) => {
   console.log(app);
+  
+  // Add Export Data link to admin menu
+  app.addMenuLink({
+    to: '/export.html',
+    icon: () => '📊',
+    intlLabel: {
+      id: 'export.menu.label',
+      defaultMessage: 'Export Data',
+    },
+    permissions: [],
+  });
 };
 
 export default {
