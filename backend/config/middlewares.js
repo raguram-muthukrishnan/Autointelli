@@ -13,8 +13,10 @@ module.exports = [
         'https://www.autointelli.com',
         'http://localhost:5173', // Vite dev server
         'http://localhost:3000', // Alternative dev port
+        'http://localhost:8080', // Docker frontend
         'http://127.0.0.1:5173',
-        'http://127.0.0.1:3000'
+        'http://127.0.0.1:3000',
+        'http://127.0.0.1:8080'
       ],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With'],

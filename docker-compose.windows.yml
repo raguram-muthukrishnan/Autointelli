@@ -1,0 +1,96 @@
+services:
+  # PostgreSQL Database
+  database:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - autointelli
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Strapi Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        - PUBLIC_URL=${PUBLIC_URL}
+        - ADMIN_URL=${ADMIN_URL}
+        - NODE_ENV=${NODE_ENV}
+    env_file:
+      - .env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: database
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_SSL: ${DATABASE_SSL}
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
+      JWT_SECRET: ${JWT_SECRET}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      HOST: ${HOST}
+      PORT: ${PORT}
+      PUBLIC_URL: ${PUBLIC_URL}
+      ADMIN_URL: ${ADMIN_URL}
+      STRAPI_TELEMETRY_DISABLED: "true"
+      NODE_ENV: ${NODE_ENV}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      SMTP_FROM: ${SMTP_FROM}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      CALENDLY_LINK: ${CALENDLY_LINK}
+      FRONTEND_URL: ${FRONTEND_URL}
+    volumes:
+      - strapi_uploads:/app/public/uploads
+    ports:
+      - "1337:1337"
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - autointelli
+
+  # React Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        - VITE_OPENROUTER_API_KEY=${VITE_OPENROUTER_API_KEY}
+        - VITE_STRAPI_URL=${VITE_STRAPI_URL}
+        - VITE_TURNSTILE_SITE_KEY=${VITE_TURNSTILE_SITE_KEY}
+    environment:
+      - VITE_OPENROUTER_API_KEY=${VITE_OPENROUTER_API_KEY}
+      - VITE_STRAPI_URL=${VITE_STRAPI_URL}
+      - VITE_TURNSTILE_SITE_KEY=${VITE_TURNSTILE_SITE_KEY}
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - autointelli
+
+volumes:
+  postgres_data:
+  strapi_uploads:
+
+networks:
+  autointelli:
+    driver: bridge

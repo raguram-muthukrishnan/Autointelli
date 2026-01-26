@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import './ChatBot.css';
 
 
-// OpenRouter API configuration
-const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
-const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+// WebSocket configuration for chatbot (from environment variables)
+const WEBSOCKET_URL = import.meta.env.VITE_WEBSOCKET_URL || 'ws://195.201.164.158:8765/';
+const WEBSOCKET_USER_ID = parseInt(import.meta.env.VITE_WEBSOCKET_USER_ID) || 2090364640;
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'http://localhost:1337';
 
 // System prompt for AutoIntelli products - focused only on company products
@@ -34,7 +34,12 @@ const ChatBot = () => {
   });
   const [userEmail, setUserEmail] = useState('');
   const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const [sessionId] = useState(() => uuidv4());
+  const [sessionId] = useState(() => {
+    // Generate a MongoDB ObjectId-like string (24 hex characters)
+    return Array.from({length: 24}, () => 
+      Math.floor(Math.random() * 16).toString(16)
+    ).join('');
+  });
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -62,14 +67,9 @@ const ChatBot = () => {
 
   // Initialize connection and check session state
   useEffect(() => {
-    // Check if API key is configured
-    if (OPENROUTER_API_KEY) {
-      setIsConnected(true);
-      console.log('OpenRouter API configured');
-    } else {
-      console.warn('OpenRouter API key not configured. Using fallback responses.');
-      setIsConnected(true); // Still show as connected for fallback mode
-    }
+    // WebSocket chatbot is always available
+    setIsConnected(true);
+    console.log('WebSocket chatbot configured');
 
     // Check if user has completed chat (closed after chatting)
     const completed = sessionStorage.getItem('chatbot_completed');
@@ -241,68 +241,96 @@ const ChatBot = () => {
     }]);
   };
 
-  // Call OpenRouter API with Mistral 7B
-  const callOpenRouterAPI = async (userMessage) => {
+  // Call WebSocket chatbot API
+  const callWebSocketAPI = async (userMessage) => {
     const newHistory = [
       ...conversationHistory,
       { role: 'user', content: userMessage }
     ];
 
-    console.log('API Key configured:', !!OPENROUTER_API_KEY);
-    console.log('Sending request to OpenRouter...');
+    console.log('Sending request to WebSocket chatbot...');
 
-    try {
-      const response = await fetch(OPENROUTER_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-          'HTTP-Referer': window.location.origin,
-          'X-Title': 'AutoIntelli ChatBot'
-        },
-        body: JSON.stringify({
-          model: 'z-ai/glm-4.5-air:free',
-          messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
-            ...newHistory
-          ],
-          max_tokens: 500,
-          temperature: 0.7
-        })
-      });
+    return new Promise((resolve) => {
+      try {
+        const ws = new WebSocket(WEBSOCKET_URL);
+        let responseReceived = false;
 
-      console.log('Response status:', response.status);
+        ws.onopen = () => {
+          console.log('WebSocket connected');
+          // Send message in the required format with authorized user_id
+          const messagePayload = {
+            user_id: WEBSOCKET_USER_ID,
+            direction: "client",
+            message: `${SYSTEM_PROMPT}\n\nUser: ${userMessage}`,
+            conversationId: sessionId,
+            createdAt: new Date().toISOString()
+          };
+          console.log('Sending:', messagePayload);
+          ws.send(JSON.stringify(messagePayload));
+        };
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('API Error Response:', errorText);
-        throw new Error(`API error: ${response.status} - ${errorText}`);
+        ws.onmessage = (event) => {
+          console.log('WebSocket response:', event.data);
+          responseReceived = true;
+          
+          let assistantMessage;
+          try {
+            const data = JSON.parse(event.data);
+            
+            // Handle different response formats
+            if (data.type === 'message' && data.message) {
+              assistantMessage = data.message;
+              // Remove "Alice AI: " prefix if present
+              assistantMessage = assistantMessage.replace(/^Alice AI:\s*/i, '');
+            } else if (data.response) {
+              assistantMessage = data.response;
+            } else if (data.message) {
+              assistantMessage = data.message;
+            } else {
+              assistantMessage = event.data;
+            }
+          } catch (e) {
+            assistantMessage = event.data;
+          }
+
+          // Update conversation history
+          setConversationHistory([
+            ...newHistory,
+            { role: 'assistant', content: assistantMessage }
+          ]);
+
+          ws.close();
+          resolve(assistantMessage);
+        };
+
+        ws.onerror = (error) => {
+          console.error('WebSocket error:', error);
+          if (!responseReceived) {
+            ws.close();
+            resolve("I apologize, but I'm having trouble connecting right now. Please try again or contact support@autointelli.com for assistance.");
+          }
+        };
+
+        ws.onclose = () => {
+          console.log('WebSocket closed');
+          if (!responseReceived) {
+            resolve("I apologize, but I'm having trouble connecting right now. Please try again or contact support@autointelli.com for assistance.");
+          }
+        };
+
+        // Timeout after 30 seconds
+        setTimeout(() => {
+          if (!responseReceived) {
+            ws.close();
+            resolve("Request timed out. Please try again.");
+          }
+        }, 30000);
+
+      } catch (error) {
+        console.error('WebSocket error:', error);
+        resolve("I apologize, but I'm having trouble connecting right now. Please try again or contact support@autointelli.com for assistance.");
       }
-
-      const data = await response.json();
-      console.log('API Response:', data);
-      console.log('Choices:', data.choices);
-      console.log('First choice:', data.choices?.[0]);
-      console.log('Message:', data.choices?.[0]?.message);
-
-      const assistantMessage = data.choices?.[0]?.message?.content || data.choices?.[0]?.text;
-
-      if (!assistantMessage) {
-        console.error('Could not extract message from response:', JSON.stringify(data, null, 2));
-        throw new Error('No response from API');
-      }
-
-      // Update conversation history
-      setConversationHistory([
-        ...newHistory,
-        { role: 'assistant', content: assistantMessage }
-      ]);
-
-      return assistantMessage;
-    } catch (error) {
-      console.error('OpenRouter API error:', error);
-      return "I apologize, but I'm having trouble connecting right now. Please try again or contact support@autointelli.com for assistance.";
-    }
+    });
   };
 
   const scrollToBottom = () => {
@@ -362,7 +390,7 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      const botResponse = await callOpenRouterAPI(userInput);
+      const botResponse = await callWebSocketAPI(userInput);
       addBotMessage(botResponse);
 
       // Update backend with conversation - pass the updated history
