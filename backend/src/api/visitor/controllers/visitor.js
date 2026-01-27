@@ -2,6 +2,37 @@
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
+// Helper function to fetch geolocation from IP using ipapi.co
+async function getGeolocation(ipAddress) {
+  // Skip geolocation for local/private IPs
+  if (!ipAddress || ipAddress === 'Unknown' || 
+      ipAddress === '::1' || ipAddress.startsWith('127.') || 
+      ipAddress.startsWith('192.168.') || ipAddress.startsWith('10.') ||
+      ipAddress.startsWith('172.') || ipAddress.startsWith('::ffff:127.')) {
+    console.log(`Local IP detected (${ipAddress}), using test data`);
+    return { country: 'Localhost (Testing)', city: 'Local Development' };
+  }
+
+  try {
+    // Using ipapi.co - Free, HTTPS, 1000 requests/day, commercial use allowed
+    const response = await fetch(`https://ipapi.co/${ipAddress}/json/`, {
+      headers: { 'User-Agent': 'AutoIntelli-Visitor-Tracker' }
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      return {
+        country: data.country_name || 'Unknown',
+        city: data.city || 'Unknown'
+      };
+    }
+  } catch (error) {
+    console.warn('Failed to fetch geolocation from ipapi.co:', error.message);
+  }
+  
+  return { country: 'Unknown', city: 'Unknown' };
+}
+
 module.exports = createCoreController('api::visitor.visitor', ({ strapi }) => ({
   async track(ctx) {
     try {
@@ -14,8 +45,6 @@ module.exports = createCoreController('api::visitor.visitor', ({ strapi }) => ({
         browser,
         device,
         os,
-        country,
-        city,
         pageViews
       } = ctx.request.body;
 
@@ -36,18 +65,32 @@ module.exports = createCoreController('api::visitor.visitor', ({ strapi }) => ({
       let visitor;
 
       if (existingVisitor) {
+        // Fetch geolocation if not already present
+        let updateData = {
+          sessionId,
+          ipAddress,
+          lastVisit: new Date(),
+          visitCount: existingVisitor.visitCount + 1,
+          pageViews: pageViews || existingVisitor.pageViews
+        };
+
+        // Update geolocation if missing
+        if (!existingVisitor.country || !existingVisitor.city || 
+            existingVisitor.country === 'Unknown' || existingVisitor.city === 'Unknown') {
+          const geolocation = await getGeolocation(ipAddress);
+          updateData.country = geolocation.country;
+          updateData.city = geolocation.city;
+        }
+
         // Update existing visitor
         visitor = await strapi.db.query('api::visitor.visitor').update({
           where: { id: existingVisitor.id },
-          data: {
-            sessionId,
-            ipAddress,
-            lastVisit: new Date(),
-            visitCount: existingVisitor.visitCount + 1,
-            pageViews: pageViews || existingVisitor.pageViews
-          }
+          data: updateData
         });
       } else {
+        // Fetch geolocation data for new visitors
+        const geolocation = await getGeolocation(ipAddress);
+        
         // Create new visitor
         visitor = await strapi.db.query('api::visitor.visitor').create({
           data: {
@@ -60,8 +103,8 @@ module.exports = createCoreController('api::visitor.visitor', ({ strapi }) => ({
             browser,
             device,
             os,
-            country,
-            city,
+            country: geolocation.country,
+            city: geolocation.city,
             visitCount: 1,
             firstVisit: new Date(),
             lastVisit: new Date(),
@@ -75,6 +118,7 @@ module.exports = createCoreController('api::visitor.visitor', ({ strapi }) => ({
         data: visitor
       });
     } catch (error) {
+      console.error('Error tracking visitor:', error);
       ctx.throw(500, error);
     }
   },

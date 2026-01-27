@@ -1,6 +1,7 @@
 import AuthLogo from './extensions/auth-logo.png';
 import MenuLogo from './extensions/menu-logo.png';
 import favicon from './extensions/favicon.png';
+import ExportPage from './pages/ExportPage';
 
 const config = {
   // Replace the Strapi logo in auth (login) views
@@ -118,13 +119,17 @@ const config = {
 const bootstrap = (app) => {
   console.log(app);
   
-  // Add Export Data link to admin menu
+  // Add the export page route
   app.addMenuLink({
-    to: '/export.html',
+    to: '/plugins/export-data',
     icon: () => '📊',
     intlLabel: {
-      id: 'export.menu.label',
+      id: 'export-data',
       defaultMessage: 'Export Data',
+    },
+    Component: async () => {
+      const module = await import('./pages/ExportPage');
+      return module.default;
     },
     permissions: [],
   });

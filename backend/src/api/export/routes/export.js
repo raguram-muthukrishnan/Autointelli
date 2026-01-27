@@ -45,7 +45,17 @@ module.exports = {
     {
       method: 'GET',
       path: '/export/chatbot-interactions',
-      handler: 'api::chatbot-interaction.chatbot-interaction.exportCsv',
+      handler: 'export.exportChatbotInteractions',
+      config: {
+        auth: false,
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/export/visitors',
+      handler: 'export.exportVisitors',
       config: {
         auth: false,
         policies: [],

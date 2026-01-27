@@ -3,6 +3,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "target": "ES2021",
+    "jsx": "react",
     "checkJs": true,
     "allowJs": true
   },
