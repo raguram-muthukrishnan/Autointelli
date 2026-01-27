@@ -11,6 +11,7 @@ export const buildImageUrl = (file, placeholder = null) => {
   const defaultPlaceholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500"%3E%3Crect fill="%23f0f0f0" width="800" height="500"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="36" dy="10.5" font-weight="bold" x="50%25" y="50%25" text-anchor="middle"%3ENo Image%3C/text%3E%3C/svg%3E';
   
   if (!file) {
+    console.log('buildImageUrl: No file provided, returning placeholder');
     return placeholder || defaultPlaceholder;
   }
   
@@ -31,14 +32,18 @@ export const buildImageUrl = (file, placeholder = null) => {
   }
   
   if (!url) {
+    console.log('buildImageUrl: No URL found in file object:', file);
     return placeholder || defaultPlaceholder;
   }
   
   // If URL is already absolute (starts with http/https), return as-is
   if (url.startsWith('http://') || url.startsWith('https://')) {
+    console.log('buildImageUrl: Absolute URL:', url);
     return url;
   }
   
   // Otherwise, prepend STRAPI_URL
-  return `${STRAPI_URL}${url}`;
+  const fullUrl = `${STRAPI_URL}${url}`;
+  console.log('buildImageUrl: Built URL:', fullUrl);
+  return fullUrl;
 };

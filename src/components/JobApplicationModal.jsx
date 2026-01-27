@@ -112,7 +112,12 @@ const JobApplicationModal = ({ job, onClose }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div 
+        className="modal-content" 
+        onClick={(e) => e.stopPropagation()}
+        onWheel={(e) => e.stopPropagation()}
+        data-lenis-prevent
+      >
         <div className="modal-header">
           <h2>Apply for {job.title}</h2>
           <button className="modal-close" onClick={onClose}>

@@ -57,7 +57,12 @@ const ResourceDownloadModal = ({ isOpen, onClose, resourceName, resourceUrl, onD
 
   return (
     <div className="resource-modal-overlay" onClick={onClose}>
-      <div className="resource-modal-content" onClick={(e) => e.stopPropagation()}>
+      <div 
+        className="resource-modal-content" 
+        onClick={(e) => e.stopPropagation()}
+        onWheel={(e) => e.stopPropagation()}
+        data-lenis-prevent
+      >
         <button className="resource-modal-close" onClick={onClose} aria-label="Close">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>

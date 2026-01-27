@@ -111,7 +111,7 @@ export const fetchWebinars = async () => {
     return await apiFetch('/webinars?populate=*&sort=start_time:desc');
   } catch (error) {
     // If authentication fails for public content, try without auth
-    if (error.message.includes('Invalid credentials') || error.message.includes('Unauthorized')) {
+    if (error.message.includes('credentials') || error.message.includes('Unauthorized') || error.message.includes('401')) {
       try {
         const response = await fetch(`${BASE_URL}/webinars?populate=*&sort=start_time:desc`, {
           headers: {
@@ -189,7 +189,7 @@ export const fetchEvents = async () => {
     return await apiFetch('/events?populate=*&sort=start_time:desc');
   } catch (error) {
     // If authentication fails for public content, try without auth
-    if (error.message.includes('Invalid credentials') || error.message.includes('Unauthorized')) {
+    if (error.message.includes('credentials') || error.message.includes('Unauthorized') || error.message.includes('401')) {
       try {
         const response = await fetch(`${BASE_URL}/events?populate=*&sort=start_time:desc`, {
           headers: {
@@ -415,12 +415,59 @@ export const unsubscribeNewsletter = async (token) => {
 
 // Jobs
 export const fetchJobs = async () => {
-  return await apiFetch('/jobs?populate=*&sort=createdAt:desc');
+  try {
+    return await apiFetch('/jobs?populate=*&sort=createdAt:desc');
+  } catch (error) {
+    // If authentication fails for public content, try without auth
+    if (error.message.includes('credentials') || error.message.includes('Unauthorized') || error.message.includes('401')) {
+      try {
+        const response = await fetch(`${BASE_URL}/jobs?populate=*&sort=createdAt:desc`, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+      } catch (fallbackError) {
+        console.warn('Both authenticated and unauthenticated job requests failed:', fallbackError);
+        return { data: [] };
+      }
+    }
+    throw error;
+  }
 };
 
 export const fetchJobBySlug = async (slug) => {
-  const data = await apiFetch(`/jobs?filters[slug][$eq]=${slug}&populate=*`);
-  return data.data[0];
+  try {
+    const data = await apiFetch(`/jobs?filters[slug][$eq]=${slug}&populate=*`);
+    return data.data[0];
+  } catch (error) {
+    // If authentication fails for public content, try without auth
+    if (error.message.includes('credentials') || error.message.includes('Unauthorized') || error.message.includes('401')) {
+      try {
+        const response = await fetch(`${BASE_URL}/jobs?filters[slug][$eq]=${slug}&populate=*`, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.data[0];
+      } catch (fallbackError) {
+        console.warn('Failed to fetch job by slug:', fallbackError);
+        return null;
+      }
+    }
+    throw error;
+  }
 };
 
 // Job Applications
