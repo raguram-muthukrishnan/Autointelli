@@ -15,7 +15,7 @@ module.exports = ({ env }) => ({
   http: {
     serverOptions: {
       requestTimeout: 300 * 1000, // 5 minutes for large file upload requests
-      headersTimeout: 310 * 1000, // Slightly higher than requestTimeout
+      headersTimeout: 300 * 1000, // Same as requestTimeout
       keepAliveTimeout: 5 * 1000,
     },
   },
