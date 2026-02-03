@@ -7,8 +7,8 @@ module.exports = ({ env }) => ({
           maxage: 300000, // Cache max age in milliseconds
         },
       },
-      // File size limits (10MB)
-      sizeLimit: 10 * 1024 * 1024,
+      // File size limits (100MB)
+      sizeLimit: 100 * 1024 * 1024,
       // Security: Validate files by MIME type
       security: {
         allowedTypes: [

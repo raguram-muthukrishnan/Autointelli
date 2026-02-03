@@ -29,11 +29,11 @@ module.exports = [
   {
     name: 'strapi::body',
     config: {
-      formLimit: '10mb', // Form body limit
-      jsonLimit: '10mb', // JSON body limit
-      textLimit: '10mb', // Text body limit
+      formLimit: '100mb', // Form body limit
+      jsonLimit: '100mb', // JSON body limit
+      textLimit: '100mb', // Text body limit
       formidable: {
-        maxFileSize: 10 * 1024 * 1024, // 10MB for file uploads
+        maxFileSize: 100 * 1024 * 1024, // 100MB for file uploads
       },
     },
   },
