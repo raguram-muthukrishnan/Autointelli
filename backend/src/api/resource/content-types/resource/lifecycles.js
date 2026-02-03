@@ -128,10 +128,10 @@ async function validateResourceFile(fileId, strapi) {
       throw new Error('Only PDF and CSV files are allowed');
     }
 
-    // Validate file size (max 10MB = 10 * 1024 KB)
-    const maxSizeKB = 10 * 1024;
+    // Validate file size (max 100MB = 100 * 1024 KB)
+    const maxSizeKB = 100 * 1024;
     if (file.size > maxSizeKB) {
-      throw new Error('File size must not exceed 10MB');
+      throw new Error('File size must not exceed 100MB');
     }
   } catch (error) {
     strapi.log.error('Resource file validation error:', error);

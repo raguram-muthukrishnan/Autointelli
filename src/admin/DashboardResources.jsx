@@ -117,10 +117,10 @@ const DashboardResources = () => {
         return;
       }
       
-      // Validate file size (max 10MB)
-      const maxSize = 10 * 1024 * 1024;
+      // Validate file size (max 100MB)
+      const maxSize = 100 * 1024 * 1024;
       if (file.size > maxSize) {
-        alert('File size must not exceed 10MB');
+        alert('File size must not exceed 100MB');
         e.target.value = '';
         return;
       }

@@ -751,7 +751,7 @@ export const createResource = async (resourceData) => {
  */
 export const validateResourceFile = (file) => {
   const allowedTypes = ['application/pdf', 'text/csv'];
-  const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+  const maxSize = 100 * 1024 * 1024; // 100MB in bytes
 
   if (!file) {
     return {
@@ -772,7 +772,7 @@ export const validateResourceFile = (file) => {
   if (file.size > maxSize) {
     return {
       isValid: false,
-      error: 'File size must not exceed 10MB'
+      error: 'File size must not exceed 100MB'
     };
   }
 
