@@ -7,7 +7,6 @@ import { useVisitorTracking } from './hooks/useVisitorTracking';
 // Import shared components
 import Header from './components/Header';
 import Footer from './components/Footer';
-import ChatBot from './components/ChatBot';
 import ConsentBanner from './components/ConsentBanner';
 import CTAPopup from './components/CTAPopup';
 
@@ -153,7 +152,6 @@ function AppContent() {
                   </Routes>
                 </main>
                 <Footer />
-                <ChatBot />
                 <ConsentBanner />
                 <CTAPopup />
               </>

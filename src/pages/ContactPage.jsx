@@ -269,18 +269,6 @@ const ContactPage = () => {
             </div>
           </div>
 
-          <div className="contact-item">
-            <div className="contact-icon location-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" />
-                <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2" />
-              </svg>
-            </div>
-            <div className="contact-text">
-              <p className="contact-label">US Office</p>
-              <p className="contact-value">2661, Meadow Hall Dr Herdon, VA20171, USA.</p>
-            </div>
-          </div>
         </div>
       </div>
 
