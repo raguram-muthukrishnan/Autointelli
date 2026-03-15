@@ -264,8 +264,8 @@ const ContactPage = () => {
               </svg>
             </div>
             <div className="contact-text">
-              <p className="contact-label">Corporate Office and Tech Center</p>
-              <p className="contact-value">Door no 484 3rd floor mount road anna Salai  Chennai - 600040, Tamilnadu, India</p>
+              <p className="contact-label">Corporate Office & Tech Center</p>
+              <p className="contact-value">NO. 484, 3RD FLOOR, MOUNT ROAD, ANNA SALAI, CHENNAI 600040, TAMIL NADU, INDIA</p>
             </div>
           </div>
 
